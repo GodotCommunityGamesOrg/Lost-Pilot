@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://didh1mtde07hl"]
+[gd_scene load_steps=21 format=3 uid="uid://didh1mtde07hl"]
 
 [ext_resource type="Script" path="res://Scripts/InteractionSystem/Door.gd" id="1_uxbyn"]
 [ext_resource type="Texture2D" uid="uid://b1y70ybs2m3ad" path="res://Assets/DoorSpriteSheet.png" id="2_hov0a"]
+[ext_resource type="AudioStream" uid="uid://dvq65p44ruwnq" path="res://Assets/Doors 2.wav" id="3_t25qx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y6b7b"]
 atlas = ExtResource("2_hov0a")
@@ -113,9 +114,10 @@ animations = [{
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqc6g"]
 
-[node name="InteractableDoor" type="Node2D" node_paths=PackedStringArray("anim", "GUI")]
+[node name="InteractableDoor" type="Node2D" node_paths=PackedStringArray("anim", "audio", "GUI")]
 script = ExtResource("1_uxbyn")
 anim = NodePath("AnimatedSprite2D")
+audio = NodePath("AudioStreamPlayer2D")
 GUI = NodePath("Button")
 detection_radius = 2
 
@@ -152,5 +154,8 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_qqc6g")
 text = "Press: Enter
 or click on door"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_t25qx")
 
 [connection signal="pressed" from="Button" to="." method="interact"]

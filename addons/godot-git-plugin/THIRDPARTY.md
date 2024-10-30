@@ -63,15 +63,15 @@ SOFTWARE.
 
 ----------------------------------------------------------------------
 
-		    GNU GENERAL PUBLIC LICENSE
-		       Version 2, June 1991
+			GNU GENERAL PUBLIC LICENSE
+			   Version 2, June 1991
 
  Copyright (C) 1989, 1991 Free Software Foundation, Inc.
-                       59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+					   59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  Everyone is permitted to copy and distribute verbatim copies
  of this license document, but changing it is not allowed.
 
-			    Preamble
+				Preamble
 
   The licenses for most software are designed to take away your
 freedom to share and change it.  By contrast, the GNU General Public
@@ -121,7 +121,7 @@ patent must be licensed for everyone's free use or not licensed at all.
   The precise terms and conditions for copying, distribution and
 modification follow.
 
-		    GNU GENERAL PUBLIC LICENSE
+			GNU GENERAL PUBLIC LICENSE
    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
   0. This License applies to any program or other work which contains
@@ -157,24 +157,24 @@ of it, thus forming a work based on the Program, and copy and
 distribute such modifications or work under the terms of Section 1
 above, provided that you also meet all of these conditions:
 
-    a) You must cause the modified files to carry prominent notices
-    stating that you changed the files and the date of any change.
+	a) You must cause the modified files to carry prominent notices
+	stating that you changed the files and the date of any change.
 
-    b) You must cause any work that you distribute or publish, that in
-    whole or in part contains or is derived from the Program or any
-    part thereof, to be licensed as a whole at no charge to all third
-    parties under the terms of this License.
+	b) You must cause any work that you distribute or publish, that in
+	whole or in part contains or is derived from the Program or any
+	part thereof, to be licensed as a whole at no charge to all third
+	parties under the terms of this License.
 
-    c) If the modified program normally reads commands interactively
-    when run, you must cause it, when started running for such
-    interactive use in the most ordinary way, to print or display an
-    announcement including an appropriate copyright notice and a
-    notice that there is no warranty (or else, saying that you provide
-    a warranty) and that users may redistribute the program under
-    these conditions, and telling the user how to view a copy of this
-    License.  (Exception: if the Program itself is interactive but
-    does not normally print such an announcement, your work based on
-    the Program is not required to print an announcement.)
+	c) If the modified program normally reads commands interactively
+	when run, you must cause it, when started running for such
+	interactive use in the most ordinary way, to print or display an
+	announcement including an appropriate copyright notice and a
+	notice that there is no warranty (or else, saying that you provide
+	a warranty) and that users may redistribute the program under
+	these conditions, and telling the user how to view a copy of this
+	License.  (Exception: if the Program itself is interactive but
+	does not normally print such an announcement, your work based on
+	the Program is not required to print an announcement.)
 
 These requirements apply to the modified work as a whole.  If
 identifiable sections of that work are not derived from the Program,
@@ -200,22 +200,22 @@ the scope of this License.
 under Section 2) in object code or executable form under the terms of
 Sections 1 and 2 above provided that you also do one of the following:
 
-    a) Accompany it with the complete corresponding machine-readable
-    source code, which must be distributed under the terms of Sections
-    1 and 2 above on a medium customarily used for software interchange; or,
+	a) Accompany it with the complete corresponding machine-readable
+	source code, which must be distributed under the terms of Sections
+	1 and 2 above on a medium customarily used for software interchange; or,
 
-    b) Accompany it with a written offer, valid for at least three
-    years, to give any third party, for a charge no more than your
-    cost of physically performing source distribution, a complete
-    machine-readable copy of the corresponding source code, to be
-    distributed under the terms of Sections 1 and 2 above on a medium
-    customarily used for software interchange; or,
+	b) Accompany it with a written offer, valid for at least three
+	years, to give any third party, for a charge no more than your
+	cost of physically performing source distribution, a complete
+	machine-readable copy of the corresponding source code, to be
+	distributed under the terms of Sections 1 and 2 above on a medium
+	customarily used for software interchange; or,
 
-    c) Accompany it with the information you received as to the offer
-    to distribute corresponding source code.  (This alternative is
-    allowed only for noncommercial distribution and only if you
-    received the program in object code or executable form with such
-    an offer, in accord with Subsection b above.)
+	c) Accompany it with the information you received as to the offer
+	to distribute corresponding source code.  (This alternative is
+	allowed only for noncommercial distribution and only if you
+	received the program in object code or executable form with such
+	an offer, in accord with Subsection b above.)
 
 The source code for a work means the preferred form of the work for
 making modifications to it.  For an executable work, complete source
@@ -320,7 +320,7 @@ make exceptions for this.  Our decision will be guided by the two goals
 of preserving the free status of all derivatives of our free software and
 of promoting the sharing and reuse of software generally.
 
-			    NO WARRANTY
+				NO WARRANTY
 
   11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
 FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN
@@ -342,9 +342,9 @@ YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER
 PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGES.
 
-		     END OF TERMS AND CONDITIONS
+			 END OF TERMS AND CONDITIONS
 
-	    How to Apply These Terms to Your New Programs
+		How to Apply These Terms to Your New Programs
 
   If you develop a new program, and you want it to be of the greatest
 possible use to the public, the best way to achieve this is to make it
@@ -355,22 +355,22 @@ to attach them to the start of each source file to most effectively
 convey the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    <one line to give the program's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+	<one line to give the program's name and a brief idea of what it does.>
+	Copyright (C) <year>  <name of author>
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
 Also add information on how to contact you by electronic and paper mail.
@@ -378,10 +378,10 @@ Also add information on how to contact you by electronic and paper mail.
 If the program is interactive, make it output a short notice like this
 when it starts in an interactive mode:
 
-    Gnomovision version 69, Copyright (C) year name of author
-    Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
-    This is free software, and you are welcome to redistribute it
-    under certain conditions; type `show c' for details.
+	Gnomovision version 69, Copyright (C) year name of author
+	Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
+	This is free software, and you are welcome to redistribute it
+	under certain conditions; type `show c' for details.
 
 The hypothetical commands `show w' and `show c' should show the appropriate
 parts of the General Public License.  Of course, the commands you use may
@@ -419,11 +419,11 @@ Copyright (C) 1995-2010 Jean-loup Gailly and Mark Adler
   freely, subject to the following restrictions:
 
   1. The origin of this software must not be misrepresented; you must not
-     claim that you wrote the original software. If you use this software
-     in a product, an acknowledgment in the product documentation would be
-     appreciated but is not required.
+	 claim that you wrote the original software. If you use this software
+	 in a product, an acknowledgment in the product documentation would be
+	 appreciated but is not required.
   2. Altered source versions must be plainly marked as such, and must not be
-     misrepresented as being the original software.
+	 misrepresented as being the original software.
   3. This notice may not be removed or altered from any source distribution.
 
   Jean-loup Gailly        Mark Adler
@@ -497,8 +497,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
 
 ----------------------------------------------------------------------
 
-                  GNU LESSER GENERAL PUBLIC LICENSE
-                       Version 2.1, February 1999
+				  GNU LESSER GENERAL PUBLIC LICENSE
+					   Version 2.1, February 1999
 
  Copyright (C) 1991, 1999 Free Software Foundation, Inc.
  51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
@@ -509,7 +509,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
  as the successor of the GNU Library Public License, version 2, hence
  the version number 2.1.]
 
-                            Preamble
+							Preamble
 
   The licenses for most software are designed to take away your
 freedom to share and change it.  By contrast, the GNU General Public
@@ -611,7 +611,7 @@ modification follow.  Pay close attention to the difference between a
 former contains code derived from the library, whereas the latter must
 be combined with the library in order to run.
 
-                  GNU LESSER GENERAL PUBLIC LICENSE
+				  GNU LESSER GENERAL PUBLIC LICENSE
    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
   0. This License Agreement applies to any software library or other
@@ -663,28 +663,28 @@ of it, thus forming a work based on the Library, and copy and
 distribute such modifications or work under the terms of Section 1
 above, provided that you also meet all of these conditions:
 
-    a) The modified work must itself be a software library.
+	a) The modified work must itself be a software library.
 
-    b) You must cause the files modified to carry prominent notices
-    stating that you changed the files and the date of any change.
+	b) You must cause the files modified to carry prominent notices
+	stating that you changed the files and the date of any change.
 
-    c) You must cause the whole of the work to be licensed at no
-    charge to all third parties under the terms of this License.
+	c) You must cause the whole of the work to be licensed at no
+	charge to all third parties under the terms of this License.
 
-    d) If a facility in the modified Library refers to a function or a
-    table of data to be supplied by an application program that uses
-    the facility, other than as an argument passed when the facility
-    is invoked, then you must make a good faith effort to ensure that,
-    in the event an application does not supply such function or
-    table, the facility still operates, and performs whatever part of
-    its purpose remains meaningful.
+	d) If a facility in the modified Library refers to a function or a
+	table of data to be supplied by an application program that uses
+	the facility, other than as an argument passed when the facility
+	is invoked, then you must make a good faith effort to ensure that,
+	in the event an application does not supply such function or
+	table, the facility still operates, and performs whatever part of
+	its purpose remains meaningful.
 
-    (For example, a function in a library to compute square roots has
-    a purpose that is entirely well-defined independent of the
-    application.  Therefore, Subsection 2d requires that any
-    application-supplied function or table used by this function must
-    be optional: if the application does not supply it, the square
-    root function must still compute square roots.)
+	(For example, a function in a library to compute square roots has
+	a purpose that is entirely well-defined independent of the
+	application.  Therefore, Subsection 2d requires that any
+	application-supplied function or table used by this function must
+	be optional: if the application does not supply it, the square
+	root function must still compute square roots.)
 
 These requirements apply to the modified work as a whole.  If
 identifiable sections of that work are not derived from the Library,
@@ -782,37 +782,37 @@ copyright notice for the Library among them, as well as a reference
 directing the user to the copy of this License.  Also, you must do one
 of these things:
 
-    a) Accompany the work with the complete corresponding
-    machine-readable source code for the Library including whatever
-    changes were used in the work (which must be distributed under
-    Sections 1 and 2 above); and, if the work is an executable linked
-    with the Library, with the complete machine-readable "work that
-    uses the Library", as object code and/or source code, so that the
-    user can modify the Library and then relink to produce a modified
-    executable containing the modified Library.  (It is understood
-    that the user who changes the contents of definitions files in the
-    Library will not necessarily be able to recompile the application
-    to use the modified definitions.)
+	a) Accompany the work with the complete corresponding
+	machine-readable source code for the Library including whatever
+	changes were used in the work (which must be distributed under
+	Sections 1 and 2 above); and, if the work is an executable linked
+	with the Library, with the complete machine-readable "work that
+	uses the Library", as object code and/or source code, so that the
+	user can modify the Library and then relink to produce a modified
+	executable containing the modified Library.  (It is understood
+	that the user who changes the contents of definitions files in the
+	Library will not necessarily be able to recompile the application
+	to use the modified definitions.)
 
-    b) Use a suitable shared library mechanism for linking with the
-    Library.  A suitable mechanism is one that (1) uses at run time a
-    copy of the library already present on the user's computer system,
-    rather than copying library functions into the executable, and (2)
-    will operate properly with a modified version of the library, if
-    the user installs one, as long as the modified version is
-    interface-compatible with the version that the work was made with.
+	b) Use a suitable shared library mechanism for linking with the
+	Library.  A suitable mechanism is one that (1) uses at run time a
+	copy of the library already present on the user's computer system,
+	rather than copying library functions into the executable, and (2)
+	will operate properly with a modified version of the library, if
+	the user installs one, as long as the modified version is
+	interface-compatible with the version that the work was made with.
 
-    c) Accompany the work with a written offer, valid for at
-    least three years, to give the same user the materials
-    specified in Subsection 6a, above, for a charge no more
-    than the cost of performing this distribution.
+	c) Accompany the work with a written offer, valid for at
+	least three years, to give the same user the materials
+	specified in Subsection 6a, above, for a charge no more
+	than the cost of performing this distribution.
 
-    d) If distribution of the work is made by offering access to copy
-    from a designated place, offer equivalent access to copy the above
-    specified materials from the same place.
+	d) If distribution of the work is made by offering access to copy
+	from a designated place, offer equivalent access to copy the above
+	specified materials from the same place.
 
-    e) Verify that the user has already received a copy of these
-    materials or that you have already sent this user a copy.
+	e) Verify that the user has already received a copy of these
+	materials or that you have already sent this user a copy.
 
   For an executable, the required form of the "work that uses the
 Library" must include any data and utility programs needed for
@@ -836,14 +836,14 @@ library, provided that the separate distribution of the work based on
 the Library and of the other library facilities is otherwise
 permitted, and provided that you do these two things:
 
-    a) Accompany the combined library with a copy of the same work
-    based on the Library, uncombined with any other library
-    facilities.  This must be distributed under the terms of the
-    Sections above.
+	a) Accompany the combined library with a copy of the same work
+	based on the Library, uncombined with any other library
+	facilities.  This must be distributed under the terms of the
+	Sections above.
 
-    b) Give prominent notice with the combined library of the fact
-    that part of it is a work based on the Library, and explaining
-    where to find the accompanying uncombined form of the same work.
+	b) Give prominent notice with the combined library of the fact
+	that part of it is a work based on the Library, and explaining
+	where to find the accompanying uncombined form of the same work.
 
   8. You may not copy, modify, sublicense, link with, or distribute
 the Library except as expressly provided under this License.  Any
@@ -931,7 +931,7 @@ decision will be guided by the two goals of preserving the free status
 of all derivatives of our free software and of promoting the sharing
 and reuse of software generally.
 
-                            NO WARRANTY
+							NO WARRANTY
 
   15. BECAUSE THE LIBRARY IS LICENSED FREE OF CHARGE, THERE IS NO
 WARRANTY FOR THE LIBRARY, TO THE EXTENT PERMITTED BY APPLICABLE LAW.
@@ -954,9 +954,9 @@ FAILURE OF THE LIBRARY TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
 SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
 DAMAGES.
 
-                     END OF TERMS AND CONDITIONS
+					 END OF TERMS AND CONDITIONS
 
-           How to Apply These Terms to Your New Libraries
+		   How to Apply These Terms to Your New Libraries
 
   If you develop a new library, and you want it to be of the greatest
 possible use to the public, we recommend making it free software that
@@ -969,22 +969,22 @@ safest to attach them to the start of each source file to most effectively
 convey the exclusion of warranty; and each file should have at least the
 "copyright" line and a pointer to where the full notice is found.
 
-    <one line to give the library's name and a brief idea of what it does.>
-    Copyright (C) <year>  <name of author>
+	<one line to give the library's name and a brief idea of what it does.>
+	Copyright (C) <year>  <name of author>
 
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
+	This library is free software; you can redistribute it and/or
+	modify it under the terms of the GNU Lesser General Public
+	License as published by the Free Software Foundation; either
+	version 2.1 of the License, or (at your option) any later version.
 
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
+	This library is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+	Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+	You should have received a copy of the GNU Lesser General Public
+	License along with this library; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 Also add information on how to contact you by electronic and paper mail.
 
@@ -1007,15 +1007,15 @@ The bundled SHA1 collision detection code is licensed under the MIT license:
 MIT License
 
 Copyright (c) 2017:
-    Marc Stevens
-    Cryptology Group
-    Centrum Wiskunde & Informatica
-    P.O. Box 94079, 1090 GB Amsterdam, Netherlands
-    marc@marc-stevens.nl
+	Marc Stevens
+	Cryptology Group
+	Centrum Wiskunde & Informatica
+	P.O. Box 94079, 1090 GB Amsterdam, Netherlands
+	marc@marc-stevens.nl
 
-    Dan Shumow
-    Microsoft Research
-    danshu@microsoft.com
+	Dan Shumow
+	Microsoft Research
+	danshu@microsoft.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1046,18 +1046,18 @@ Redistribution and use in any form are permitted provided that the
 following restrictions are are met:
 
 1.  Source distributions must retain this entire copyright notice
-    and comment.
+	and comment.
 2.  Binary distributions must include the acknowledgement ``This
-    product includes software developed by Rich Salz'' in the
-    documentation or other materials provided with the
-    distribution.  This must not be represented as an endorsement
+	product includes software developed by Rich Salz'' in the
+	documentation or other materials provided with the
+	distribution.  This must not be represented as an endorsement
    or promotion without specific prior written permission.
 3.  The origin of this software must not be misrepresented, either
-    by explicit claim or by omission.  Credits must appear in the
-    source and documentation.
+	by explicit claim or by omission.  Credits must appear in the
+	source and documentation.
 4.  Altered versions must be plainly marked as such in the source
-    and documentation and must not be misrepresented as being the
-    original software.
+	and documentation and must not be misrepresented as being the
+	original software.
 
 THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR IMPLIED
 WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
@@ -1099,7 +1099,7 @@ are met:
 3. All advertising materials mentioning features or use of this software
    must display the following acknowledgement:
    "This product includes cryptographic software written by
-    Eric Young (eay@cryptsoft.com)"
+	Eric Young (eay@cryptsoft.com)"
    The word 'cryptographic' can be left out if the rouines from the library
    being used are not cryptographic related :-).
 4. If you include any Windows specific code (or a derivative thereof) from

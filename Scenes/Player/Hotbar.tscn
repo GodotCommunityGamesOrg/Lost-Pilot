@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7bp1x1j426du"]
+
+[ext_resource type="Script" path="res://Scripts/Inventory/Hotbar.gd" id="1_7wg0i"]
+[ext_resource type="Texture2D" uid="uid://df307ktv7ef4y" path="res://Assets/hotbar_background.png" id="1_kcb2d"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Slot.gd" id="2_l7ota"]
+
+[node name="Hotbar" type="Node2D"]
+scale = Vector2(2.5, 2.5)
+script = ExtResource("1_7wg0i")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 158.0
+offset_top = 247.0
+offset_right = 347.0
+offset_bottom = 276.0
+texture = ExtResource("1_kcb2d")
+
+[node name="HotbarSlots" type="GridContainer" parent="."]
+offset_left = 165.0
+offset_top = 252.0
+offset_right = 353.0
+offset_bottom = 272.0
+theme_override_constants/h_separation = 2
+columns = 8
+
+[node name="HotbarSlot1" type="Panel" parent="HotbarSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+script = ExtResource("2_l7ota")
+
+[node name="HotbarSlot2" type="Panel" parent="HotbarSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+script = ExtResource("2_l7ota")
+
+[node name="HotbarSlot3" type="Panel" parent="HotbarSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+script = ExtResource("2_l7ota")
+
+[node name="HotbarSlot4" type="Panel" parent="HotbarSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+script = ExtResource("2_l7ota")
+
+[node name="HotbarSlot5" type="Panel" parent="HotbarSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+script = ExtResource("2_l7ota")
+
+[node name="HotbarSlot6" type="Panel" parent="HotbarSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+script = ExtResource("2_l7ota")
+
+[node name="HotbarSlot7" type="Panel" parent="HotbarSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+script = ExtResource("2_l7ota")
+
+[node name="HotbarSlot8" type="Panel" parent="HotbarSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+script = ExtResource("2_l7ota")

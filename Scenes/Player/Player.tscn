@@ -1,16 +1,40 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkkdcx534ran6"]
+[gd_scene load_steps=6 format=3 uid="uid://dkkdcx534ran6"]
 
-[ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_4kof2"]
-[ext_resource type="Texture2D" uid="uid://b05hj6ognkfqi" path="res://Assets/icon.svg" id="2_pi6i1"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_4kof2"]
+[ext_resource type="Texture2D" uid="uid://b05hj6ognkfqi" path="res://icon.svg" id="2_pi6i1"]
+[ext_resource type="Script" path="res://Scripts/InteractionSystem/InteractionManager.gd" id="3_s0tr7"]
+[ext_resource type="Script" path="res://Scripts/InteractionSystem/MouseInteracter.gd" id="4_howra"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2tjqv"]
+radius = 15.0
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_4kof2")
 Actions = 8
 speed = 400.0
-pc = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_pi6i1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.6, 0.6)
+
+[node name="Modules" type="Node2D" parent="."]
+
+[node name="InteractionManager" type="Node2D" parent="Modules" node_paths=PackedStringArray("mouse_interacter")]
+script = ExtResource("3_s0tr7")
+mouse_interacter = NodePath("MouseInteracter")
+
+[node name="MouseInteracter" type="Area2D" parent="Modules/InteractionManager"]
+top_level = true
+collision_layer = 4
+collision_mask = 4
+input_pickable = false
+monitorable = false
+script = ExtResource("4_howra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Modules/InteractionManager/MouseInteracter"]
+shape = SubResource("CircleShape2D_2tjqv")
+
+[connection signal="area_entered" from="Modules/InteractionManager/MouseInteracter" to="Modules/InteractionManager/MouseInteracter" method="_on_area_entered"]
+[connection signal="area_exited" from="Modules/InteractionManager/MouseInteracter" to="Modules/InteractionManager/MouseInteracter" method="_on_area_exited"]

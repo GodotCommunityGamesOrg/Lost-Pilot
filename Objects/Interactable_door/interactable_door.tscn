@@ -1,0 +1,228 @@
+[gd_scene load_steps=33 format=3 uid="uid://didh1mtde07hl"]
+
+[ext_resource type="Script" path="res://Objects/Interactable_door/interactable_door.gd" id="1_mc1b5"]
+[ext_resource type="Texture2D" uid="uid://b1y70ybs2m3ad" path="res://Assets/DoorSpriteSheet.png" id="2_41kmh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yc2aq"]
+size = Vector2(128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6onmq"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(1664, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnwr8"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(1536, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aom8a"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(1408, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgtkk"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(1280, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7gp5e"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(1152, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_klihv"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dr203"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2k60"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fh4wf"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4dg66"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7b4gc"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vt5tb"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7uc2q"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2nk8"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcbyd"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nck5i"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nd36t"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6w4h"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_820o0"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8i74r"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0iyh"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6uk8a"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qu4ou"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rm7ay"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(1152, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6o4sb"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(1280, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpmb7"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(1408, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmdp1"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(1536, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4trm6"]
+atlas = ExtResource("2_41kmh")
+region = Rect2(1664, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ihkx4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6onmq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnwr8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aom8a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgtkk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7gp5e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_klihv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dr203")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2k60")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fh4wf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4dg66")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7b4gc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vt5tb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7uc2q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2nk8")
+}],
+"loop": false,
+"name": &"Closing",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xcbyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nck5i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nd36t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6w4h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_820o0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8i74r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o0iyh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6uk8a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qu4ou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rm7ay")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6o4sb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpmb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmdp1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4trm6")
+}],
+"loop": false,
+"name": &"Opening",
+"speed": 24.0
+}]
+
+[node name="InteractableDoor" type="Area2D" node_paths=PackedStringArray("animator")]
+script = ExtResource("1_mc1b5")
+animator = NodePath("AnimatedSprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yc2aq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ihkx4")
+animation = &"Opening"

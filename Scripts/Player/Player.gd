@@ -27,6 +27,8 @@ func _ready() -> void:
 	$Camera2D.limit_top = global.map.get_used_rect().position.y*128
 	$Camera2D.limit_right = (global.map.get_used_rect().position.x+global.map.get_used_rect().size.x)*128
 	$Camera2D.limit_bottom = (global.map.get_used_rect().position.y+global.map.get_used_rect().size.y)*128
+	get_tree().get_root().size_changed.connect(_cam_resize)
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -64,3 +66,8 @@ func _draw() -> void:
 		
 		var final_color = Color(1, 1, 0, 1) if (highlight_path.size() - 1 <= Actions) else Color(1, 0, 0, 1)
 		draw_rect(Rect2(global.map.map_to_local(highlight_path[highlight_path.size() - 1]) - (Vector2.ONE * 62.5) - position, Vector2(128, 128)), final_color, false, 10)
+
+func _cam_resize():
+	var viewport_size = get_viewport().size
+	print(viewport_size, UserInterface._base_size, Vector2.ONE*(viewport_size.x / UserInterface._base_size.x + viewport_size.y / UserInterface._base_size.y) / 2.0)
+	$Camera2D.zoom = (Vector2.ONE*0.8)*(viewport_size.x / UserInterface._base_size.x + viewport_size.y / UserInterface._base_size.y) / 2.0

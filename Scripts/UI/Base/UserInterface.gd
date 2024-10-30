@@ -16,7 +16,7 @@ class_name UserInterface
 @export var resize_MODE: RESIZE_MODE_ENUM = RESIZE_MODE_ENUM.AUTO ## Setting for how the [UserInterface] handles font resizing.
 
 # --- Private Properties ---
-@onready var _base_size: Vector2 = Vector2( ## original viewport size.
+static var _base_size: Vector2 = Vector2( ## original viewport size.
 	ProjectSettings.get_setting("display/window/size/viewport_width"), 
 	ProjectSettings.get_setting("display/window/size/viewport_height")
 ) 

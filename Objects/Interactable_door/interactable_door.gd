@@ -1,5 +1,5 @@
 extends InteractableObj
-class_name InteractableObject
+class_name InteractableDoor
 
 var door_state : bool = false
 

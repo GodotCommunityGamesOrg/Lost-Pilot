@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://didh1mtde07hl"]
+[gd_scene load_steps=23 format=3 uid="uid://didh1mtde07hl"]
 
 [ext_resource type="Script" path="res://Scripts/InteractionSystem/Door.gd" id="1_uxbyn"]
 [ext_resource type="Texture2D" uid="uid://b1y70ybs2m3ad" path="res://Assets/DoorSpriteSheet.png" id="2_hov0a"]
+[ext_resource type="Texture2D" uid="uid://myntqljcecwk" path="res://Assets/DoorSpriteSelected.png" id="2_xieid"]
 [ext_resource type="Script" path="res://Scripts/UI/Base/CircleMenuButton.gd" id="3_xu5ei"]
 [ext_resource type="Script" path="res://Scripts/UI/Base/WheelOption.gd" id="4_v7qj0"]
 
@@ -119,14 +120,18 @@ name = "closed"
 script = ExtResource("4_v7qj0")
 name = "open"
 
-[node name="InteractableDoor" type="Button" node_paths=PackedStringArray("anim", "gui_container", "gui_focus")]
+[node name="InteractableDoor" type="Control" node_paths=PackedStringArray("anim", "gui_container", "gui_focus")]
+process_priority = 2
 top_level = true
+layout_mode = 3
+anchors_preset = 0
 offset_left = -64.0
 offset_top = -64.0
 offset_right = 64.0
 offset_bottom = 64.0
 script = ExtResource("1_uxbyn")
 anim = NodePath("AnimatedSprite2D")
+hover_texture = ExtResource("2_xieid")
 gui_interaction_priority = 2
 gui_container = NodePath("Control")
 gui_focus = NodePath("Control")
@@ -165,21 +170,21 @@ use_parent_material = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 0)
 layout_direction = 0
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -99.0
+offset_right = 100.0
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
 rotation = 0.0
 scale = Vector2(1, 1)
-pivot_offset = Vector2(0, 0)
+pivot_offset = Vector2(100, 100)
 size_flags_horizontal = 1
 size_flags_vertical = 1
 size_flags_stretch_ratio = 1.0
@@ -209,5 +214,7 @@ shortcut_feedback = true
 shortcut_in_tooltip = true
 script = ExtResource("3_xu5ei")
 options = Array[ExtResource("4_v7qj0")]([SubResource("AtlasTexture_mrtq3"), SubResource("AtlasTexture_tec37")])
-size_outer_radius = 128
+color_bg = Color(0, 0, 0, 1)
+size_outer_radius = 100
 size_inner_radius = 32
+size_line_width = 2

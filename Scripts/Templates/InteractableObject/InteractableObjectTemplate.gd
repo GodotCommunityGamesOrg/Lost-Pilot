@@ -1,5 +1,6 @@
-## Note: This is a template script
-## You should duplicate this script and scene to create new objects
+## template_name=Interactable Object Template
+## Note: This is a template script. Duplicate this script and scene to create new objects.
+
 extends InteractableObject
 
 # --- Custom Methods ---

@@ -5,7 +5,6 @@ class_name CircleMenuButton
 ## circular interface.
 
 # --- Constants ---
-const SPRITE_SIZE = Vector2(32, 32)                    ## Size for aligning option text
 
 # --- Exported Properties ---
 @export var options: Array[WheelOption]                ## List of selectable options
@@ -29,11 +28,14 @@ signal closed ## Signal emitted when the _selection is confirmed
 
 # --- Built-in Callbacks ---
 func _process(_delta: float) -> void:
+	size = min(size.x, size.y) * Vector2.ONE
+	pivot_offset = size / 2
+	size_outer_radius = min(size.x / 2, size.y / 2)
 	if Engine.is_editor_hint():
 		return
 	if !visible:
 		return
-	var mouse_pos = get_local_mouse_position()
+	var mouse_pos = get_local_mouse_position()-size/2
 	var mouse_radius = mouse_pos.length()
 
 	if mouse_radius < size_inner_radius:
@@ -47,23 +49,23 @@ func _process(_delta: float) -> void:
 	elif _selection < 0:
 		_selection = -1
 
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept") and has_focus():
+		await get_tree().process_frame
 		closed.emit()
 
 	queue_redraw()
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if not Engine.is_editor_hint():
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and visible:
 			get_tree().get_root().set_input_as_handled()
 			closed.emit()
 
 func _draw() -> void:
-	var offset = SPRITE_SIZE / -2  # Offset for centering text on options
 
-	draw_circle(Vector2.ZERO, size_outer_radius, color_bg)
+	draw_circle(size / 2, size_outer_radius, color_bg)
 
-	draw_arc(Vector2.ZERO, size_inner_radius, 0, TAU, 128, color_line, size_line_width, true)
+	draw_arc(size / 2, size_inner_radius, 0, TAU, 128, color_line, size_line_width, true)
 
 	if options.size() == 0:
 		return
@@ -74,7 +76,7 @@ func _draw() -> void:
 		var angle = TAU * i / total_options
 		var point = Vector2.from_angle(angle)
 
-		draw_line(point * size_inner_radius, point * size_outer_radius, color_line, size_line_width, true)
+		draw_line(point * size_inner_radius + size / 2, point * size_outer_radius + size / 2, color_line, size_line_width, true)
 
 	if _selection >= 0 and _selection < total_options:
 		var selected_index = total_options - 1 - _selection  # Adjust for correct _selection highlighting
@@ -87,8 +89,8 @@ func _draw() -> void:
 
 		for j in range(points_per_arc + 1):
 			var _angle = start_rads + j * (end_rads - start_rads) / points_per_arc
-			points_inner.append(size_inner_radius * Vector2.from_angle(-_angle))  # Inner arc points
-			points_outer.append(size_outer_radius * Vector2.from_angle(-_angle))  # Outer arc points
+			points_inner.append(size_inner_radius * Vector2.from_angle(-_angle) + size / 2)  # Inner arc points
+			points_outer.append(size_outer_radius * Vector2.from_angle(-_angle) + size / 2)  # Outer arc points
 
 		points_outer.reverse()  # Reverse outer points to close the shape
 
@@ -99,12 +101,16 @@ func _draw() -> void:
 		var default_font_size = ThemeDB.fallback_font_size
 		var angle = TAU * i / total_options
 		var mid_angle = angle + (TAU / (2 * total_options))  # Midpoint angle for text alignment
-		var draw_pos = ((size_inner_radius + size_outer_radius) / 2.0) * Vector2.from_angle(mid_angle) + offset
+		var text_width = default_font.get_string_size(options[i].name).x  # Width of the text for horizontal centering
+		# Adjusted draw position for centering
+		var draw_pos = (((size_outer_radius-size_inner_radius) / 2.0)+size_inner_radius) * Vector2.from_angle(mid_angle)
+		draw_pos -= Vector2(text_width / 2, 0)  # Adjust for both horizontal and vertical centering
+		draw_pos += size / 2  # Offset to position within the circle center
 
 		draw_string(default_font, draw_pos, options[i].name, HORIZONTAL_ALIGNMENT_CENTER, -1, default_font_size)
 
 	if _selection == -1:
-		draw_circle(Vector2.ZERO, size_inner_radius, color_highlight)
+		draw_circle(size / 2, size_inner_radius, color_highlight)
 
 # --- Custom Methods ---
 ## Method to close the menu and emit the selected option

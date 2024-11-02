@@ -30,6 +30,7 @@ project/assembly_name="Godot Community Project 1"
 
 [editor]
 
+script/templates_search_path="res://Scripts/Templates"
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 

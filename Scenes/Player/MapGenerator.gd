@@ -1,4 +1,5 @@
 extends TileMapLayer
+## builds pathfinder for tilemap
 # --- Exported Properties ---
 func _ready() -> void:
 	global.pathfinder = AStarGrid2D.new()

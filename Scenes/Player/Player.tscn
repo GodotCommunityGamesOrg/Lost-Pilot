@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkkdcx534ran6"]
+[gd_scene load_steps=6 format=3 uid="uid://dkkdcx534ran6"]
 
-[ext_resource type="Script" path="res://Scripts/Player/Player.gd" id="1_4kof2"]
-[ext_resource type="Texture2D" uid="uid://b05hj6ognkfqi" path="res://Assets/icon.svg" id="2_pi6i1"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_4kof2"]
+[ext_resource type="Texture2D" uid="uid://b05hj6ognkfqi" path="res://icon.svg" id="2_pi6i1"]
+[ext_resource type="Script" path="res://Scripts/InteractionSystem/InteractionManager.gd" id="3_s0tr7"]
+[ext_resource type="Script" path="res://Scripts/InteractionSystem/MouseInteracter.gd" id="4_howra"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2tjqv"]
+radius = 15.0
 
 [node name="Player" type="Node2D"]
 z_index = 1
@@ -13,5 +18,7 @@ speed = 400.0
 texture = ExtResource("2_pi6i1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
+

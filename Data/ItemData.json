@@ -1,0 +1,22 @@
+{
+    "Repair Kit" : {
+        "ItemCategory" : "Repair",
+        "AddHealth" : 5,
+        "StackSize" : 99,
+        "Description" : "This repairs damage to a ship"
+    },
+    "Med Kit" : {
+        "ItemCategory" : "Consumable",
+        "AddHealth" : 5,
+        "AddEnergy" : 0,
+        "StackSize" : 99,
+        "Description" : "This heals injuries to you or crewmates"
+    },
+    "Bandage" : {
+        "ItemCategory" : "Consumable",
+        "AddHealth" : 2,
+        "AddEnergy" : 0,
+        "StackSize" : 99,
+        "Description" : "This heals injuries to you or crewmates"
+    }
+}

@@ -1,12 +1,7 @@
 ## Note: This is a template script
 ## You should duplicate this script and scene to create new objects
-extends InteractableObject
+## also make sure the area2D is on the same collision layer "Interactable"
+extends InteractableObj
 
-# --- Custom Methods ---
 func interact() -> void:
-	super()
-	pass
-
-func end_interact() -> void:
-	super()
 	pass

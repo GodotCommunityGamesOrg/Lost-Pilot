@@ -35,12 +35,6 @@ project/assembly_name="Godot Community Project 1"
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
-[gui]
-
-theme/custom_font="res://Assets/Gugi-Regular.ttf"
-theme/default_font_multichannel_signed_distance_field=true
-theme/default_font_generate_mipmaps=true
-
 [input]
 
 ui_accept={
@@ -67,14 +61,6 @@ scroll_down={
 ]
 }
 
-[internationalization]
-
-pseudolocalization/fake_bidi=true
-
 [layer_names]
 
 2d_physics/layer_3="Interactable"
-
-[rendering]
-
-textures/canvas_textures/default_texture_filter=0

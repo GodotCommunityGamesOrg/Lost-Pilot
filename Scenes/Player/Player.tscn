@@ -9,6 +9,7 @@
 radius = 15.0
 
 [node name="Player" type="Node2D"]
+z_index = 1
 script = ExtResource("1_4kof2")
 Actions = 8
 speed = 400.0
@@ -17,24 +18,7 @@ speed = 400.0
 texture = ExtResource("2_pi6i1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.6, 0.6)
 
-[node name="Modules" type="Node2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
 
-[node name="InteractionManager" type="Node2D" parent="Modules" node_paths=PackedStringArray("mouse_interacter")]
-script = ExtResource("3_s0tr7")
-mouse_interacter = NodePath("MouseInteracter")
-
-[node name="MouseInteracter" type="Area2D" parent="Modules/InteractionManager"]
-top_level = true
-collision_layer = 4
-collision_mask = 4
-input_pickable = false
-monitorable = false
-script = ExtResource("4_howra")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Modules/InteractionManager/MouseInteracter"]
-shape = SubResource("CircleShape2D_2tjqv")
-
-[connection signal="area_entered" from="Modules/InteractionManager/MouseInteracter" to="Modules/InteractionManager/MouseInteracter" method="_on_area_entered"]
-[connection signal="area_exited" from="Modules/InteractionManager/MouseInteracter" to="Modules/InteractionManager/MouseInteracter" method="_on_area_exited"]

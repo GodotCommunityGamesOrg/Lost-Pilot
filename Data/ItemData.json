@@ -18,5 +18,33 @@
         "AddEnergy" : 0,
         "StackSize" : 99,
         "Description" : "This heals injuries to you or crewmates"
+    },
+    "Basic Helmet" : {
+        "ItemCategory" : "Helmet",
+        "AddHealth" : 10,
+        "AddEnergy" : 0,
+        "StackSize" : 12,
+        "Description" : "This protects you from damage"
+    },
+    "Basic Vest" : {
+        "ItemCategory" : "Vest",
+        "AddHealth" : 10,
+        "AddEnergy" : 0,
+        "StackSize" : 12,
+        "Description" : "This protects you from damage"
+    },
+    "Basic Boots" : {
+        "ItemCategory" : "Boots",
+        "AddHealth" : 10,
+        "AddEnergy" : 0,
+        "StackSize" : 12,
+        "Description" : "This protects you from damage"
+    },
+    "Weapon 1" : {
+        "ItemCategory" : "Weapon",
+        "ItemAttack" : 3,
+        "ItemReload" : 1,
+        "StackSize" : 1,
+        "Description" : "This deals damage to enemies"
     }
 }

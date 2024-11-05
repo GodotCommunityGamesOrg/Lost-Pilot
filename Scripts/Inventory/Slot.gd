@@ -55,6 +55,11 @@ func putIntoSlot(new_item):
 	add_child(item)
 	refresh_style()
 
+func getFromSlot():
+	var inventoryNode = find_parent("UI")
+	inventoryNode.add_child(item)
+	refresh_style()
+
 func initialize_item(item_name, item_quantity):
 	if item == null:
 		item = ItemClass.instantiate()

@@ -14,6 +14,7 @@ var inventory = {
 	3 : ["Repair Kit", 2],
 	4 : ["Med Kit", 10],
 	5 : ["Bandage", 30],
+	6 : ["Repair Kit", 5],
 }
 
 var hotbar = {
@@ -22,7 +23,7 @@ var hotbar = {
 	2 : ["Bandage", 30],
 	3 : ["Repair Kit", 2],
 	4 : ["Med Kit", 10],
-	5 : ["Bandage", 30],
+	5 : ["Bandage", 20],
 }
 
 var equips = {
@@ -85,6 +86,13 @@ func add_item_quantity(slot : SlotClass, quantity_to_add : int):
 			hotbar[slot.slot_index][1] += quantity_to_add
 		SlotClass.SlotType.INVENTORY:
 			inventory[slot.slot_index][1] += quantity_to_add
+
+func decrease_item_quantity(slot : SlotClass, quantity_to_remove : int):
+	match slot.SlotType:
+		SlotClass.SlotType.HOTBAR:
+			hotbar[slot.slot_index][1] -= quantity_to_remove
+		SlotClass.SlotType.INVENTORY:
+			inventory[slot.slot_index][1] -= quantity_to_remove
 
 func active_item_scroll_up():
 	active_item_slot = (active_item_slot + 1) % NUM_HOTBAR_SLOTS

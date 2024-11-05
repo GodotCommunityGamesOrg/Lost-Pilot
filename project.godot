@@ -10,9 +10,19 @@ config_version=5
 
 [application]
 
-config/name="Godot Community Project 1"
+config/name="Lost Pilot"
+run/main_scene="res://Scenes/Player/World.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Assets/icon.svg"
+
+[autoload]
+
+global="*res://Scripts/Global/Global.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [dotnet]
 
@@ -20,8 +30,15 @@ project/assembly_name="Godot Community Project 1"
 
 [editor]
 
+script/templates_search_path="res://Scripts/Templates"
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[gui]
+
+theme/custom_font="res://Assets/Gugi-Regular.ttf"
+theme/default_font_multichannel_signed_distance_field=true
+theme/default_font_generate_mipmaps=true
 
 [input]
 
@@ -33,6 +50,15 @@ ui_accept={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
+
+
+[internationalization]
+
+pseudolocalization/fake_bidi=true
+
+[layer_names]
+
+2d_physics/layer_3="Interactable"
 
 [rendering]
 

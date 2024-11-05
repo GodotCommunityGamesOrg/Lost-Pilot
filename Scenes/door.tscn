@@ -1,7 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://didh1mtde07hl"]
+[gd_scene load_steps=23 format=3 uid="uid://didh1mtde07hl"]
 
 [ext_resource type="Script" path="res://Scripts/InteractionSystem/Door.gd" id="1_uxbyn"]
 [ext_resource type="Texture2D" uid="uid://b1y70ybs2m3ad" path="res://Assets/DoorSpriteSheet.png" id="2_hov0a"]
+[ext_resource type="Texture2D" uid="uid://myntqljcecwk" path="res://Assets/DoorSpriteSelected.png" id="2_xieid"]
+[ext_resource type="Script" path="res://Scripts/UI/Base/CircleMenuButton.gd" id="3_xu5ei"]
+[ext_resource type="Script" path="res://Scripts/UI/Base/WheelOption.gd" id="4_v7qj0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y6b7b"]
 atlas = ExtResource("2_hov0a")
@@ -109,48 +112,109 @@ animations = [{
 "speed": 13.0
 }]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bg86f"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrtq3"]
+script = ExtResource("4_v7qj0")
+name = "closed"
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqc6g"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tec37"]
+script = ExtResource("4_v7qj0")
+name = "open"
 
-[node name="InteractableDoor" type="Node2D" node_paths=PackedStringArray("anim", "GUI")]
-script = ExtResource("1_uxbyn")
-anim = NodePath("AnimatedSprite2D")
-GUI = NodePath("Button")
-detection_radius = 2
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_plsfi")
-animation = &"open"
-
-[node name="Button" type="Button" parent="."]
+[node name="InteractableDoor" type="Control" node_paths=PackedStringArray("anim", "gui_container", "gui_focus")]
+process_priority = 2
+top_level = true
+layout_mode = 3
+anchors_preset = 0
 offset_left = -64.0
 offset_top = -64.0
 offset_right = 64.0
 offset_bottom = 64.0
-theme_override_styles/focus = SubResource("StyleBoxEmpty_bg86f")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_bg86f")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_bg86f")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_bg86f")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_bg86f")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_bg86f")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_bg86f")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_bg86f")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_bg86f")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_bg86f")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_bg86f")
-alignment = 0
+script = ExtResource("1_uxbyn")
+anim = NodePath("AnimatedSprite2D")
+hover_texture = ExtResource("2_xieid")
+gui_interaction_priority = 2
+gui_container = NodePath("Control")
+gui_focus = NodePath("Control")
 
-[node name="Label" type="Label" parent="Button"]
-layout_mode = 0
-offset_left = -198.0
-offset_top = 1.0
-offset_right = 41.0
-offset_bottom = 94.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_qqc6g")
-text = "Press: Enter
-or click on door"
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(64, 64)
+sprite_frames = SubResource("SpriteFrames_plsfi")
+animation = &"open"
 
-[connection signal="pressed" from="Button" to="." method="interact"]
+[node name="Control" type="BaseButton" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = false
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 3
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -99.0
+offset_right = 100.0
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(100, 100)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 2
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("3_xu5ei")
+options = Array[ExtResource("4_v7qj0")]([SubResource("AtlasTexture_mrtq3"), SubResource("AtlasTexture_tec37")])
+color_bg = Color(0, 0, 0, 1)
+size_outer_radius = 100
+size_inner_radius = 32
+size_line_width = 2

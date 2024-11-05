@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7bp1x1j426du"]
+[gd_scene load_steps=6 format=3 uid="uid://b7bp1x1j426du"]
 
 [ext_resource type="Script" path="res://Scripts/Inventory/Hotbar.gd" id="1_7wg0i"]
 [ext_resource type="Texture2D" uid="uid://df307ktv7ef4y" path="res://Assets/hotbar_background.png" id="1_kcb2d"]
 [ext_resource type="Script" path="res://Scripts/Inventory/Slot.gd" id="2_l7ota"]
 [ext_resource type="FontFile" uid="uid://c0qkbpts5pm2" path="res://Fonts/m5x7.ttf" id="4_20f2o"]
+[ext_resource type="Texture2D" uid="uid://cot7qf3l3mpne" path="res://Assets/tooltip_background.png" id="5_tm362"]
 
 [node name="Hotbar" type="Node2D"]
 scale = Vector2(2.5, 2.5)
@@ -65,6 +66,7 @@ layout_mode = 2
 script = ExtResource("2_l7ota")
 
 [node name="ActiveItemLabel" type="Label" parent="."]
+texture_filter = 1
 offset_left = 158.4
 offset_top = 233.6
 offset_right = 266.4
@@ -75,3 +77,49 @@ theme_override_constants/outline_size = 3
 theme_override_fonts/font = ExtResource("4_20f2o")
 theme_override_font_sizes/font_size = 16
 text = "Sample Name"
+
+[node name="Tooltip" type="TextureRect" parent="ActiveItemLabel"]
+layout_mode = 0
+offset_left = -143.0
+offset_top = -36.0
+offset_right = -20.0
+offset_bottom = 50.0
+texture = ExtResource("5_tm362")
+
+[node name="Item Category" type="Label" parent="ActiveItemLabel/Tooltip"]
+texture_filter = 1
+layout_mode = 2
+offset_left = 2.6
+offset_top = -0.400009
+offset_right = 90.6
+offset_bottom = 12.6
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_20f2o")
+theme_override_font_sizes/font_size = 16
+text = "Item Category"
+
+[node name="Item Name" type="Label" parent="ActiveItemLabel/Tooltip"]
+texture_filter = 1
+layout_mode = 2
+offset_left = 3.0
+offset_top = 12.0
+offset_right = 91.0
+offset_bottom = 25.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_20f2o")
+theme_override_font_sizes/font_size = 16
+text = "Item Name"
+
+[node name="Item Description" type="Label" parent="ActiveItemLabel/Tooltip"]
+texture_filter = 3
+custom_minimum_size = Vector2(88, 13)
+layout_mode = 2
+offset_left = 3.0
+offset_top = 35.0
+offset_right = 122.0
+offset_bottom = 48.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_20f2o")
+text = "Item Description"
+autowrap_mode = 2

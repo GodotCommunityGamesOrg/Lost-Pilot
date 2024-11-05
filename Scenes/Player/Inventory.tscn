@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ctmwn4da5hhm8"]
+[gd_scene load_steps=13 format=3 uid="uid://ctmwn4da5hhm8"]
 
 [ext_resource type="Script" path="res://Scripts/Inventory/Inventory.gd" id="1_fvmfh"]
 [ext_resource type="Texture2D" uid="uid://d4b0cwdp6yd3s" path="res://Assets/inventory_background.png" id="1_g1vlc"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://iepriqfn6mhf" path="res://Assets/Item_icons/Body_Overlay.png" id="6_2v0yx"]
 [ext_resource type="Texture2D" uid="uid://b67ntqaob73cw" path="res://Assets/Item_icons/Weapon_Overlay.png" id="6_jplto"]
 [ext_resource type="Texture2D" uid="uid://btnc4w1t360qg" path="res://Assets/Item_icons/Boot_Overlay.png" id="7_cvc2h"]
+[ext_resource type="Texture2D" uid="uid://cot7qf3l3mpne" path="res://Assets/tooltip_background.png" id="9_v1u3j"]
+[ext_resource type="FontFile" uid="uid://c0qkbpts5pm2" path="res://Fonts/m5x7.ttf" id="10_1y7jr"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c6mmg"]
 texture = ExtResource("2_1bfx2")
@@ -20,16 +22,16 @@ scale = Vector2(2.5, 2.5)
 script = ExtResource("1_fvmfh")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = 207.6
+offset_left = 244.8
 offset_top = 130.0
-offset_right = 414.6
+offset_right = 451.8
 offset_bottom = 242.0
 texture = ExtResource("1_g1vlc")
 
 [node name="GridContainer" type="GridContainer" parent="."]
-offset_left = 291.1
+offset_left = 328.3
 offset_top = 147.0
-offset_right = 407.1
+offset_right = 444.3
 offset_bottom = 239.0
 theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 4
@@ -156,10 +158,10 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_rii4f")
 
 [node name="EquipSlots" type="GridContainer" parent="."]
-offset_left = 220.0
+offset_left = 257.2
 offset_top = 164.4
-offset_right = 288.0
-offset_bottom = 208.4
+offset_right = 325.2
+offset_bottom = 214.4
 theme_override_constants/v_separation = 10
 columns = 3
 
@@ -216,10 +218,10 @@ script = ExtResource("3_rii4f")
 [node name="TextureRect" type="TextureRect" parent="EquipSlots/WeaponSlot"]
 modulate = Color(1, 1, 0.901961, 1)
 layout_mode = 0
-offset_left = 2.0
-offset_top = 4.00001
-offset_right = 18.0
-offset_bottom = 16.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 17.0
+offset_bottom = 17.0
 texture = ExtResource("6_jplto")
 
 [node name="WeaponSlot2" type="Panel" parent="EquipSlots"]
@@ -231,8 +233,53 @@ script = ExtResource("3_rii4f")
 [node name="TextureRect" type="TextureRect" parent="EquipSlots/WeaponSlot2"]
 modulate = Color(1, 1, 0.901961, 1)
 layout_mode = 0
-offset_left = 2.0
-offset_top = 4.00001
-offset_right = 18.0
-offset_bottom = 16.0
+offset_left = 3.2
+offset_top = 2.8
+offset_right = 17.2
+offset_bottom = 16.8
 texture = ExtResource("6_jplto")
+
+[node name="Tooltip" type="TextureRect" parent="."]
+offset_left = 328.0
+offset_top = 29.2
+offset_right = 451.0
+offset_bottom = 115.2
+texture = ExtResource("9_v1u3j")
+
+[node name="Item Category" type="Label" parent="Tooltip"]
+texture_filter = 1
+layout_mode = 2
+offset_left = 2.6
+offset_top = -0.400009
+offset_right = 90.6
+offset_bottom = 12.6
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("10_1y7jr")
+theme_override_font_sizes/font_size = 16
+text = "Item Category"
+
+[node name="Item Name" type="Label" parent="Tooltip"]
+texture_filter = 1
+layout_mode = 2
+offset_left = 3.0
+offset_top = 12.0
+offset_right = 91.0
+offset_bottom = 25.0
+scale = Vector2(1.5, 1.5)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("10_1y7jr")
+theme_override_font_sizes/font_size = 16
+text = "Item Name"
+
+[node name="Item Description" type="Label" parent="Tooltip"]
+texture_filter = 3
+custom_minimum_size = Vector2(88, 13)
+layout_mode = 2
+offset_left = 3.0
+offset_top = 35.0
+offset_right = 122.0
+offset_bottom = 48.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("10_1y7jr")
+text = "Item Description"
+autowrap_mode = 2

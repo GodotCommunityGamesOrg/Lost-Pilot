@@ -1,6 +1,6 @@
 {
     "Repair Kit" : {
-        "ItemCategory" : "Repair",
+        "ItemCategory" : "Tool",
         "AddHealth" : 5,
         "StackSize" : 99,
         "Description" : "This repairs damage to a ship"

@@ -57,6 +57,6 @@ script = ExtResource("4_vmpql")
 
 [node name="Inventory" parent="UI" instance=ExtResource("5_j5cyo")]
 visible = false
-position = Vector2(-11, 44)
+position = Vector2(42, -34)
 
 [node name="Hotbar" parent="UI" instance=ExtResource("6_02d48")]

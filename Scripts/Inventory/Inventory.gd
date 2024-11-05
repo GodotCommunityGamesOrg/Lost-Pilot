@@ -3,6 +3,8 @@ extends Node2D
 const SlotClass = preload("res://Scripts/Inventory/Slot.gd")
 @onready var inventory_slots = $GridContainer
 @onready var equip_slots = $EquipSlots.get_children()
+@onready var tooltip = $Tooltip
+var t = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,6 +23,7 @@ func _ready() -> void:
 	equip_slots[4].slot_type = SlotClass.SlotType.WEAPONS
 	initialize_inventory()
 	initialize_equip()
+
 		
 func initialize_inventory():
 	var slots = inventory_slots.get_children()
@@ -70,6 +73,18 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 				PlayerInventory.remove_item(slot)
 				find_parent("UI").holding_item = slot.item
 				slot.pickFromSlot()
+				find_parent("UI").holding_item.global_position = get_global_mouse_position()
+		if event.button_index == MOUSE_BUTTON_RIGHT && event.pressed:
+			if slot.item:
+				var amount_to_remove = slot.item.item_quantity/2
+				PlayerInventory.decrease_item_quantity(slot, amount_to_remove)
+				slot.item.decrease_item_quantity(amount_to_remove)
+				t = SlotClass.new()
+				add_child(t)
+				t.initialize_item(slot.item.item_name, amount_to_remove)
+				find_parent("UI").holding_item = t.item
+				t.remove_child(t.item)
+				t.getFromSlot()
 				find_parent("UI").holding_item.global_position = get_global_mouse_position()
 
 func _input(event: InputEvent) -> void:

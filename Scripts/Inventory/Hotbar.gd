@@ -4,6 +4,8 @@ const SlotClass = preload("res://Scripts/Inventory/Slot.gd")
 @onready var hotbar = $HotbarSlots 
 @onready var slots = $HotbarSlots.get_children()
 @onready var active_item_label = $ActiveItemLabel
+@onready var tooltip = $ActiveItemLabel/Tooltip
+var t
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,10 +19,17 @@ func _ready() -> void:
 	update_active_item_label()
 	
 func update_active_item_label():
+	tooltip.visible = true
 	if slots[PlayerInventory.active_item_slot].item != null:
 		active_item_label.text = slots[PlayerInventory.active_item_slot].item.item_name
+		tooltip.visible = true
+		var tips = tooltip.get_children()
+		tips[0].text = JsonData.item_data[active_item_label.text]["ItemCategory"]
+		tips[1].text = slots[PlayerInventory.active_item_slot].item.item_name
+		tips[2].text = JsonData.item_data[active_item_label.text]["Description"]
 	else:
 		active_item_label.text = "Empty Slot"
+		tooltip.visible = false
 		
 func initialize_hotbar():
 	for i in range(slots.size()):
@@ -62,3 +71,15 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 				slot.pickFromSlot()
 				find_parent("UI").holding_item.global_position = get_global_mouse_position()
 			update_active_item_label()
+		if event.button_index == MOUSE_BUTTON_RIGHT && event.pressed:
+			if slot.item:
+				var amount_to_remove = slot.item.item_quantity/2
+				PlayerInventory.decrease_item_quantity(slot, amount_to_remove)
+				slot.item.decrease_item_quantity(amount_to_remove)
+				t = SlotClass.new()
+				add_child(t)
+				t.initialize_item(slot.item.item_name, amount_to_remove)
+				find_parent("UI").holding_item = t.item
+				t.remove_child(t.item)
+				t.getFromSlot()
+				find_parent("UI").holding_item.global_position = get_global_mouse_position()

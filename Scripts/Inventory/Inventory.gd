@@ -1,8 +1,8 @@
-extends Node2D
+extends UserInterface
 
 const SlotClass = preload("res://Scripts/Inventory/Slot.gd")
-@onready var inventory_slots = $GridContainer
-@onready var equip_slots = $EquipSlots.get_children()
+@onready var inventory_slots:GridContainer = $VBoxContainer/TextureRect/VBoxContainer/GridContainer
+@onready var equip_slots: Array = $VBoxContainer/TextureRect/VBoxContainer/EquipSlots.get_children()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -73,8 +73,9 @@ func slot_gui_input(event: InputEvent, slot: SlotClass):
 				find_parent("UI").holding_item.global_position = get_global_mouse_position()
 
 func _input(event: InputEvent) -> void:
-	if find_parent("UI").holding_item:
-		find_parent("UI").holding_item.global_position = get_global_mouse_position()
+	if event is InputEventMouseButton:
+		if find_parent("UI").holding_item:
+			find_parent("UI").holding_item.global_position = get_global_mouse_position()
 
 func able_to_put_into_slot(slot):
 	var holding_item = find_parent("UI").holding_item

@@ -1,14 +1,11 @@
 extends Node
 
-## Signal emitted when the player's turn ends.
-signal player_turn_end
+# --- Public Properties ---
+var map: TileMapLayer       ## Reference to the TileMapLayer node for interacting with the game map.
+var player: PlayerNode      ## Reference to the Player for interacting.
+var pathfinder: AStarGrid2D ## Reference to the AStarGrid2D for pathfinding.
 
-## Reference to the AStarGrid2D node for pathfinding.
-var pathfinder: AStarGrid2D
-
-## Reference to the TileMapLayer node for interacting with the game map.
-var map: TileMapLayer
-
+# --- Custom Methods  ---
 ## return A [PackedVector2Array] containing a path as a series of points from the start to the end position.
 ## [param start]: A [Vector2] representing the starting position in the world.
 ## [param end]: A [Vector2] representing the target position in the world.

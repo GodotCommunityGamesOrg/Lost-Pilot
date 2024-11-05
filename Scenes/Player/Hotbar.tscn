@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7bp1x1j426du"]
+[gd_scene load_steps=5 format=3 uid="uid://w5myd5130r7v"]
 
 [ext_resource type="Script" path="res://Scripts/Inventory/Hotbar.gd" id="1_7wg0i"]
 [ext_resource type="Texture2D" uid="uid://df307ktv7ef4y" path="res://Assets/hotbar_background.png" id="1_kcb2d"]
 [ext_resource type="Script" path="res://Scripts/Inventory/Slot.gd" id="2_l7ota"]
-[ext_resource type="FontFile" uid="uid://c0qkbpts5pm2" path="res://Fonts/m5x7.ttf" id="4_20f2o"]
+[ext_resource type="FontFile" uid="uid://c0qkbpts5pm2" path="res://Assets/Fonts/m5x7.ttf" id="4_20f2o"]
 
 [node name="Hotbar" type="Node2D"]
 scale = Vector2(2.5, 2.5)

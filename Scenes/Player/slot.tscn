@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cw75i4ar1o7du"]
+
+[ext_resource type="Texture2D" uid="uid://dtqd1ooqdgyv5" path="res://Assets/Item_icons/Helmet_Overlay.png" id="1_aup44"]
+[ext_resource type="Script" path="res://Scripts/Inventory/Slot.gd" id="2_e2e32"]
+
+[node name="HelmetSlot" type="AspectRatioContainer"]
+custom_minimum_size = Vector2(20, 20)
+offset_right = 20.0
+offset_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_e2e32")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_aup44")
+expand_mode = 1

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://baxyfbui8qb04"]
 
 [ext_resource type="Script" path="res://Objects/Items/Item.gd" id="1_po1g3"]
-[ext_resource type="FontFile" uid="uid://c0qkbpts5pm2" path="res://Fonts/m5x7.ttf" id="3_yaqbl"]
+[ext_resource type="FontFile" uid="uid://c0qkbpts5pm2" path="res://Assets/Fonts/m5x7.ttf" id="3_yaqbl"]
 
 [node name="Item" type="Node2D"]
 z_index = 1

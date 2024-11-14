@@ -1,0 +1,152 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfxim84yrh17w"]
+
+[ext_resource type="Script" path="res://Scripts/Menus/main_menu.gd" id="1_8rgqn"]
+[ext_resource type="FontFile" uid="uid://b2qsse7qo1d8y" path="res://Assets/Gugi-Regular.ttf" id="2_x63qt"]
+[ext_resource type="Texture2D" uid="uid://cl3v6nwopeykd" path="res://Assets/UI/TransparentGrayPanel64x64.png" id="3_ilnhd"]
+[ext_resource type="Texture2D" uid="uid://b5m6rbp0pckc7" path="res://Assets/UI/GitHub_Logo.png" id="4_xmsdu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7cqtw"]
+texture = ExtResource("3_ilnhd")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("start_focus")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8rgqn")
+start_focus = NodePath("PanelContainer/MarginContainer/VBoxContainer/Play")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.27451, 0.541176, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.363281
+anchor_top = 0.190278
+anchor_right = 0.6375
+anchor_bottom = 0.270833
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0.156863, 0.247059, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("2_x63qt")
+theme_override_font_sizes/font_size = 56
+text = "The lost pilot"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(180, 50)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.846875
+anchor_top = 0.908333
+anchor_right = 0.9875
+anchor_bottom = 0.977778
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("3_ilnhd")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="GithubButton" type="TextureButton" parent="NinePatchRect"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -30.0
+offset_right = 100.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("4_xmsdu")
+texture_pressed = ExtResource("4_xmsdu")
+texture_hover = ExtResource("4_xmsdu")
+texture_disabled = ExtResource("4_xmsdu")
+texture_focused = ExtResource("4_xmsdu")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(200, 220)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_7cqtw")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Play" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_x63qt")
+theme_override_font_sizes/font_size = 24
+text = "Play"
+
+[node name="Settings" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_x63qt")
+theme_override_font_sizes/font_size = 24
+text = "Settings"
+
+[node name="Credits" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_x63qt")
+theme_override_font_sizes/font_size = 24
+text = "Credits"
+
+[node name="Quit" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_x63qt")
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+
+[connection signal="pressed" from="NinePatchRect/GithubButton" to="." method="_on_github_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

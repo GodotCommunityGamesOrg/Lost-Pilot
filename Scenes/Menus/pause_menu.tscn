@@ -1,0 +1,90 @@
+[gd_scene load_steps=5 format=3 uid="uid://bo4uld1h02n47"]
+
+[ext_resource type="Script" path="res://Scripts/Menus/pause_menu.gd" id="1_sjvxr"]
+[ext_resource type="Texture2D" uid="uid://cl3v6nwopeykd" path="res://Assets/UI/TransparentGrayPanel64x64.png" id="2_7rbvu"]
+[ext_resource type="FontFile" uid="uid://b2qsse7qo1d8y" path="res://Assets/Gugi-Regular.ttf" id="3_ofry3"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3b2dr"]
+texture = ExtResource("2_7rbvu")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("start_focus")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sjvxr")
+is_paused = true
+start_focus = NodePath("PanelContainer/MarginContainer/VBoxContainer/Resume")
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(170, 240)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.433594
+anchor_top = 0.326389
+anchor_right = 0.566406
+anchor_bottom = 0.659722
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_3b2dr")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Creditor0" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "
+[center][color=Red]Paused[/color][/center]"
+fit_content = true
+
+[node name="Resume" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ofry3")
+theme_override_font_sizes/font_size = 24
+text = "Resume"
+
+[node name="MainMenu" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ofry3")
+theme_override_font_sizes/font_size = 24
+text = "Main Menu"
+
+[node name="Settings" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ofry3")
+theme_override_font_sizes/font_size = 24
+text = "Settings"
+
+[node name="Quit" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ofry3")
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lffo83livjbu"
-path="res://.godot/imported/Animated-door-V.png-8dbba376c15f43235c2aad321c4cd5da.ctex"
+uid="uid://b86uor46vus0p"
+path="res://.godot/imported/Space-station-v1-2.png-aa99d59b1f107f7e2ac127872a4be7a3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/objects/Animated-door-V.png"
-dest_files=["res://.godot/imported/Animated-door-V.png-8dbba376c15f43235c2aad321c4cd5da.ctex"]
+source_file="res://assets/tilemaps/Space-station-v1-2.png"
+dest_files=["res://.godot/imported/Space-station-v1-2.png-aa99d59b1f107f7e2ac127872a4be7a3.ctex"]
 
 [params]
 

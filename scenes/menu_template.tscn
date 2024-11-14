@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcie4ffdb5mis"]
+
+[ext_resource type="Script" path="res://scripts/menu_system/menu_base.gd" id="1_epc1c"]
+
+[node name="MenuTemplate" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_epc1c")
+metadata/_edit_use_anchors_ = true

@@ -1,0 +1,148 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvrveljgfa32h"]
+
+[ext_resource type="Script" path="res://scripts/ui/inventory/hotbar.gd" id="1_wtpqd"]
+[ext_resource type="Texture2D" uid="uid://ss8h5ocyboi" path="res://assets/ui/inventory_ui/hotbar_background.png" id="2_74qrd"]
+[ext_resource type="Script" path="res://scripts/ui/inventory/slot.gd" id="3_ntfse"]
+[ext_resource type="FontFile" uid="uid://b2qsse7qo1d8y" path="res://assets/Gugi-Regular.ttf" id="4_20f2o"]
+[ext_resource type="Texture2D" uid="uid://cuwdbmuehtg1j" path="res://assets/ui/inventory_ui/tooltip_background.png" id="5_viweb"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m05ba"]
+texture = ExtResource("5_viweb")
+
+[node name="Hotbar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(2.5, 2.5)
+script = ExtResource("1_wtpqd")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 247.0
+offset_right = 347.0
+offset_bottom = 276.0
+texture = ExtResource("2_74qrd")
+
+[node name="HotbarSlots" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 165.0
+offset_top = 252.0
+offset_right = 353.0
+offset_bottom = 272.0
+theme_override_constants/h_separation = 2
+columns = 8
+
+[node name="HotbarSlot1" type="Panel" parent="HotbarSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+script = ExtResource("3_ntfse")
+
+[node name="HotbarSlot2" type="Panel" parent="HotbarSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+tooltip_text = "Slot"
+script = ExtResource("3_ntfse")
+
+[node name="HotbarSlot3" type="Panel" parent="HotbarSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+script = ExtResource("3_ntfse")
+
+[node name="HotbarSlot4" type="Panel" parent="HotbarSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+script = ExtResource("3_ntfse")
+
+[node name="HotbarSlot5" type="Panel" parent="HotbarSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+script = ExtResource("3_ntfse")
+
+[node name="HotbarSlot6" type="Panel" parent="HotbarSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+script = ExtResource("3_ntfse")
+
+[node name="HotbarSlot7" type="Panel" parent="HotbarSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+script = ExtResource("3_ntfse")
+
+[node name="HotbarSlot8" type="Panel" parent="HotbarSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+script = ExtResource("3_ntfse")
+
+[node name="ActiveItemLabel" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 158.4
+offset_top = 225.0
+offset_right = 266.4
+offset_bottom = 242.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_20f2o")
+theme_override_font_sizes/font_size = 16
+text = "Sample Name"
+
+[node name="Tooltip" type="PanelContainer" parent="ActiveItemLabel"]
+layout_mode = 0
+offset_left = -132.8
+offset_top = -51.8
+offset_right = -9.8
+offset_bottom = 63.2
+theme_override_styles/panel = SubResource("StyleBoxTexture_m05ba")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ActiveItemLabel/Tooltip"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="Item Category" type="Label" parent="ActiveItemLabel/Tooltip/VBoxContainer" groups=["hotbar_info_slots"]]
+texture_filter = 1
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_20f2o")
+theme_override_font_sizes/font_size = 10
+text = "Item Category"
+
+[node name="Item Name" type="Label" parent="ActiveItemLabel/Tooltip/VBoxContainer" groups=["hotbar_info_slots"]]
+texture_filter = 1
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_20f2o")
+theme_override_font_sizes/font_size = 10
+text = "Item Name"
+
+[node name="Item Description" type="Label" parent="ActiveItemLabel/Tooltip/VBoxContainer" groups=["hotbar_info_slots"]]
+texture_filter = 1
+custom_minimum_size = Vector2(88, 13)
+layout_mode = 2
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("4_20f2o")
+theme_override_font_sizes/font_size = 10
+text = "Item Description"
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ActiveItemLabel/Tooltip/VBoxContainer"]
+layout_mode = 2
+
+[node name="Item Stat1" type="Label" parent="ActiveItemLabel/Tooltip/VBoxContainer/HBoxContainer" groups=["hotbar_info_slots"]]
+texture_filter = 3
+custom_minimum_size = Vector2(40, 13)
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_20f2o")
+theme_override_font_sizes/font_size = 10
+autowrap_mode = 2
+
+[node name="Item Stat2" type="Label" parent="ActiveItemLabel/Tooltip/VBoxContainer/HBoxContainer" groups=["hotbar_info_slots"]]
+texture_filter = 3
+custom_minimum_size = Vector2(40, 13)
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_20f2o")
+theme_override_font_sizes/font_size = 10
+autowrap_mode = 2

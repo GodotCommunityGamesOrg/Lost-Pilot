@@ -21,7 +21,7 @@ func _ready() -> void:
 	
 func tooltip_change():
 	# Toggle the visibility of the tooltip
-	tooltip.visible = !tooltip.visible
+	active_item_label.visible = !active_item_label.visible
 
 func update_active_item_label():
 	tooltip.visible = true

@@ -59,6 +59,7 @@ func putIntoSlot(new_item):
 	var inventoryNode = find_parent("UI")
 	inventoryNode.remove_child(item)
 	add_child(item)
+	tooltip_text = item.item_name
 	refresh_style()
 
 func getFromSlot():
@@ -77,6 +78,7 @@ func initialize_item(item_name, item_quantity):
 		item.position.x = 2.5
 		item.position.y = 2.5
 		item.set_item(item_name, item_quantity)
+	tooltip_text = item.item_name
 	refresh_style()
 
 func change_hover():

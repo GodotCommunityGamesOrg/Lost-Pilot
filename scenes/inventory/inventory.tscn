@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://cc5s5h3qhwkom"]
+[gd_scene load_steps=17 format=3 uid="uid://cc5s5h3qhwkom"]
 
 [ext_resource type="Script" path="res://scripts/ui/inventory/inventory.gd" id="1_yuqda"]
-[ext_resource type="Texture2D" uid="uid://cuwdbmuehtg1j" path="res://assets/ui/inventory_ui/tooltip_background.png" id="2_vicio"]
 [ext_resource type="Script" path="res://scripts/ui/inventory/slot.gd" id="3_3gd4k"]
 [ext_resource type="Texture2D" uid="uid://c3t67ucjc17xh" path="res://assets/ui/inventory_ui/inventory_background.png" id="4_qjx8n"]
+[ext_resource type="Texture2D" uid="uid://1bramb5go6aa" path="res://assets/ui/panels/RedTransparentPanel64x64.png" id="5_5b15x"]
+[ext_resource type="Texture2D" uid="uid://bftj5xvnuaa70" path="res://assets/ui/panels/GrayTransparentPanel64x64.png" id="5_fvali"]
 [ext_resource type="FontFile" uid="uid://b2qsse7qo1d8y" path="res://assets/Gugi-Regular.ttf" id="5_ptnxp"]
 [ext_resource type="Texture2D" uid="uid://ce0pf5op5farq" path="res://assets/ui/inventory_ui/overlays/Helmet_Overlay.png" id="6_y23rr"]
 [ext_resource type="Texture2D" uid="uid://5hla2mrab4j1" path="res://assets/ui/inventory_ui/overlays/Body_Overlay.png" id="7_plhtd"]
@@ -12,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://b4cl313lwqp7m" path="res://assets/ui/inventory_ui/InventorySlot64x64.png" id="10_gmb76"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u27p8"]
-texture = ExtResource("2_vicio")
+texture = ExtResource("5_5b15x")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4wq3d"]
 texture = ExtResource("4_qjx8n")
@@ -23,12 +24,7 @@ texture_margin_bottom = 6.0
 region_rect = Rect2(0, 0, 207, 11)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vosku"]
-texture = ExtResource("4_qjx8n")
-texture_margin_left = 8.0
-texture_margin_top = 8.0
-texture_margin_right = 9.0
-texture_margin_bottom = 6.0
-region_rect = Rect2(0, 11, 207, 101)
+texture = ExtResource("5_fvali")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tpeyn"]
 
@@ -44,13 +40,14 @@ script = ExtResource("1_yuqda")
 [node name="Tooltip" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(120, 109)
 layout_mode = 2
-offset_left = 216.8
+offset_left = 217.0
 offset_top = 4.0
-offset_right = 355.8
+offset_right = 337.0
 offset_bottom = 162.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_u27p8")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Tooltip"]
+custom_minimum_size = Vector2(88, 115)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -67,7 +64,7 @@ tooltip_text = "Item Category"
 mouse_filter = 0
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("5_ptnxp")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 12
 text = "Item Category"
 
 [node name="Item Name" type="Label" parent="Tooltip/VBoxContainer" groups=["Info_Slots"]]
@@ -81,8 +78,8 @@ theme_override_font_sizes/font_size = 10
 text = "Item Name"
 
 [node name="Item Description" type="Label" parent="Tooltip/VBoxContainer" groups=["Info_Slots"]]
-texture_filter = 3
-custom_minimum_size = Vector2(100, 48)
+texture_filter = 1
+custom_minimum_size = Vector2(88, 48)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -90,7 +87,7 @@ tooltip_text = "Item Description"
 mouse_filter = 0
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("5_ptnxp")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 10
 text = "Item Description"
 autowrap_mode = 2
 
@@ -105,6 +102,7 @@ custom_minimum_size = Vector2(40, 13)
 layout_mode = 2
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("5_ptnxp")
+theme_override_font_sizes/font_size = 10
 autowrap_mode = 2
 
 [node name="Item Stat2" type="Label" parent="Tooltip/VBoxContainer/HBoxContainer" groups=["Info_Slots"]]
@@ -113,17 +111,11 @@ custom_minimum_size = Vector2(40, 13)
 layout_mode = 2
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("5_ptnxp")
+theme_override_font_sizes/font_size = 10
 autowrap_mode = 2
 
-[node name="Item Description2" type="Label" parent="Tooltip/VBoxContainer"]
-texture_filter = 3
-custom_minimum_size = Vector2(88, 10)
+[node name="Container2" type="Control" parent="Tooltip/VBoxContainer"]
 layout_mode = 2
-mouse_default_cursor_shape = 6
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("5_ptnxp")
-autowrap_mode = 2
-max_lines_visible = 3
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -152,7 +144,10 @@ size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxTexture_vosku")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/PanelContainer2"]
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="EquipSlots" type="GridContainer" parent="VBoxContainer2/PanelContainer2/HBoxContainer"]
 layout_mode = 2

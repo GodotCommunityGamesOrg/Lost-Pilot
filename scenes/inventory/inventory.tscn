@@ -151,6 +151,7 @@ size_flags_vertical = 4
 
 [node name="EquipSlots" type="GridContainer" parent="VBoxContainer2/PanelContainer2/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 0
 theme_override_constants/v_separation = 10
 columns = 3
 
@@ -230,6 +231,7 @@ texture = ExtResource("9_i0785")
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer2/PanelContainer2/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 0
 theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 4
 columns = 5
@@ -237,12 +239,18 @@ columns = 5
 [node name="Slot1" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
+focus_neighbor_right = NodePath("../Slot2")
+focus_neighbor_bottom = NodePath("../Slot6")
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
 [node name="Slot2" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
+focus_neighbor_left = NodePath("../Slot1")
+focus_neighbor_right = NodePath("../Slot3")
+focus_neighbor_bottom = NodePath("../Slot7")
+focus_previous = NodePath("../Slot1")
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 

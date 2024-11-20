@@ -27,6 +27,13 @@
         "StackSize" : 99,
         "Description" : "This heals injuries and provides energy to you or crewmates"
     },
+    "Fuel" : {
+        "ItemCategory" : "Consumable",
+        "AddHealth" : 0,
+        "AddEnergy" : 15,
+        "StackSize" : 99,
+        "Description" : "This provides fuel for ships"
+    },
     "Basic Helmet" : {
         "SuperCategory" : "Clothes",
         "ItemCategory" : "Helmet",
@@ -47,6 +54,30 @@
         "SuperCategory" : "Clothes",
         "ItemCategory" : "Boots",
         "Protection" : 10,
+        "Insulation" : 2,
+        "StackSize" : 12,
+        "Description" : "This protects you from damage"
+    },
+    "Intermediate Helmet" : {
+        "SuperCategory" : "Clothes",
+        "ItemCategory" : "Helmet",
+        "Protection" : 15,
+        "Insulation" : 3,
+        "StackSize" : 12,
+        "Description" : "This protects you from damage"
+    },
+    "Intermediate Vest" : {
+        "SuperCategory" : "Clothes",
+        "ItemCategory" : "Vest",
+        "Protection" : 15,
+        "Insulation" : 2,
+        "StackSize" : 12,
+        "Description" : "This protects you from damage"
+    },
+    "Intermediate Boots" : {
+        "SuperCategory" : "Clothes",
+        "ItemCategory" : "Boots",
+        "Protection" : 15,
         "Insulation" : 2,
         "StackSize" : 12,
         "Description" : "This protects you from damage"

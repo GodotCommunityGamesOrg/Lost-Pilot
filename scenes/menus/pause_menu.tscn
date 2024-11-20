@@ -26,6 +26,12 @@ is_paused = true
 start_focus = NodePath("PanelContainer/MarginContainer/VBoxContainer/Resume")
 metadata/_edit_use_anchors_ = true
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1275.0
+offset_bottom = 720.0
+color = Color(1, 1, 1, 0.2)
+
 [node name="PanelContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(170, 240)
 layout_mode = 1

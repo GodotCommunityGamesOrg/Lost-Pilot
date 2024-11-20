@@ -17,6 +17,8 @@ var inventory = {
 	5 : ["Bandage", 30],
 	6 : ["Repair Kit", 5],
 	7 : ["Food 1", 12],
+	8 : ["Fuel", 2],
+	9 : ["Intermediate Helmet", 1],
 }
 
 var hotbar = {

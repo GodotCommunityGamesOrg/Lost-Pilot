@@ -16,7 +16,7 @@ class_name InteractableObject
 @export var gui_focus: BaseButton              ## Primary focusable GUI element for the object.
 
 # --- Public Properties ---
-@onready var map_position = global.map.local_to_map(position)  ## Position of the object on the map grid.
+@onready var map_position = WorldPathfinder.map.local_to_map(position)  ## Position of the object on the map grid.
 
 # --- Private Properties ---
 var in_object: bool = false                    ## Tracks if the player is within the object’s space.
@@ -45,12 +45,12 @@ func _ready() -> void:
 	mouse_entered.connect(func(): hover = true; queue_redraw())
 	mouse_exited.connect(func(): hover = false; queue_redraw())
 
-	if global.pathfinder and global.map:
-		global.pathfinder.set_point_solid(global.map.local_to_map(position), is_blocking)
+	if WorldPathfinder.pathfinder:
+		WorldPathfinder.pathfinder.set_point_solid(WorldPathfinder.map.local_to_map(position), is_blocking)
 	else:
 		push_error("Pathfinder or map not initialized.")
 	
-	global.player.moved.connect(_player_moved)
+	WorldPathfinder.players[0].moved.connect(_player_moved)
 
 func _player_moved(player_position: Vector2i) -> void:
 	if player_position == map_position:
@@ -59,18 +59,18 @@ func _player_moved(player_position: Vector2i) -> void:
 		in_object = false
 	
 	var is_within_radius := (player_position - map_position).length() < gui_detection_radius
-	var should_hide_gui := global.player.selected_object and global.player.selected_object != self and global.player.selected_object.gui_interaction_priority >= gui_interaction_priority
+	var should_hide_gui: bool = WorldPathfinder.players[0].selected_object and WorldPathfinder.players[0].selected_object != self and WorldPathfinder.players[0].selected_object.gui_interaction_priority >= gui_interaction_priority
 	
 	if is_within_radius:
 		if should_hide_gui:
 			disabled = true
 			return
 		grab_focus()
-		global.player.selected_object = self
+		WorldPathfinder.players[0].selected_object = self
 		disabled = false
 	else:
-		if global.player.selected_object == self:
-			global.player.selected_object = null
+		if WorldPathfinder.players[0].selected_object == self:
+			WorldPathfinder.players[0].selected_object = null
 		disabled = true
 
 # Draws the object with hover and focus effects.
@@ -84,14 +84,14 @@ func _draw() -> void:
 
 ## Starts interaction with the object, making the GUI visible and focusing the object.
 func interact() -> void:
-	if global.map.local_to_map(global.player.position) == map_position:
+	if WorldPathfinder.map.local_to_map(WorldPathfinder.players[0].position) == map_position:
 		return
 	if disabled:
 		return
 	interacting.emit(true)
 	gui_container.visible = true
 	gui_focus.grab_focus()
-	global.player.action = true
+	WorldPathfinder.players[0].action = true
 
 ## Ends the interaction, hiding the GUI and releasing focus.
 func end_interact() -> void:
@@ -100,4 +100,4 @@ func end_interact() -> void:
 	interacting.emit(false)
 	gui_container.visible = false
 	grab_focus()
-	global.player.action = false
+	WorldPathfinder.players[0].action = false

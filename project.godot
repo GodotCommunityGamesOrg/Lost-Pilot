@@ -13,7 +13,7 @@ config_version=5
 config/name="Lost Pilot"
 run/main_scene="res://scenes/main/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://Assets/icon.svg"
+config/icon="res://assets/icon.svg"
 
 [autoload]
 
@@ -36,7 +36,7 @@ version_control/autoload_on_startup=true
 
 [gui]
 
-theme/custom_font="res://Assets/Gugi-Regular.ttf"
+theme/custom_font="res://assets/Gugi-Regular.ttf"
 theme/default_font_multichannel_signed_distance_field=true
 theme/default_font_generate_mipmaps=true
 

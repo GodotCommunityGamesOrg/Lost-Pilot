@@ -35,7 +35,7 @@ func _gui_input(event: InputEvent) -> void:
 			interact()
 			get_tree().get_root().set_input_as_handled()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and has_focus():
 		interact()
 

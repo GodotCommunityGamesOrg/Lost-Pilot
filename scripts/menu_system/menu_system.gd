@@ -23,34 +23,19 @@ func _ready() -> void:
 	set_up_menu_container()
 	
 	## Adding all the menus we want the game to have in the ready func.
-	add_menu(Keys.InGame,"res://scenes/menus/in_game_menu.tscn")
-	add_menu(Keys.Paused,"res://scenes/menus/pause_menu.tscn")
-	add_menu(Keys.MainMenu,"res://scenes/menus/main_menu.tscn")
-	add_menu(Keys.Settings,"res://scenes/menus/settings_menu.tscn")
-	add_menu(Keys.Credits,"res://scenes/menus/credits_menu.tscn")
+	menus[Keys.InGame] = preload("res://scenes/menus/in_game_menu.tscn")
+	menus[Keys.Paused] = preload("res://scenes/menus/pause_menu.tscn")
+	menus[Keys.MainMenu] = preload("res://scenes/menus/main_menu.tscn")
+	menus[Keys.Settings] = preload("res://scenes/menus/settings_menu.tscn")
+	menus[Keys.Credits] = preload("res://scenes/menus/credits_menu.tscn")
+	
 	## When all the menus are setup we now need to load the first menu. 
 	load_menu(Keys.MainMenu)
 
-## Adding the new menu into the dict and is loaded into memory.
-func add_menu(key : Keys , menu_path : String) -> void:
-	menus[key] = load(menu_path)
-
 ## Load the menu using the keys enum as input, we wait a frame to avoid timing issues.
 func load_menu(key : Keys) -> void:
-	## Should wait one frame before loading the next menu, to avoid any unwanted issue.
-	call_deferred("deferred_menu_load",key)
-
-## Load a previous menu using the previous_menus array we pop the current menu
-## so we get the previous menu
-func load_previous_menu() -> void:
-	## Delete the last menu in the previous menu array and load it
-	previous_menus.pop_back()
-	call_deferred("deferred_menu_load",previous_menus[-1])
-
-func deferred_menu_load(key : Keys) -> void:
-	
 	## Stop attempt if menu does not exist.
-	if not menus.has(key): assert(true,"No menu found!")
+	assert(menus.has(key),"No menu "+str(key)+" found!")
 	
 	## If the previous menu array is empty we add the first menu,
 	## elif the last menu isnt the same one as the current one we add it
@@ -75,6 +60,13 @@ func deferred_menu_load(key : Keys) -> void:
 	
 	## Set the game to paused if a menu pauses the game
 	get_tree().paused = current_menu.is_paused
+
+## Load a previous menu using the previous_menus array we pop the current menu
+## so we get the previous menu
+func load_previous_menu() -> void:
+	## Delete the last menu in the previous menu array and load it
+	previous_menus.pop_back()
+	call_deferred("deferred_menu_load",previous_menus[-1])
 
 ## Function for creating a container for the menus.
 func set_up_menu_container() -> void:

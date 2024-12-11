@@ -50,7 +50,7 @@ func _ready() -> void:
 	else:
 		push_error("Pathfinder or map not initialized.")
 	
-	WorldPathfinder.players[0].moved.connect(_player_moved)
+	WorldTurnBase.players[0].moved.connect(_player_moved)
 
 func _player_moved(player_position: Vector2i) -> void:
 	if player_position == map_position:
@@ -59,18 +59,18 @@ func _player_moved(player_position: Vector2i) -> void:
 		in_object = false
 	
 	var is_within_radius := (player_position - map_position).length() < gui_detection_radius
-	var should_hide_gui: bool = WorldPathfinder.players[0].selected_object and WorldPathfinder.players[0].selected_object != self and WorldPathfinder.players[0].selected_object.gui_interaction_priority >= gui_interaction_priority
+	var should_hide_gui: bool = WorldTurnBase.players[0].selected_object and WorldTurnBase.players[0].selected_object != self and WorldTurnBase.players[0].selected_object.gui_interaction_priority >= gui_interaction_priority
 	
 	if is_within_radius:
 		if should_hide_gui:
 			disabled = true
 			return
 		grab_focus()
-		WorldPathfinder.players[0].selected_object = self
+		WorldTurnBase.players[0].selected_object = self
 		disabled = false
 	else:
-		if WorldPathfinder.players[0].selected_object == self:
-			WorldPathfinder.players[0].selected_object = null
+		if WorldTurnBase.players[0].selected_object == self:
+			WorldTurnBase.players[0].selected_object = null
 		disabled = true
 
 # Draws the object with hover and focus effects.
@@ -84,14 +84,14 @@ func _draw() -> void:
 
 ## Starts interaction with the object, making the GUI visible and focusing the object.
 func interact() -> void:
-	if WorldPathfinder.map.local_to_map(WorldPathfinder.players[0].position) == map_position:
+	if WorldPathfinder.map.local_to_map(WorldTurnBase.players[0].position) == map_position:
 		return
 	if disabled:
 		return
 	interacting.emit(true)
 	gui_container.visible = true
 	gui_focus.grab_focus()
-	WorldPathfinder.players[0].action = true
+	WorldTurnBase.players[0].action = true
 
 ## Ends the interaction, hiding the GUI and releasing focus.
 func end_interact() -> void:
@@ -100,4 +100,4 @@ func end_interact() -> void:
 	interacting.emit(false)
 	gui_container.visible = false
 	grab_focus()
-	WorldPathfinder.players[0].action = false
+	WorldTurnBase.players[0].action = false

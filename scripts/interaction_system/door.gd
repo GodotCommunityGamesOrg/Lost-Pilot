@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func end_interact() -> void:
 	super()
-	if WorldPathfinder.map.local_to_map(WorldPathfinder.players[0].position) == map_position:
+	if WorldPathfinder.map.local_to_map(WorldTurnBase.players[0].position) == map_position:
 		print("ERR-1")
 		gui_focus.close()
 		return

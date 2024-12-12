@@ -10,9 +10,9 @@ class_name CircleMenuButton
 @export var options: Array[WheelOption]                ## List of selectable options
 
 @export_group("Color", "color_")
-@export var color_bg: Color = Color(0.3, 0.3, 0.3)     ## Background circle color
+@export var color_bg: Color = Color(0.302, 0.302, 0.302, 0.694)     ## Background circle color
 @export var color_line: Color = Color(1, 1, 1)         ## Line color for option dividers
-@export var color_highlight: Color = Color(1, 0.5, 0)  ## Highlight color for selected option
+@export var color_highlight: Color = Color(0, 0.502, 1)  ## Highlight color for selected option
 
 @export_group("size", "size_")
 @export var size_outer_radius: int = 256               ## Radius for the outer circle
@@ -62,10 +62,13 @@ func _input(event: InputEvent) -> void:
 			closed.emit()
 
 func _draw() -> void:
+	var poly := []
+	for i in range(0, options.size()*2):
+		poly.append(size/2+(Vector2.from_angle(PI/options.size()*i)*size_outer_radius))
+	draw_colored_polygon(poly, color_bg)
+	#draw_circle(size / 2, size_outer_radius, color_bg)
 
-	draw_circle(size / 2, size_outer_radius, color_bg)
-
-	draw_arc(size / 2, size_inner_radius, 0, TAU, 128, color_line, size_line_width, true)
+	draw_arc(size / 2, size_inner_radius, 0, TAU, options.size()*2+1, color_line, size_line_width, true)
 
 	if options.size() == 0:
 		return
@@ -83,7 +86,7 @@ func _draw() -> void:
 		var start_rads = TAU * selected_index / total_options  # Start angle for the option
 		var end_rads = TAU * (selected_index + 1) / total_options  # End angle for the next option
 
-		var points_per_arc = 32  # Number of points to define the arc
+		var points_per_arc = 2  # Number of points to define the arc
 		var points_inner = PackedVector2Array()
 		var points_outer = PackedVector2Array()
 
@@ -91,26 +94,29 @@ func _draw() -> void:
 			var _angle = start_rads + j * (end_rads - start_rads) / points_per_arc
 			points_inner.append(size_inner_radius * Vector2.from_angle(-_angle) + size / 2)  # Inner arc points
 			points_outer.append(size_outer_radius * Vector2.from_angle(-_angle) + size / 2)  # Outer arc points
-
 		points_outer.reverse()  # Reverse outer points to close the shape
 
-		draw_colored_polygon(points_inner + points_outer, color_highlight)
+		draw_polyline(points_inner + points_outer + PackedVector2Array([points_inner[0]]), color_highlight, size_line_width+1)
 
 	for i in range(total_options):
-		var default_font = ThemeDB.fallback_font  # Font for option names
-		var default_font_size = ThemeDB.fallback_font_size
+		var default_font = ThemeDB.get_default_theme().default_font  # Font for option names
+		var default_font_size = ThemeDB.get_default_theme().default_font_size
 		var angle = TAU * i / total_options
 		var mid_angle = angle + (TAU / (2 * total_options))  # Midpoint angle for text alignment
-		var text_width = default_font.get_string_size(options[i].name).x  # Width of the text for horizontal centering
+		var text_size = default_font.get_string_size(options[i].name)  # Width of the text for horizontal centering
 		# Adjusted draw position for centering
 		var draw_pos = (((size_outer_radius-size_inner_radius) / 2.0)+size_inner_radius) * Vector2.from_angle(mid_angle)
-		draw_pos -= Vector2(text_width / 2, 0)  # Adjust for both horizontal and vertical centering
+		draw_pos.x -= text_size.x / 2  # Adjust for both horizontal and vertical centering
+		draw_pos -= ((text_size/2).y*Vector2.from_angle(mid_angle))
 		draw_pos += size / 2  # Offset to position within the circle center
 
 		draw_string(default_font, draw_pos, options[i].name, HORIZONTAL_ALIGNMENT_CENTER, -1, default_font_size)
 
 	if _selection == -1:
-		draw_circle(size / 2, size_inner_radius, color_highlight)
+		poly.clear()
+		for i in range(0, options.size()*2+1):
+			poly.append(size/2+(Vector2.from_angle(PI/options.size()*i)*size_inner_radius))
+		draw_polyline(poly, color_highlight, size_line_width+1)
 
 # --- Custom Methods ---
 ## Method to close the menu and emit the selected option

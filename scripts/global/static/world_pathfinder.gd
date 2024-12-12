@@ -1,6 +1,5 @@
 class_name WorldPathfinder
 # --- Public Properties ---
-static var players: Array[UserActor] = []      ## Reference to the Player for interacting.
 static var pathfinder: AStarGrid2D ## Reference to the AStarGrid2D for pathfinding.
 static var map: map_generator
 

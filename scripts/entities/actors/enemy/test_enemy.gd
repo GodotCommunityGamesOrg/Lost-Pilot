@@ -9,7 +9,6 @@ func _ready() -> void:
 			if world_state == turn_state:
 				path = WorldPathfinder.calculate_path(position, WorldTurnBase.players[0].position)
 				path.pop_front()
-				_actions = actions
 				timer.start()
 	)
 	

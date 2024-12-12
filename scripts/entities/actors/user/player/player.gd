@@ -66,7 +66,7 @@ func _process(delta: float) -> void:
 		path.clear()
 		path_index = 0
 		action = false
-		WorldTurnBase.state.remove_player(self)
+		WorldTurnBase.state.remove_actor(self)
 	else:
 		if highlight_path.size() > 0:
 			queue_redraw()

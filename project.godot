@@ -18,7 +18,7 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 global="*res://scripts/global/global.gd"
-GameManager="*res://scripts/global/game_manager.gd"
+GameManager="*res://scripts/global/manager.gd"
 JsonData="*res://scripts/global/json_data.gd"
 PlayerInventory="*res://scripts/global/player_inventory.gd"
 

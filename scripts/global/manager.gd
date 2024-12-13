@@ -1,4 +1,5 @@
 extends Node
+class_name Manager
 # GameManager that handles loading and spawning scenes
 # e.g Player, world scene and more.
 
@@ -12,7 +13,6 @@ var scenes : Dictionary
 
 var current_scene : Node
 var scene_container : Node2D
-
 func _ready() -> void:
 	create_container()
 	add_scene("res://scenes/player/world.tscn",Keys.SpaceStation)

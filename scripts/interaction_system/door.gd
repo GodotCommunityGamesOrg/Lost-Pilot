@@ -10,19 +10,20 @@ func _ready() -> void:
 
 func end_interact() -> void:
 	super()
-	if global.map.local_to_map(global.player.position) == map_position:
+	if WorldPathfinder.map.local_to_map(WorldTurnBase.players[0].position) == map_position:
+		print("ERR-1")
 		gui_focus.close()
 		return
 	match gui_focus.close():
 		-1:
 			return
 		0:
-			if !global.pathfinder.is_point_solid(map_position):
-				global.pathfinder.set_point_solid(map_position, true)
+			if !WorldPathfinder.pathfinder.is_point_solid(map_position):
+				WorldPathfinder.pathfinder.set_point_solid(map_position, true)
 				anim.play_backwards("open")
 				gui_interaction_priority = 2
 		1:
-			if global.pathfinder.is_point_solid(map_position):
-				global.pathfinder.set_point_solid(map_position, false)
+			if WorldPathfinder.pathfinder.is_point_solid(map_position):
+				WorldPathfinder.pathfinder.set_point_solid(map_position, false)
 				anim.play("open")
 				gui_interaction_priority = 1

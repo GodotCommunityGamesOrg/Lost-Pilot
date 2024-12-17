@@ -9,7 +9,7 @@ class_name Actor
 @export var actions: int = 2
 
 ## Tracks the current remaining actions during the [Actor]'s turn.
-var _actions: int = 2
+@onready var _actions: int = actions
 
 func _ready() -> void:
 	# Checks if the game state matches the actor's turn state and adds the actor to the turn system.

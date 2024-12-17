@@ -5,6 +5,7 @@ class_name Manager
 
 # This script will evolve as the game progresses.
 
+
 # Add to the keys for specific scenes.
 enum Keys {SpaceStation,ShipEditor,SpaceEnvironment}
 

@@ -1,12 +1,11 @@
 class_name WorldTurnBase
+
 ## A class representing the core logic for a turn-based game system. It maintains the game state, manages player interactions, and controls transitions between different phases (player, enemy, NPC). The class also includes a nested StateMachine class for state-specific functionality.
 
-## Reference to the current players for interaction.
-static var players: Array[UserActor] = []
-## State machine instance managing game states.
-static var state: StateMachine = StateMachine.new()
-## Tracks whether the game state is active.
-static var on: bool = false
+# Static variables shared across all instances of this class.
+static var players: Array[UserActor] = []      ## Reference to the current players for interaction.
+static var state: StateMachine = StateMachine.new() ## State machine instance managing game states.
+static var on: bool = false                    ## Tracks whether the game state is active.
 
 # StateMachine class to handle turn-based states.
 class StateMachine:

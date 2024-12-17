@@ -1,6 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://oidd5uwptfyx"]
+[gd_scene load_steps=8 format=3 uid="uid://oidd5uwptfyx"]
 
 [ext_resource type="Script" path="res://scripts/ui/base/user_interface.gd" id="1_ksjhh"]
+[ext_resource type="Script" path="res://scripts/ui/base/circle_menu_button.gd" id="2_miv5k"]
+[ext_resource type="Script" path="res://scripts/ui/base/wheel_option.gd" id="3_orymj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijbqc"]
+script = ExtResource("3_orymj")
+name = "hello"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1r52r"]
+script = ExtResource("3_orymj")
+name = ""
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ts46b"]
+script = ExtResource("3_orymj")
+name = ""
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gu1c"]
+script = ExtResource("3_orymj")
+name = ""
+
 
 [node name="Control" type="Control" node_paths=PackedStringArray("start_focus")]
 layout_mode = 3
@@ -100,3 +119,79 @@ metadata/_tab_index = 2
 visible = false
 layout_mode = 2
 metadata/_tab_index = 3
+
+[node name="CircleMenuButton" type="BaseButton" parent="."]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 2
+auto_translate_mode = 0
+editor_description = ""
+visible = true
+modulate = Color(1, 1, 1, 1)
+self_modulate = Color(1, 1, 1, 1)
+show_behind_parent = false
+top_level = false
+clip_children = 0
+light_mask = 1
+visibility_layer = 1
+z_index = 0
+z_as_relative = true
+y_sort_enabled = false
+texture_filter = 0
+texture_repeat = 0
+material = null
+use_parent_material = false
+clip_contents = false
+custom_minimum_size = Vector2(0, 0)
+layout_direction = 0
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 281.0
+offset_bottom = 282.0
+grow_horizontal = 1
+grow_vertical = 1
+rotation = 0.0
+scale = Vector2(1, 1)
+pivot_offset = Vector2(139, 139)
+size_flags_horizontal = 1
+size_flags_vertical = 1
+size_flags_stretch_ratio = 1.0
+localize_numeral_system = true
+tooltip_text = ""
+focus_neighbor_left = NodePath("")
+focus_neighbor_top = NodePath("")
+focus_neighbor_right = NodePath("")
+focus_neighbor_bottom = NodePath("")
+focus_next = NodePath("")
+focus_previous = NodePath("")
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = true
+mouse_default_cursor_shape = 0
+theme = null
+theme_type_variation = &""
+disabled = false
+toggle_mode = false
+button_pressed = false
+action_mode = 1
+button_mask = 1
+keep_pressed_outside = false
+button_group = null
+shortcut = null
+shortcut_feedback = true
+shortcut_in_tooltip = true
+script = ExtResource("2_miv5k")
+options = Array[ExtResource("3_orymj")]([SubResource("AtlasTexture_ijbqc"), SubResource("AtlasTexture_1r52r"), SubResource("AtlasTexture_ts46b"), SubResource("AtlasTexture_3gu1c")])
+color_bg = Color(0, 0, 0, 1)
+color_highlight = Color(1, 0.5, 0, 1)
+size_outer_radius = 139

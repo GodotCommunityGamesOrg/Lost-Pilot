@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://crd2r3t10bkt5"]
+
+[ext_resource type="Script" path="res://scripts/ui/inventory/item.gd" id="1_1y3yh"]
+[ext_resource type="FontFile" uid="uid://b2qsse7qo1d8y" path="res://assets/Gugi-Regular.ttf" id="3_yaqbl"]
+
+[node name="Item" type="Node2D"]
+z_index = 1
+script = ExtResource("1_1y3yh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 15.0
+offset_bottom = 15.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="."]
+offset_left = 12.0
+offset_top = 9.0
+offset_right = 24.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.968627, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_yaqbl")
+theme_override_font_sizes/font_size = 10
+text = "99"

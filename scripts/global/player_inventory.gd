@@ -1,56 +1,58 @@
 extends Node
+#class_name PlayerInventory
 
 signal active_item_updated
 signal inventory_active_item_updated
 
 # Constants defining the number of inventory and hotbar slots
-const NUM_INVENTORY_SLOTS = 20
-const NUM_HOTBAR_SLOTS = 8
+const NUM_INVENTORY_SLOTS : int = 20
+const NUM_HOTBAR_SLOTS : int = 8
 
 # Preloaded classes for Item and Slot
 const ItemClass = preload("res://scripts/ui/inventory/item.gd")
 const SlotClass = preload("res://scripts/ui/inventory/slot.gd")
 
 # Player Inventory Dictionary
-var inventory = {
-	0 : ["Repair Kit", 5],
-	1 : ["Med Kit", 10],
-	2 : ["Bandage", 30],
-	3 : ["Repair Kit", 2],
-	4 : ["Med Kit", 10],
-	5 : ["Bandage", 30],
-	6 : ["Repair Kit", 5],
-	7 : ["Food 1", 12],
-	8 : ["Fuel", 2],
-	9 : ["Intermediate Helmet", 1],
-}
+var inventory = [
+	["Repair Kit", 5], 
+	["Med Kit", 10], 
+	["Bandage", 30], 
+	["Repair Kit", 2], 
+	["Med Kit", 10], 
+	["Bandage", 30], 
+	["Repair Kit", 5], 
+	["Food 1", 12], 
+	["Fuel", 2], 
+	["Intermediate Helmet", 1]
+]
 
 # Player Hotbar Dictionary
-var hotbar = {
-	0 : ["Repair Kit", 5],
-	1 : ["Med Kit", 10],
-	2 : ["Bandage", 30],
-	3 : ["Repair Kit", 2],
-	4 : ["Med Kit", 10],
-	5 : ["Bandage", 20],
-}
+var hotbar = [
+		["Repair Kit", 5],
+		["Med Kit", 10],
+		["Bandage", 30],
+		["Repair Kit", 2],
+		["Med Kit", 10],
+		["Bandage", 20],
+]
 
 # Player Equip Dictionary
-var equips = {
-	0 : ["Basic Helmet", 1],
-	1 : ["Basic Vest", 1],
-	2 : ["Basic Boots", 1],
-	3 : ["Weapon 1", 1],
-}
+var equips = [
+	["Basic Helmet", 1],
+	["Basic Vest", 1], 
+	["Basic Boots", 1], 
+	["Weapon 1", 1]
+]
+
 # Keeps track of index of selected slots
-var active_item_slot = 0
+var active_item_slot : int = 0
 
 # Adds items to the inventory.
 func add_item(item_name, item_quantity):
 	for item in inventory:
 		if inventory[item][0] == item_name:
-			var stack_size = int(JsonData.item_data[item_name]["StackSize"])
-			var able_to_add = stack_size - inventory[item][1]
+			var stack_size : int = int(ResourceData.item_data[item_name].stacksize)
+			var able_to_add : int = stack_size - inventory[item][1]
 			if able_to_add >= item_quantity:
 				inventory[item][1] += item_quantity
 				update_slot_visual(item, inventory[item][0], inventory[item][1])
@@ -87,11 +89,11 @@ func remove_item(slot : SlotClass):
 func add_item_to_empty_slot(item : ItemClass, slot : SlotClass):
 	match slot.SlotType:
 		SlotClass.SlotType.HOTBAR:
-			hotbar[slot.slot_index] = [item.item_name, item.item_quantity]
+			hotbar.append([item.item_name, item.item_quantity])
 		SlotClass.SlotType.INVENTORY:
-			inventory[slot.slot_index] = [item.item_name, item.item_quantity]
+			inventory.append([item.item_name, item.item_quantity])
 		_:
-			equips[slot.slot_index] = [item.item_name, item.item_quantity]
+			equips.append([item.item_name, item.item_quantity])
 
 # Adds quantity to items in the inventory
 func add_item_quantity(slot : SlotClass, quantity_to_add : int):

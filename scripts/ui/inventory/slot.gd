@@ -4,20 +4,20 @@ var default_texture = preload("res://assets/ui/inventory_ui/InventorySlotUsed64x
 var empty_texture = preload("res://assets/ui/inventory_ui/InventorySlot64x64.png")
 var selected_texture = preload("res://assets/ui/inventory_ui/InventorySlotSelected64x64.png")
 
-var default_style : StyleBoxTexture = null
-var empty_style : StyleBoxTexture = null
-var selected_style : StyleBoxTexture = null
+var default_style : StyleBoxTexture = StyleBoxTexture.new()
+var empty_style : StyleBoxTexture = StyleBoxTexture.new()
+var selected_style : StyleBoxTexture = StyleBoxTexture.new()
 
 var ItemClass = preload("res://scenes/inventory/item.tscn")
 var item = null
-var slot_index
-var inventory_slot_index
-var equip_slot_index
-var slot_type
-var hover 
+var slot_index : int
+var inventory_slot_index : int
+var equip_slot_index : int
+var slot_type 
+var hover : bool
 
 enum SlotType{
-	HOTBAR = 0,
+	HOTBAR,
 	INVENTORY,
 	HELMET,
 	BODY,
@@ -26,18 +26,13 @@ enum SlotType{
 }
 
 func _ready() -> void:
-	default_style = StyleBoxTexture.new()
-	empty_style = StyleBoxTexture.new()
-	selected_style = StyleBoxTexture.new()
 	default_style.texture = default_texture
 	empty_style.texture = empty_texture
 	selected_style.texture = selected_texture
 	self.mouse_entered.connect(self.change_hover)
 	self.mouse_exited.connect(self.change_hover)
 	refresh_style()
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-		
+			
 func refresh_style():
 	if PlayerInventory.active_item_slot == slot_index or PlayerInventory.active_item_slot == inventory_slot_index:
 		set('theme_override_styles/panel', selected_style);

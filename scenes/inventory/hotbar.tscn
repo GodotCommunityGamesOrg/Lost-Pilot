@@ -1,13 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvrveljgfa32h"]
+[gd_scene load_steps=9 format=3 uid="uid://bvrveljgfa32h"]
 
 [ext_resource type="Script" path="res://scripts/ui/inventory/hotbar.gd" id="1_wtpqd"]
 [ext_resource type="Texture2D" uid="uid://ss8h5ocyboi" path="res://assets/ui/inventory_ui/hotbar_background.png" id="2_74qrd"]
 [ext_resource type="Script" path="res://scripts/ui/inventory/slot.gd" id="3_ntfse"]
 [ext_resource type="FontFile" uid="uid://b2qsse7qo1d8y" path="res://assets/Gugi-Regular.ttf" id="4_20f2o"]
 [ext_resource type="Texture2D" uid="uid://1bramb5go6aa" path="res://assets/ui/panels/RedTransparentPanel64x64.png" id="5_2pofh"]
+[ext_resource type="Shader" path="res://scripts/shaders/ScanLineShader.gdshader" id="5_31saa"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6rtq8"]
+shader = ExtResource("5_31saa")
+shader_parameter/boarder = 2.0
+shader_parameter/max_lines = 15.0
+shader_parameter/darken_amount = 0.9
+shader_parameter/speed = 0.2
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m05ba"]
 texture = ExtResource("5_2pofh")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
 
 [node name="Hotbar" type="Control"]
 layout_mode = 3
@@ -89,6 +101,7 @@ theme_override_font_sizes/font_size = 16
 text = "Sample Name"
 
 [node name="Tooltip" type="PanelContainer" parent="ActiveItemLabel"]
+material = SubResource("ShaderMaterial_6rtq8")
 layout_mode = 1
 anchors_preset = -1
 offset_left = -132.8

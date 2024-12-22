@@ -1,0 +1,27 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bvdxreuav4rbx"]
+
+[ext_resource type="Texture2D" uid="uid://bue43mkwcmm0d" path="res://assets/ui/inventory_ui/item_icons/Fuel.png" id="1_dw6d4"]
+
+[sub_resource type="GDScript" id="GDScript_8p7q3"]
+script/source = "extends Resource
+
+@export var item_category: String = \"Consumable\"
+@export var itemname : String = \"Fuel\"
+@export var add_health : int = 0
+@export var add_energy : int = 15
+@export var stacksize : int = 99
+@export var description : String = \"This provides fuel for ships\"
+@export var image : Texture2D = preload(\"res://assets/ui/inventory_ui/item_icons/Fuel.png\")
+@export var rarity : int
+"
+
+[resource]
+script = SubResource("GDScript_8p7q3")
+item_category = "Consumable"
+itemname = "Fuel"
+add_health = 0
+add_energy = 15
+stacksize = 99
+description = "This provides fuel for ships"
+image = ExtResource("1_dw6d4")
+rarity = 0

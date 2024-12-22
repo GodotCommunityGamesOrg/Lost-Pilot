@@ -1,0 +1,27 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://mfjpyhxghg2c"]
+
+[ext_resource type="Texture2D" uid="uid://bgo0diwmv8bk5" path="res://assets/ui/inventory_ui/item_icons/Food 1.png" id="1_op0e2"]
+
+[sub_resource type="GDScript" id="GDScript_0e3kb"]
+script/source = "extends Resource
+
+@export var item_category: String = \"Consumable\"
+@export var itemname : String = \"Food 1\"
+@export var add_health : int = 3
+@export var add_energy : int = 9
+@export var stacksize : int = 99
+@export var description : String = \"This heals injuries and provides energy to you or crewmates\"
+@export var image : Texture2D = preload(\"res://assets/ui/inventory_ui/item_icons/Food 1.png\")
+@export var rarity : int
+"
+
+[resource]
+script = SubResource("GDScript_0e3kb")
+item_category = "Consumable"
+itemname = "Food 1"
+add_health = 3
+add_energy = 9
+stacksize = 99
+description = "This heals injuries and provides energy to you or crewmates"
+image = ExtResource("1_op0e2")
+rarity = 0

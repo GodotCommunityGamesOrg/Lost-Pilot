@@ -1,10 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://cu6wnh1d65tf5"]
 
-[ext_resource type="Script" path="res://scripts/entities/actors/enemy/actoren.gd" id="1_dx4h3"]
+
+[ext_resource type="Script" path="res://scripts/entities/actors/enemy/test_enemy.gd" id="1_dx4h3"]
 [ext_resource type="Texture2D" uid="uid://b05hj6ognkfqi" path="res://assets/icon.svg" id="2_neea3"]
 
-[node name="Actor" type="Node2D"]
+[node name="Actor" type="Node2D" node_paths=PackedStringArray("timer")]
 script = ExtResource("1_dx4h3")
+timer = NodePath("Timer2")
+
 turn_state = 1
 
 [node name="Timer2" type="Timer" parent="."]
@@ -14,5 +17,3 @@ one_shot = true
 self_modulate = Color(1, 0, 0, 1)
 z_index = 1
 texture = ExtResource("2_neea3")
-
-[connection signal="timeout" from="Timer2" to="." method="_on_timer_timeout"]

@@ -1,6 +1,7 @@
 class_name WorldPathfinder
 # --- Public Properties ---
 static var pathfinder: AStarGrid2D ## Reference to the AStarGrid2D for pathfinding.
+static var free_pathfinder: AStarGrid2D
 static var map: map_generator
 
 # --- Custom Methods  ---
@@ -10,7 +11,13 @@ static var map: map_generator
 ## [param tf]: A [bool] (optional, defaults to true) that toggles whether the algorithm can retun partial paths.[br]
 static func calculate_path(start: Vector2, end: Vector2, tf: bool = true) -> PackedVector2Array:
 	return pathfinder.get_id_path(
-		WorldPathfinder.map.local_to_map(start), 
-		WorldPathfinder.map.local_to_map(end),
+		map.local_to_map(start), 
+		map.local_to_map(end),
+		tf
+	)
+static func calculate_free_path(start: Vector2, end: Vector2, tf: bool = true) -> PackedVector2Array:
+	return free_pathfinder.get_id_path(
+		map.local_to_map(start), 
+		map.local_to_map(end),
 		tf
 	)

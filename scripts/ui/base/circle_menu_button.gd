@@ -25,7 +25,6 @@ var _selection: int = -1  # Currently selected option index
 
 # --- Signals ---
 signal closed ## Signal emitted when the _selection is confirmed
-
 # --- Built-in Callbacks ---
 func _process(_delta: float) -> void:
 	size = min(size.x, size.y) * Vector2.ONE

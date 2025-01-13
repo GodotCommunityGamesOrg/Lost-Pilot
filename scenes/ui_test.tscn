@@ -20,7 +20,6 @@ name = ""
 script = ExtResource("3_orymj")
 name = ""
 
-
 [node name="Control" type="Control" node_paths=PackedStringArray("start_focus")]
 layout_mode = 3
 anchors_preset = 15

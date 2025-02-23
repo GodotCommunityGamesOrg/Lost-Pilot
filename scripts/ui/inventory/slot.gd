@@ -15,6 +15,7 @@ var inventory_slot_index : int
 var equip_slot_index : int
 var slot_type 
 var hover : bool
+@onready var ui = find_parent("UI")
 
 enum SlotType{
 	HOTBAR,
@@ -25,6 +26,12 @@ enum SlotType{
 	WEAPONS,
 }
 
+var equip_types = [SlotType.HELMET, 
+					SlotType.BODY,
+					SlotType.BOOTS, 
+					SlotType.WEAPONS
+				]
+
 func _ready() -> void:
 	default_style.texture = default_texture
 	empty_style.texture = empty_texture
@@ -34,8 +41,12 @@ func _ready() -> void:
 	refresh_style()
 			
 func refresh_style():
-	if PlayerInventory.active_item_slot == slot_index or PlayerInventory.active_item_slot == inventory_slot_index:
+	if slot_type == SlotType.INVENTORY and PlayerInventory.active_item_slot == inventory_slot_index:
 		set('theme_override_styles/panel', selected_style);
+	elif slot_type == SlotType.HOTBAR and PlayerInventory.active_item_slot == slot_index:
+		set('theme_override_styles/panel', selected_style);
+	elif slot_type in equip_types and PlayerInventory.active_item_slot == equip_slot_index:
+			set('theme_override_styles/panel', selected_style);
 	elif item == null:
 		set('theme_override_styles/panel', empty_style);
 	else:
@@ -43,23 +54,20 @@ func refresh_style():
 
 func pickFromSlot():
 	remove_child(item)
-	var inventoryNode = find_parent("UI")
-	inventoryNode.add_child(item)
+	ui.add_child(item)
 	item = null
 	refresh_style()
 	
 func putIntoSlot(new_item):
 	item = new_item
 	item.position = Vector2(2.5, 2.5)
-	var inventoryNode = find_parent("UI")
-	inventoryNode.remove_child(item)
+	ui.remove_child(item)
 	add_child(item)
 	tooltip_text = item.item_name
 	refresh_style()
 
 func getFromSlot():
-	var inventoryNode = find_parent("UI")
-	inventoryNode.add_child(item)
+	ui.add_child(item)
 	refresh_style()
 
 func initialize_item(item_name, item_quantity):
@@ -83,3 +91,5 @@ func change_hover():
 			PlayerInventory.change_active_item_slot(slot_index)
 		if slot_type == SlotType.INVENTORY:
 			PlayerInventory.change_inventory_active_item_slot(inventory_slot_index)
+		else:
+			PlayerInventory.change_equip_active_item_slot(equip_slot_index)

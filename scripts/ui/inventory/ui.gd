@@ -17,23 +17,11 @@ func _input(event: InputEvent) -> void:
 			PlayerInventory.active_inventory_item_scroll_down()
 		else:
 			PlayerInventory.active_item_scroll_down()
-	if event.is_action_pressed("hotkey1"):
-		PlayerInventory.change_active_item_slot(0)
-	if event.is_action_pressed("hotkey2"):
-		PlayerInventory.change_active_item_slot(1)
-	if event.is_action_pressed("hotkey3"):
-		PlayerInventory.change_active_item_slot(2)
-	if event.is_action_pressed("hotkey4"):
-		PlayerInventory.change_active_item_slot(3)
-	if event.is_action_pressed("hotkey5"):
-		PlayerInventory.change_active_item_slot(4)
-	if event.is_action_pressed("hotkey6"):
-		PlayerInventory.change_active_item_slot(5)
-	if event.is_action_pressed("hotkey7"):
-		PlayerInventory.change_active_item_slot(6)
-	if event.is_action_pressed("hotkey8"):
-		PlayerInventory.change_active_item_slot(7)
-		
+	if event is InputEventKey:
+		var action_string : String = event_text(event)
+		if "hotkey" in action_string:
+			var sub_action_string = action_string.substr(6)
+			PlayerInventory.change_active_item_slot(int(sub_action_string)-1)	
 
 func _ready() -> void:
 	get_tree().node_added.connect(self.tree_changed)
@@ -44,3 +32,8 @@ func tree_changed(new_node):
 		visible = false
 	if new_node.name == "InGameMenu":
 		visible = true
+
+func event_text(event):
+	for action in InputMap.get_actions():
+		if event.is_action(action):
+			return action

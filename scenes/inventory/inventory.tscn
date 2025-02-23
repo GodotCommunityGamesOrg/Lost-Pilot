@@ -264,7 +264,7 @@ theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 4
 columns = 5
 
-[node name="Slot1" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot1" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 focus_neighbor_right = NodePath("../Slot2")
@@ -272,7 +272,7 @@ focus_neighbor_bottom = NodePath("../Slot6")
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot2" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot2" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 focus_neighbor_left = NodePath("../Slot1")
@@ -282,109 +282,109 @@ focus_previous = NodePath("../Slot1")
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot3" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot3" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot4" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot4" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot5" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot5" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot6" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot6" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot7" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot7" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot8" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot8" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot9" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot9" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot10" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot10" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot11" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot11" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot12" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot12" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot13" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot13" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot14" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot14" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot15" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot15" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot16" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot16" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot17" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot17" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot18" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot18" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot19" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot19" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
 script = ExtResource("3_3gd4k")
 
-[node name="Slot20" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer"]
+[node name="Slot20" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")

@@ -29,6 +29,3 @@ func _ready() -> void:
 		intermediate_boots.itemname : intermediate_boots,
 		weapon_1.itemname : weapon_1,
 		}
-	print(repair_kit.itemname)
-	var item_name = "Bandage"
-	print(item_data[item_name].stacksize)

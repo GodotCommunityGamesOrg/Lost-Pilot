@@ -3,6 +3,7 @@ extends Node
 
 signal active_item_updated
 signal inventory_active_item_updated
+signal equip_active_item_updated
 
 # Constants defining the number of inventory and hotbar slots
 const NUM_INVENTORY_SLOTS : int = 20
@@ -69,7 +70,7 @@ func add_item(item_name, item_quantity):
 		
 # Updates the visual inventory
 func update_slot_visual(slot_index, item_name, new_quantity):
-	var slot = get_tree().root.get_node("/root/World/UI/Inventory/GridContainer/Slot" + str(slot_index + 1))
+	var slot = get_tree().get_nodes_in_group("inv_slots")[slot_index]
 	if slot.item != null:
 		slot.item.set_item(item_name, new_quantity)
 	else:
@@ -114,31 +115,35 @@ func decrease_item_quantity(slot : SlotClass, quantity_to_remove : int):
 # Changes the active item slot in the hotbar and emit a signal
 func change_active_item_slot(active_slot):
 	active_item_slot = active_slot
-	emit_signal("active_item_updated")
+	active_item_updated.emit()
 
 # Changes the active item slot in the inventory and emit a signal
 func change_inventory_active_item_slot(active_slot):
 	active_item_slot = active_slot
-	emit_signal("inventory_active_item_updated")
+	inventory_active_item_updated.emit()
+
+func change_equip_active_item_slot(active_slot):
+	active_item_slot = active_slot
+	equip_active_item_updated.emit()
 	
 func active_inventory_item_scroll_up():
 	active_item_slot = (active_item_slot + 1) % NUM_INVENTORY_SLOTS
-	emit_signal("inventory_active_item_updated")
+	inventory_active_item_updated.emit()
 	
 func active_inventory_item_scroll_down():
 	if active_item_slot == 0:
 		active_item_slot = NUM_INVENTORY_SLOTS - 1
 	else:
 		active_item_slot -= 1
-	emit_signal("inventory_active_item_updated")
+	inventory_active_item_updated.emit()
 
 func active_item_scroll_up():
 	active_item_slot = (active_item_slot + 1) % NUM_HOTBAR_SLOTS
-	emit_signal("active_item_updated")
-	
+	active_item_updated.emit()
+
 func active_item_scroll_down():
 	if active_item_slot == 0:
 		active_item_slot = NUM_HOTBAR_SLOTS - 1
 	else:
 		active_item_slot -= 1
-	emit_signal("active_item_updated")
+	active_item_updated.emit()

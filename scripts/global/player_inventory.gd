@@ -1,5 +1,5 @@
 extends Node
-#class_name PlayerInventory
+class_name PlInventory
 
 signal active_item_updated
 signal inventory_active_item_updated

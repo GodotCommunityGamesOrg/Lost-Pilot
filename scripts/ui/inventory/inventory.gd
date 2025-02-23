@@ -10,6 +10,7 @@ var t = null
 func _ready() -> void:
 	var slots = get_tree().get_nodes_in_group("inv_slots")
 	PlayerInventory.inventory_active_item_updated.connect(self.update_inventory_active_item_label)
+	PlayerInventory.equip_active_item_updated.connect(self.update_equip_active_item_label)
 	for i in range(slots.size()):
 		slots[i].gui_input.connect(slot_gui_input.bind(slots[i]))
 		slots[i].inventory_slot_index = i
@@ -27,10 +28,12 @@ func _ready() -> void:
 	initialize_inventory()
 	initialize_equip()
 	update_inventory_active_item_label()
+	update_equip_active_item_label()
 		
 func update_inventory_active_item_label():
 	var slots = inventory_slots.get_children()
 	tooltip.visible = true
+	tooltip.set_position(Vector2(217,4))
 	#if PlayerInventory.active_item_slot == null or slots[PlayerInventory.active_item_slot].slot_type == SlotClass.SlotType.INVENTORY:
 		#return
 	if slots[PlayerInventory.active_item_slot].item != null:
@@ -48,6 +51,37 @@ func update_inventory_active_item_label():
 		elif ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].item_category == "Weapon":
 			info_slots[3].text = "Damage: " + str(ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].item_attack)
 			info_slots[4].text = "Reload: " + str(ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].item_reload) + "s"
+		elif ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].super_category == "Clothes":
+			info_slots[3].text = "Adds " + str(ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].protection) + " Protection" 
+			info_slots[4].text = "Adds " + str(ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].insulation) + " Insulation"
+		else:
+			info_slots[3].text = ""
+			info_slots[4].text = ""
+	else:
+		tooltip.visible = false
+		
+func update_equip_active_item_label():
+	var slots = equip_slots
+	tooltip.visible = true
+	tooltip.set_position(Vector2(-140,4))
+	if slots[PlayerInventory.active_item_slot].item != null:
+		tooltip.visible = true
+		var info_slots = get_tree().get_nodes_in_group("Info_Slots")
+		info_slots[0].text = str(ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].item_category)
+		info_slots[1].text = slots[PlayerInventory.active_item_slot].item.item_name
+		info_slots[2].text = ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].description
+		if ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].item_category == "Consumable":
+			info_slots[3].text = "Adds " + str(ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].add_health) + " Health"
+			info_slots[4].text = "Adds " + str(ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].add_energy) + " Energy"
+		elif ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].item_category == "Tool":
+			info_slots[3].text = "Adds " + str(ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].add_repair) + " Repair"
+			info_slots[4].text = "Adds " + str(ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].add_energy) + " Energy"
+		elif ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].item_category == "Weapon":
+			info_slots[3].text = "Damage: " + str(ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].item_attack)
+			info_slots[4].text = "Reload: " + str(ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].item_reload) + "s"
+		elif ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].super_category == "Clothes":
+			info_slots[3].text = "Protection: " + str(ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].protection)
+			info_slots[4].text = "Insulation: " + str(ResourceData.item_data[slots[PlayerInventory.active_item_slot].item.item_name].insulation)
 		else:
 			info_slots[3].text = ""
 			info_slots[4].text = ""

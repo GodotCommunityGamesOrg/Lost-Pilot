@@ -21,7 +21,7 @@ func _input(event: InputEvent) -> void:
 		var action_string : String = event_text(event)
 		if "hotkey" in action_string:
 			var sub_action_string = action_string.substr(6)
-			PlayerInventory.change_active_item_slot(int(sub_action_string)-1)	
+			PlayerInventory.change_active_item_slot(int(sub_action_string)-1)
 
 func _ready() -> void:
 	get_tree().node_added.connect(self.tree_changed)

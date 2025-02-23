@@ -66,7 +66,7 @@ custom_minimum_size = Vector2(120, 109)
 layout_mode = 2
 offset_left = 217.0
 offset_top = 4.0
-offset_right = 337.0
+offset_right = 356.0
 offset_bottom = 162.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_u27p8")
 
@@ -117,12 +117,14 @@ autowrap_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Tooltip/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
 theme_override_constants/separation = 20
 alignment = 1
 
 [node name="Item Stat1" type="Label" parent="Tooltip/VBoxContainer/HBoxContainer" groups=["Info_Slots"]]
 texture_filter = 3
-custom_minimum_size = Vector2(40, 13)
+custom_minimum_size = Vector2(50, 13)
 layout_mode = 2
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("5_ptnxp")
@@ -131,7 +133,7 @@ autowrap_mode = 2
 
 [node name="Item Stat2" type="Label" parent="Tooltip/VBoxContainer/HBoxContainer" groups=["Info_Slots"]]
 texture_filter = 3
-custom_minimum_size = Vector2(40, 13)
+custom_minimum_size = Vector2(50, 13)
 layout_mode = 2
 theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("5_ptnxp")

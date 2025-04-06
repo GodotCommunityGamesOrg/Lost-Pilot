@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://oidd5uwptfyx"]
 
-[ext_resource type="Script" path="res://scripts/ui/base/user_interface.gd" id="1_ksjhh"]
-[ext_resource type="Script" path="res://scripts/ui/base/circle_menu_button.gd" id="2_miv5k"]
-[ext_resource type="Script" path="res://scripts/ui/base/wheel_option.gd" id="3_orymj"]
+[ext_resource type="Script" uid="uid://ckg7qxe0rs4en" path="res://scripts/ui/base/user_interface.gd" id="1_ksjhh"]
+[ext_resource type="Script" uid="uid://dr5fgv1ea0fdu" path="res://scripts/ui/base/circle_menu_button.gd" id="2_miv5k"]
+[ext_resource type="Script" uid="uid://b6eabpqsv7vme" path="res://scripts/ui/base/wheel_option.gd" id="3_orymj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ijbqc"]
 script = ExtResource("3_orymj")

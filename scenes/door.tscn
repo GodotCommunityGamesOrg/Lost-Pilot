@@ -1,10 +1,10 @@
 [gd_scene load_steps=23 format=3 uid="uid://didh1mtde07hl"]
 
-[ext_resource type="Script" path="res://scripts/interaction_system/door.gd" id="1_uxbyn"]
+[ext_resource type="Script" uid="uid://boasomcw4dl11" path="res://scripts/interaction_system/door.gd" id="1_uxbyn"]
 [ext_resource type="Texture2D" uid="uid://b1y70ybs2m3ad" path="res://assets/DoorSpriteSheet.png" id="2_hov0a"]
 [ext_resource type="Texture2D" uid="uid://myntqljcecwk" path="res://assets/DoorSpriteSelected.png" id="2_xieid"]
-[ext_resource type="Script" path="res://scripts/ui/base/circle_menu_button.gd" id="3_xu5ei"]
-[ext_resource type="Script" path="res://scripts/ui/base/wheel_option.gd" id="4_v7qj0"]
+[ext_resource type="Script" uid="uid://dr5fgv1ea0fdu" path="res://scripts/ui/base/circle_menu_button.gd" id="3_xu5ei"]
+[ext_resource type="Script" uid="uid://b6eabpqsv7vme" path="res://scripts/ui/base/wheel_option.gd" id="4_v7qj0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y6b7b"]
 atlas = ExtResource("2_hov0a")

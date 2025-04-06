@@ -1,13 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://cu6wnh1d65tf5"]
 
-
-[ext_resource type="Script" path="res://scripts/entities/actors/enemy/test_enemy.gd" id="1_dx4h3"]
+[ext_resource type="Script" uid="uid://cpecsr5e2h2mc" path="res://scripts/entities/actors/enemy/test_enemy.gd" id="1_dx4h3"]
 [ext_resource type="Texture2D" uid="uid://b05hj6ognkfqi" path="res://assets/icon.svg" id="2_neea3"]
 
 [node name="Actor" type="Node2D" node_paths=PackedStringArray("timer")]
 script = ExtResource("1_dx4h3")
 timer = NodePath("Timer2")
-
 turn_state = 1
 
 [node name="Timer2" type="Timer" parent="."]

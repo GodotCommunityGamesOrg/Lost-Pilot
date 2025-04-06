@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bfxim84yrh17w"]
 
-[ext_resource type="Script" path="res://scripts/menus/main_menu.gd" id="1_8rgqn"]
+[ext_resource type="Script" uid="uid://dr4orwkymr5hj" path="res://scripts/menus/main_menu.gd" id="1_8rgqn"]
 [ext_resource type="FontFile" uid="uid://b2qsse7qo1d8y" path="res://assets/Gugi-Regular.ttf" id="2_x63qt"]
 [ext_resource type="Texture2D" uid="uid://8h3nvonha1me" path="res://assets/ui/panels/TransparentGrayPanel64x64.png" id="3_ilnhd"]
 [ext_resource type="Texture2D" uid="uid://bhrivec7a66ht" path="res://assets/ui/misc/GitHub_Logo.png" id="4_xmsdu"]

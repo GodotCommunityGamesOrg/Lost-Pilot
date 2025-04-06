@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dkkdcx534ran6"]
 
-[ext_resource type="Script" path="res://scripts/entities/actors/user/player/player.gd" id="1_4kof2"]
+[ext_resource type="Script" uid="uid://dtrudhv5frehb" path="res://scripts/entities/actors/user/player/player.gd" id="1_4kof2"]
 [ext_resource type="Texture2D" uid="uid://b05hj6ognkfqi" path="res://assets/icon.svg" id="2_pi6i1"]
 
 [node name="Player" type="Node2D" node_paths=PackedStringArray("cam", "camcon") groups=["Savable"]]

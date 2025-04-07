@@ -1,30 +1,28 @@
 shader_type canvas_item;
 
-uniform float boarder = 10.0;
-uniform float max_lines = 30.0;
-uniform float darken_amount = 0.9; // Lower numbers the darker it is.
-uniform float speed = 0.2;
-
-void vertex() {
-	// Called for every vertex the material is visible on.
-}
+uniform float scanline_strength : hint_range(0.0, 1.0) = 0.2;
+uniform float glitch_intensity : hint_range(0.0, 1.0) = 0.3;
+uniform float speed = 1.0;
 
 void fragment() {
-	ivec2 size = textureSize(TEXTURE,0);
-	float boarder_w = boarder / float(size.x);
-	float boarder_h = boarder / float(size.y);
+    float time = TIME * speed;
+    vec2 uv = UV;
+    vec4 tex = texture(TEXTURE, uv);
 
-	float t1 = step(1.0 - boarder_w, UV.x);
-	float t2 = 1.0 - step(boarder_w, UV.x);
-	float t3 = step(1.0 - boarder_h, UV.y);
-	float t4 = 1.0 - step(boarder_h, UV.y);
+    float scanline = sin(UV.y * 600.0) * scanline_strength;
+    tex.rgb -= scanline;
 
-	float t = max(t1, max(t2, max(t3, t4)));
-	t = 1.0 - t;
-	float uv = -UV.y + TIME * speed;
-	float interval = fract(uv * max_lines);
-	float stepped = step(0.5,interval) * t;
-	float mapped_value = mix(darken_amount,1.0,stepped);
-	vec4 tex_color = texture(TEXTURE, UV) * mapped_value;
-	COLOR = tex_color;
+    float glitch = step(0.95, fract(sin(dot(UV * time, vec2(12.9898, 78.233))) * 43758.5453));
+    
+    if (glitch > 0.0) {
+        float offset = sin(UV.y * 50.0 + time * 10.0) * 0.01 * glitch_intensity;
+        uv.x += offset;
+
+        vec4 r = texture(TEXTURE, uv + vec2(0.003, 0.0));
+        vec4 g = texture(TEXTURE, uv);
+        vec4 b = texture(TEXTURE, uv - vec2(0.003, 0.0));
+        tex.rgb = vec3(r.r, g.g, b.b);
+    }
+
+    COLOR = tex;
 }

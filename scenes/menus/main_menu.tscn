@@ -1,18 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfxim84yrh17w"]
+[gd_scene load_steps=11 format=3 uid="uid://bfxim84yrh17w"]
 
 [ext_resource type="Script" uid="uid://dr4orwkymr5hj" path="res://scripts/menus/main_menu.gd" id="1_8rgqn"]
+[ext_resource type="Shader" uid="uid://f0odfx5f7dvb" path="res://scripts/shaders/star.gdshader" id="2_imvie"]
 [ext_resource type="FontFile" uid="uid://b2qsse7qo1d8y" path="res://assets/Gugi-Regular.ttf" id="2_x63qt"]
 [ext_resource type="Texture2D" uid="uid://8h3nvonha1me" path="res://assets/ui/panels/TransparentGrayPanel64x64.png" id="3_ilnhd"]
+[ext_resource type="Texture2D" uid="uid://56uygsg6y0r4" path="res://assets/preview-export(1).png" id="3_ng0o5"]
 [ext_resource type="Texture2D" uid="uid://bhrivec7a66ht" path="res://assets/ui/misc/GitHub_Logo.png" id="4_xmsdu"]
+[ext_resource type="Shader" uid="uid://dpbmrgdgioq6r" path="res://scripts/shaders/ScanLineShader.gdshader" id="6_8r73w"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7cqtw"]
-texture = ExtResource("3_ilnhd")
-texture_margin_left = 2.0
-texture_margin_top = 2.0
-texture_margin_right = 2.0
-texture_margin_bottom = 2.0
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ng0o5"]
+shader = ExtResource("2_imvie")
+shader_parameter/bg_color = Color(0, 0, 0, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/bigStarSlow = 2.0
+shader_parameter/mediumStarSlow = 6.0
+shader_parameter/smallStarSlow = 8.0
+shader_parameter/smallStarAmount = 0.002
+shader_parameter/mediumStarAmount = 0.01
+shader_parameter/bigStarAmount = 0.01
+shader_parameter/pixelSize = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1hnlc"]
+shader = ExtResource("6_8r73w")
+shader_parameter/scanline_strength = 0.2
+shader_parameter/glitch_intensity = 0.3
+shader_parameter/speed = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50h1w"]
+bg_color = Color(0.419813, 0.419813, 0.419813, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 20
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("start_focus")]
 layout_mode = 3
@@ -26,30 +46,27 @@ start_focus = NodePath("PanelContainer/MarginContainer/VBoxContainer/Play")
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ng0o5")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 8.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0.27451, 0.541176, 1)
 
-[node name="Label" type="Label" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.363281
-anchor_top = 0.190278
-anchor_right = 0.6375
-anchor_bottom = 0.270833
+anchor_left = 0.225
+anchor_top = 0.202778
+anchor_right = 0.775781
+anchor_bottom = 0.444444
 grow_horizontal = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0.156863, 0.247059, 1)
-theme_override_constants/outline_size = 16
-theme_override_fonts/font = ExtResource("2_x63qt")
-theme_override_font_sizes/font_size = 56
-text = "The lost pilot"
-horizontal_alignment = 1
-vertical_alignment = 1
+grow_vertical = 2
+texture = ExtResource("3_ng0o5")
+stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
@@ -94,20 +111,19 @@ ignore_texture_size = true
 stretch_mode = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+material = SubResource("ShaderMaterial_1hnlc")
 custom_minimum_size = Vector2(200, 220)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = -1
+anchor_left = 0.41875
 anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+anchor_right = 0.58125
+anchor_bottom = 0.805556
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_7cqtw")
+theme_override_styles/panel = SubResource("StyleBoxFlat_50h1w")
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
@@ -123,27 +139,51 @@ alignment = 1
 
 [node name="Play" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.129558, 0.129558, 0.129558, 1)
+theme_override_colors/font_hover_color = Color(0.384314, 0.384314, 0.384314, 1)
+theme_override_colors/font_color = Color(0.537011, 0.537011, 0.537011, 1)
+theme_override_colors/font_focus_color = Color(0.384314, 0.384314, 0.384314, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_x63qt")
 theme_override_font_sizes/font_size = 24
 text = "Play"
+flat = true
 
 [node name="Settings" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.129558, 0.129558, 0.129558, 1)
+theme_override_colors/font_hover_color = Color(0.384314, 0.384314, 0.384314, 1)
+theme_override_colors/font_color = Color(0.537255, 0.537255, 0.537255, 1)
+theme_override_colors/font_focus_color = Color(0.384314, 0.384314, 0.384314, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_x63qt")
 theme_override_font_sizes/font_size = 24
 text = "Settings"
+flat = true
 
 [node name="Credits" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.129558, 0.129558, 0.129558, 1)
+theme_override_colors/font_hover_color = Color(0.384314, 0.384314, 0.384314, 1)
+theme_override_colors/font_color = Color(0.537255, 0.537255, 0.537255, 1)
+theme_override_colors/font_focus_color = Color(0.384314, 0.384314, 0.384314, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_x63qt")
 theme_override_font_sizes/font_size = 24
 text = "Credits"
+flat = true
 
 [node name="Quit" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.129558, 0.129558, 0.129558, 1)
+theme_override_colors/font_hover_color = Color(0.384314, 0.384314, 0.384314, 1)
+theme_override_colors/font_color = Color(0.537255, 0.537255, 0.537255, 1)
+theme_override_colors/font_focus_color = Color(0.384314, 0.384314, 0.384314, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_x63qt")
 theme_override_font_sizes/font_size = 24
 text = "Quit"
+flat = true
 
 [connection signal="pressed" from="NinePatchRect/GithubButton" to="." method="_on_github_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]

@@ -3,8 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b05hj6ognkfqi" path="res://assets/icon.svg" id="1_glmva"]
 [ext_resource type="PackedScene" uid="uid://dkkdcx534ran6" path="res://scenes/player/player.tscn" id="2_0813x"]
 [ext_resource type="PackedScene" uid="uid://didh1mtde07hl" path="res://scenes/door.tscn" id="3_lctwl"]
-[ext_resource type="Script" path="res://scripts/map_generator.gd" id="4_rsxc5"]
-[ext_resource type="Script" path="res://Scripts/LightManager/light_manager.gd" id="5_e3cta"]
+[ext_resource type="Script" uid="uid://mqyxoitrg52a" path="res://scripts/map_generator.gd" id="4_rsxc5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4fw4l"]
 texture = ExtResource("1_glmva")
@@ -28,6 +27,9 @@ custom_data_layer_0/type = 2
 sources/0 = SubResource("TileSetAtlasSource_4fw4l")
 sources/1 = SubResource("TileSetScenesCollectionSource_4su1h")
 
+[sub_resource type="Resource" id="Resource_boq0m"]
+metadata/__load_path__ = "res://Scripts/LightManager/light_manager.gd"
+
 [node name="SpaceStation" type="Node2D"]
 
 [node name="Floor" type="TileMapLayer" parent="."]
@@ -40,7 +42,7 @@ tile_map_data = PackedByteArray("AAABAAAAAQAAAAAAAQAGAAIAAQAAAAAAAgAKAAEAAQAAAAA
 tile_set = SubResource("TileSet_4raql")
 
 [node name="LightManager" type="Node2D" parent="." node_paths=PackedStringArray("tile_layer")]
-script = ExtResource("5_e3cta")
+script = SubResource("Resource_boq0m")
 tile_layer = NodePath("../Floor")
 default_light = Color(0, 0, 0, 0.588235)
 light_radius = 4

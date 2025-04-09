@@ -21,7 +21,7 @@ static var _base_size: Vector2 = Vector2( ## original viewport size.
 	ProjectSettings.get_setting("display/window/size/viewport_height")
 ) 
 
-var _font_nodes: Dictionary = {} ## [Dictionary] to hold nodes with font size overrides
+var _font_nodes: Dictionary[Node, int] = {} ## [Dictionary] to hold nodes with font size overrides
 
 # --- Enum ---
 enum RESIZE_MODE_ENUM 

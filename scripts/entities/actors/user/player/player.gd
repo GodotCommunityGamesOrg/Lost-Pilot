@@ -7,18 +7,19 @@ class_name PlayerNode
 var current_cell: Vector2i
 var path: Array = []
 var highlight_path: PackedVector2Array = []
-var selected_object: InteractableObject
 var action: bool = false:
 	set(value):
 		action = value
 		queue_redraw()
-
+var highlight_pos: Vector2i
 var all_actions: Array[Action] = []
-
+var used: bool = false
 signal moved(position: Vector2i)
-
+var select: CallableList = CallableList.new()
+var selection_position: Vector2
 func _ready() -> void:
 	super()
+	moved.emit()
 	_setup_camera_limits()
 	get_tree().get_root().size_changed.connect(_cam_resize)
 	WorldTurnBase.on = true
@@ -27,21 +28,24 @@ func _unhandled_input(event: InputEvent) -> void:
 	super(event)
 	if WorldTurnBase.state.state == turn_state and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		var mouse_pos = WorldPathfinder.map.local_to_map(get_global_mouse_position())
+		await select.emit(mouse_pos)
 		if UtilityFunctions.in_map(get_global_mouse_position()) and not WorldPathfinder.pathfinder.is_point_solid(mouse_pos):
 			if highlight_path.size() - 1 <= _actions and not action:
-				camcon.global_position = WorldPathfinder.map.map_to_local(mouse_pos)
-				all_actions.append(Move.new(mouse_pos, self))
-				get_tree().get_root().set_input_as_handled()
-				_actions -= (highlight_path.size() - 1)
-				highlight_path.clear()
+				if !used:
+					camcon.global_position = WorldPathfinder.map.map_to_local(mouse_pos)
+					all_actions.append(Move.new(mouse_pos, self))
+					get_tree().get_root().set_input_as_handled()
+					_actions -= (highlight_path.size() - 1)
+					highlight_path.clear()
 
 func _process(delta: float) -> void:
 	super(delta)
 	if WorldTurnBase.state.state != turn_state: return
 
 	if UtilityFunctions.in_map(get_global_mouse_position()) and not action:
+		selection_position = WorldPathfinder.map.map_to_local(UtilityFunctions.find_last_occurrence(all_actions, Move).destination) if all_actions.size() > 0 and UtilityFunctions.find_last_occurrence(all_actions, Move) != null else position
 		highlight_path = WorldPathfinder.calculate_path(
-			WorldPathfinder.map.map_to_local(all_actions.back().destination) if all_actions.size() > 0 else position, 
+			selection_position, 
 			get_global_mouse_position()
 		)
 		queue_redraw()
@@ -127,7 +131,7 @@ class Move extends Action:
 
 class Press extends Action:
 	var caller: Callable
-
+	func _init(_caller:Callable) -> void:
+		caller = Callable(_caller)
 	func execute():
-		if caller.is_valid():
-			caller.call()
+		await caller.call()

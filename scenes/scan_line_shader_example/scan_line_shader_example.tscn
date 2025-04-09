@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://civx8syccft2h"]
 
-[ext_resource type="Shader" path="res://scripts/shaders/ScanLineShader.gdshader" id="1_tu53w"]
+[ext_resource type="Shader" uid="uid://dpbmrgdgioq6r" path="res://scripts/shaders/ScanLineShader.gdshader" id="1_tu53w"]
 [ext_resource type="Texture2D" uid="uid://duks126gj6geu" path="res://assets/ui/panels/GreenPanel64x64.png" id="2_l3quc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6oe2k"]

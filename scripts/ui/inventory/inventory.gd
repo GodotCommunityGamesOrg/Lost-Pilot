@@ -34,8 +34,6 @@ func update_inventory_active_item_label():
 	var slots = inventory_slots.get_children()
 	tooltip.visible = true
 	tooltip.set_position(Vector2(217,4))
-	#if PlayerInventory.active_item_slot == null or slots[PlayerInventory.active_item_slot].slot_type == SlotClass.SlotType.INVENTORY:
-		#return
 	if slots[PlayerInventory.active_item_slot].item != null:
 		tooltip.visible = true
 		var info_slots = get_tree().get_nodes_in_group("Info_Slots")

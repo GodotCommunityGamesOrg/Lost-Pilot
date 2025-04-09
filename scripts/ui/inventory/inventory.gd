@@ -15,7 +15,10 @@ func _ready() -> void:
 		slots[i].gui_input.connect(slot_gui_input.bind(slots[i]))
 		slots[i].inventory_slot_index = i
 		slots[i].slot_type = SlotClass.SlotType.INVENTORY
-		PlayerInventory.inventory_active_item_updated.connect(slots[i].refresh_style)
+		if PlayerInventory.is_connected("inventory_active_item_updated", slots[i].refresh_style):
+			continue
+		else:
+			PlayerInventory.inventory_active_item_updated.connect(slots[i].refresh_style)
 	equip_slots[0].slot_type = SlotClass.SlotType.HELMET
 	equip_slots[1].slot_type = SlotClass.SlotType.BODY
 	equip_slots[2].slot_type = SlotClass.SlotType.BOOTS

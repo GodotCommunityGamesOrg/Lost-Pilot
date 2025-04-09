@@ -1,4 +1,5 @@
 extends Panel
+class_name Slot
 
 var default_texture = preload("res://assets/ui/inventory_ui/InventorySlotUsed64x64.png")
 var empty_texture = preload("res://assets/ui/inventory_ui/InventorySlot64x64.png")
@@ -17,6 +18,7 @@ var slot_type
 var hover : bool
 @onready var ui = find_parent("UI")
 
+## Types of Slots
 enum SlotType{
 	HOTBAR,
 	INVENTORY,
@@ -26,12 +28,13 @@ enum SlotType{
 	WEAPONS,
 }
 
+## Types of Equip Slots
 var equip_types = [SlotType.HELMET, 
 					SlotType.BODY,
 					SlotType.BOOTS, 
 					SlotType.WEAPONS
 				]
-
+## Sets the textures and connect the signals for hover effect
 func _ready() -> void:
 	default_style.texture = default_texture
 	empty_style.texture = empty_texture
@@ -40,6 +43,7 @@ func _ready() -> void:
 	self.mouse_exited.connect(self.change_hover)
 	refresh_style()
 			
+## Checks the slot and changes the texture to the appropriate one 
 func refresh_style():
 	if slot_type == SlotType.INVENTORY and PlayerInventory.active_item_slot == inventory_slot_index:
 		set('theme_override_styles/panel', selected_style);
@@ -52,12 +56,14 @@ func refresh_style():
 	else:
 		set('theme_override_styles/panel', default_style);
 
+## Removes the item from the slot and puts it in the UI 
 func pickFromSlot():
 	remove_child(item)
 	ui.add_child(item)
 	item = null
 	refresh_style()
-	
+
+## Removes the item from the UI and puts it in the Slot 	
 func putIntoSlot(new_item):
 	item = new_item
 	item.position = Vector2(2.5, 2.5)
@@ -66,10 +72,12 @@ func putIntoSlot(new_item):
 	tooltip_text = item.item_name
 	refresh_style()
 
+## Put item in UI
 func getFromSlot():
 	ui.add_child(item)
 	refresh_style()
 
+## Initializes the item in the slot 
 func initialize_item(item_name, item_quantity):
 	if item == null:
 		item = ItemClass.instantiate()
@@ -84,6 +92,7 @@ func initialize_item(item_name, item_quantity):
 	tooltip_text = item.item_name
 	refresh_style()
 
+## Changes the item being actively hovered on
 func change_hover():
 	hover = !hover
 	if hover:

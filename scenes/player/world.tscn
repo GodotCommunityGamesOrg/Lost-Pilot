@@ -7,9 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cu6wnh1d65tf5" path="res://scenes/actor.tscn" id="4_gd2e3"]
 [ext_resource type="Script" uid="uid://ckg7qxe0rs4en" path="res://scripts/ui/base/user_interface.gd" id="5_lqwlq"]
 [ext_resource type="PackedScene" uid="uid://cc5s5h3qhwkom" path="res://scenes/inventory/inventory.tscn" id="6_5effa"]
-[ext_resource type="Script" path="res://scripts/ui/inventory/ui.gd" id="6_f4j3m"]
+[ext_resource type="Script" uid="uid://c75u5fjca6wij" path="res://scripts/ui/inventory/ui.gd" id="6_f4j3m"]
 [ext_resource type="PackedScene" uid="uid://bvrveljgfa32h" path="res://scenes/inventory/hotbar.tscn" id="7_fnkyy"]
-
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4fw4l"]
 texture = ExtResource("2_2nh4u")

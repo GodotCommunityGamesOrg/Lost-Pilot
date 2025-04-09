@@ -1,8 +1,8 @@
 [gd_scene load_steps=20 format=3 uid="uid://cc5s5h3qhwkom"]
 
-[ext_resource type="Script" path="res://scripts/ui/inventory/inventory.gd" id="1_yuqda"]
-[ext_resource type="Shader" path="res://scripts/shaders/ScanLineShader.gdshader" id="2_y3wgp"]
-[ext_resource type="Script" path="res://scripts/ui/inventory/slot.gd" id="3_3gd4k"]
+[ext_resource type="Script" uid="uid://dvcwo0iixo85t" path="res://scripts/ui/inventory/inventory.gd" id="1_yuqda"]
+[ext_resource type="Shader" uid="uid://dpbmrgdgioq6r" path="res://scripts/shaders/ScanLineShader.gdshader" id="2_y3wgp"]
+[ext_resource type="Script" uid="uid://bbvh8t6cee3ri" path="res://scripts/ui/inventory/slot.gd" id="3_3gd4k"]
 [ext_resource type="Texture2D" uid="uid://c3t67ucjc17xh" path="res://assets/ui/inventory_ui/inventory_background.png" id="4_qjx8n"]
 [ext_resource type="Texture2D" uid="uid://1bramb5go6aa" path="res://assets/ui/panels/RedTransparentPanel64x64.png" id="5_5b15x"]
 [ext_resource type="Texture2D" uid="uid://bftj5xvnuaa70" path="res://assets/ui/panels/GrayTransparentPanel64x64.png" id="5_fvali"]

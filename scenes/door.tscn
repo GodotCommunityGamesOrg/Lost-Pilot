@@ -114,11 +114,11 @@ animations = [{
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mrtq3"]
 script = ExtResource("4_v7qj0")
-name = "closed"
+name = "Closed"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tec37"]
 script = ExtResource("4_v7qj0")
-name = "open"
+name = "Open"
 
 [node name="InteractableDoor" type="Node2D" node_paths=PackedStringArray("anim", "gui_container", "gui_focus")]
 process_priority = 2

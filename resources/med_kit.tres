@@ -1,0 +1,27 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://b55hedqarxwyb"]
+
+[ext_resource type="Texture2D" uid="uid://d064goqtv6tb2" path="res://assets/ui/inventory_ui/item_icons/Med Kit.png" id="1_52jjd"]
+
+[sub_resource type="GDScript" id="GDScript_qkanr"]
+script/source = "extends Resource
+
+@export var item_category: String = \"Consumable\"
+@export var itemname : String = \"Med Kit\"
+@export var add_health : int = 5
+@export var add_energy : int = 0
+@export var stacksize : int = 99
+@export var description : String = \"This heals injuries to you or crewmates\"
+@export var image : Texture2D = preload(\"res://assets/ui/inventory_ui/item_icons/Med Kit.png\")
+@export var rarity : int
+"
+
+[resource]
+script = SubResource("GDScript_qkanr")
+item_category = "Consumable"
+itemname = "Med Kit"
+add_health = 5
+add_energy = 0
+stacksize = 99
+description = "This heals injuries to you or crewmates"
+image = ExtResource("1_52jjd")
+rarity = 0

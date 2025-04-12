@@ -1,0 +1,393 @@
+[gd_scene load_steps=20 format=3 uid="uid://cc5s5h3qhwkom"]
+
+[ext_resource type="Script" uid="uid://dvcwo0iixo85t" path="res://scripts/ui/inventory/inventory.gd" id="1_yuqda"]
+[ext_resource type="Shader" uid="uid://dpbmrgdgioq6r" path="res://scripts/shaders/ScanLineShader.gdshader" id="2_y3wgp"]
+[ext_resource type="Script" uid="uid://bbvh8t6cee3ri" path="res://scripts/ui/inventory/slot.gd" id="3_3gd4k"]
+[ext_resource type="Texture2D" uid="uid://c3t67ucjc17xh" path="res://assets/ui/inventory_ui/inventory_background.png" id="4_qjx8n"]
+[ext_resource type="Texture2D" uid="uid://1bramb5go6aa" path="res://assets/ui/panels/RedTransparentPanel64x64.png" id="5_5b15x"]
+[ext_resource type="Texture2D" uid="uid://bftj5xvnuaa70" path="res://assets/ui/panels/GrayTransparentPanel64x64.png" id="5_fvali"]
+[ext_resource type="FontFile" uid="uid://b2qsse7qo1d8y" path="res://assets/Gugi-Regular.ttf" id="5_ptnxp"]
+[ext_resource type="Texture2D" uid="uid://ce0pf5op5farq" path="res://assets/ui/inventory_ui/overlays/Helmet_Overlay.png" id="6_y23rr"]
+[ext_resource type="Texture2D" uid="uid://5hla2mrab4j1" path="res://assets/ui/inventory_ui/overlays/Body_Overlay.png" id="7_plhtd"]
+[ext_resource type="Texture2D" uid="uid://drp0q2blofo6n" path="res://assets/ui/inventory_ui/overlays/Boot_Overlay.png" id="8_trx76"]
+[ext_resource type="Texture2D" uid="uid://c7av4r7sdanav" path="res://assets/ui/inventory_ui/overlays/Weapon_Overlay.png" id="9_i0785"]
+[ext_resource type="Texture2D" uid="uid://b4cl313lwqp7m" path="res://assets/ui/inventory_ui/InventorySlot64x64.png" id="10_gmb76"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wcl5f"]
+shader = ExtResource("2_y3wgp")
+shader_parameter/boarder = 2.0
+shader_parameter/max_lines = 18.0
+shader_parameter/darken_amount = 0.9
+shader_parameter/speed = 0.2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u27p8"]
+texture = ExtResource("5_5b15x")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4wq3d"]
+texture = ExtResource("4_qjx8n")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 9.0
+texture_margin_bottom = 6.0
+region_rect = Rect2(0, 0, 207, 11)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lrf4t"]
+shader = ExtResource("2_y3wgp")
+shader_parameter/boarder = 2.0
+shader_parameter/max_lines = 10.0
+shader_parameter/darken_amount = 0.9
+shader_parameter/speed = 0.2
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vosku"]
+texture = ExtResource("5_fvali")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tpeyn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c6mmg"]
+texture = ExtResource("10_gmb76")
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(2.5, 2.5)
+script = ExtResource("1_yuqda")
+
+[node name="Tooltip" type="PanelContainer" parent="."]
+material = SubResource("ShaderMaterial_wcl5f")
+custom_minimum_size = Vector2(120, 109)
+layout_mode = 2
+offset_left = 217.0
+offset_top = 4.0
+offset_right = 356.0
+offset_bottom = 162.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_u27p8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tooltip"]
+custom_minimum_size = Vector2(88, 115)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 0
+theme_override_constants/separation = 10
+
+[node name="Container" type="Control" parent="Tooltip/VBoxContainer"]
+layout_mode = 2
+
+[node name="Item Category" type="Label" parent="Tooltip/VBoxContainer" groups=["Info_Slots"]]
+texture_filter = 1
+layout_mode = 2
+tooltip_text = "Item Category"
+mouse_filter = 0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("5_ptnxp")
+theme_override_font_sizes/font_size = 12
+text = "Item Category"
+
+[node name="Item Name" type="Label" parent="Tooltip/VBoxContainer" groups=["Info_Slots"]]
+texture_filter = 3
+layout_mode = 2
+tooltip_text = "Item Name"
+mouse_filter = 0
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("5_ptnxp")
+theme_override_font_sizes/font_size = 10
+text = "Item Name"
+
+[node name="Item Description" type="Label" parent="Tooltip/VBoxContainer" groups=["Info_Slots"]]
+texture_filter = 1
+custom_minimum_size = Vector2(88, 48)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+tooltip_text = "Item Description"
+mouse_filter = 0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("5_ptnxp")
+theme_override_font_sizes/font_size = 10
+text = "Item Description"
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Tooltip/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Item Stat1" type="Label" parent="Tooltip/VBoxContainer/HBoxContainer" groups=["Info_Slots"]]
+texture_filter = 3
+custom_minimum_size = Vector2(50, 13)
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("5_ptnxp")
+theme_override_font_sizes/font_size = 10
+autowrap_mode = 2
+
+[node name="Item Stat2" type="Label" parent="Tooltip/VBoxContainer/HBoxContainer" groups=["Info_Slots"]]
+texture_filter = 3
+custom_minimum_size = Vector2(50, 13)
+layout_mode = 2
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("5_ptnxp")
+theme_override_font_sizes/font_size = 10
+autowrap_mode = 2
+
+[node name="Container2" type="Control" parent="Tooltip/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 6.00002
+offset_top = 6.80001
+offset_right = 211.0
+offset_bottom = 137.8
+theme_override_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_4wq3d")
+
+[node name="Label" type="Label" parent="VBoxContainer2/PanelContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_ptnxp")
+theme_override_font_sizes/font_size = 10
+text = "Inventory"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer2"]
+material = SubResource("ShaderMaterial_lrf4t")
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_vosku")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/PanelContainer2"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+
+[node name="EquipSlots" type="GridContainer" parent="VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/v_separation = 10
+columns = 3
+
+[node name="HelmetSlot" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/EquipSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_tpeyn")
+script = ExtResource("3_3gd4k")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/EquipSlots/HelmetSlot"]
+layout_mode = 0
+offset_left = 2.5
+offset_top = 2.8
+offset_right = 17.5
+offset_bottom = 16.8
+texture = ExtResource("6_y23rr")
+expand_mode = 1
+
+[node name="BodySlot" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/EquipSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_tpeyn")
+script = ExtResource("3_3gd4k")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/EquipSlots/BodySlot"]
+layout_mode = 0
+offset_left = 2.4
+offset_top = 2.80001
+offset_right = 18.4
+offset_bottom = 16.8
+texture = ExtResource("7_plhtd")
+
+[node name="BootSlot" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/EquipSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_tpeyn")
+script = ExtResource("3_3gd4k")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/EquipSlots/BootSlot"]
+modulate = Color(1, 1, 0.901961, 1)
+layout_mode = 0
+offset_left = 2.4
+offset_top = 4.4
+offset_right = 18.4
+offset_bottom = 16.4
+texture = ExtResource("8_trx76")
+
+[node name="WeaponSlot" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/EquipSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_tpeyn")
+script = ExtResource("3_3gd4k")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/EquipSlots/WeaponSlot"]
+modulate = Color(1, 1, 0.901961, 1)
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 17.0
+offset_bottom = 17.0
+texture = ExtResource("9_i0785")
+
+[node name="WeaponSlot2" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/EquipSlots"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_tpeyn")
+script = ExtResource("3_3gd4k")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/PanelContainer2/HBoxContainer/VBoxContainer/EquipSlots/WeaponSlot2"]
+modulate = Color(1, 1, 0.901961, 1)
+layout_mode = 0
+offset_left = 3.2
+offset_top = 2.8
+offset_right = 17.2
+offset_bottom = 16.8
+texture = ExtResource("9_i0785")
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer2/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 5
+
+[node name="Slot1" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+focus_neighbor_right = NodePath("../Slot2")
+focus_neighbor_bottom = NodePath("../Slot6")
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot2" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+focus_neighbor_left = NodePath("../Slot1")
+focus_neighbor_right = NodePath("../Slot3")
+focus_neighbor_bottom = NodePath("../Slot7")
+focus_previous = NodePath("../Slot1")
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot3" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot4" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot5" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot6" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot7" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot8" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot9" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot10" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot11" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot12" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot13" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot14" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot15" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot16" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot17" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot18" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot19" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")
+
+[node name="Slot20" type="Panel" parent="VBoxContainer2/PanelContainer2/HBoxContainer/GridContainer" groups=["inv_slots"]]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c6mmg")
+script = ExtResource("3_3gd4k")

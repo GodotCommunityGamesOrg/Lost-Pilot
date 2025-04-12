@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://seyud828e8iv"]
+
+[ext_resource type="Texture2D" uid="uid://dho2hj7wyihf4" path="res://assets/ui/inventory_ui/item_icons/Intermediate Helmet.png" id="1_cbdgm"]
+
+[sub_resource type="GDScript" id="GDScript_1uoar"]
+script/source = "extends Resource
+
+@export var super_category : String = \"Clothes\"
+@export var item_category: String = \"Helmet\"
+@export var itemname : String = \"Intermediate Helmet\"
+@export var protection : int = 15
+@export var insulation : int = 3
+@export var stacksize : int = 1
+@export var description : String = \"This protects you from damage\"
+@export var image : Texture2D = preload(\"res://assets/ui/inventory_ui/item_icons/Intermediate Helmet.png\")
+@export var rarity : int
+"
+
+[resource]
+script = SubResource("GDScript_1uoar")
+super_category = "Clothes"
+item_category = "Helmet"
+itemname = "Intermediate Helmet"
+protection = 15
+insulation = 3
+stacksize = 1
+description = "This protects you from damage"
+image = ExtResource("1_cbdgm")
+rarity = 0

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dxtqjd3hctcqs"]
+
+[ext_resource type="Texture2D" uid="uid://sa0nlf0101p6" path="res://assets/ui/inventory_ui/item_icons/Basic Helmet.png" id="1_wewmu"]
+
+[sub_resource type="GDScript" id="GDScript_sdjo8"]
+script/source = "extends Resource
+
+@export var super_category : String = \"Clothes\"
+@export var item_category: String = \"Helmet\"
+@export var itemname : String = \"Basic Helmet\"
+@export var protection : int = 10
+@export var insulation : int = 3
+@export var stacksize : int = 1
+@export var description : String = \"This protects you from damage\"
+@export var image : Texture2D = preload(\"res://assets/ui/inventory_ui/item_icons/Basic Helmet.png\")
+@export var rarity : int
+"
+
+[resource]
+script = SubResource("GDScript_sdjo8")
+super_category = "Clothes"
+item_category = "Helmet"
+itemname = "Basic Helmet"
+protection = 10
+insulation = 3
+stacksize = 1
+description = "This protects you from damage"
+image = ExtResource("1_wewmu")
+rarity = 0

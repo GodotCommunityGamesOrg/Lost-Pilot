@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cqpaoq4rul3xh"]
+
+[ext_resource type="Texture2D" uid="uid://cahsastudigpq" path="res://assets/ui/inventory_ui/item_icons/Basic Vest.png" id="1_rg3d7"]
+
+[sub_resource type="GDScript" id="GDScript_8m5bc"]
+script/source = "extends Resource
+
+@export var super_category : String = \"Clothes\"
+@export var item_category: String = \"Vest\"
+@export var itemname : String = \"Basic Vest\"
+@export var protection : int = 10
+@export var insulation : int = 2
+@export var stacksize : int = 1
+@export var description : String = \"This protects you from damage\"
+@export var image : Texture2D = preload(\"res://assets/ui/inventory_ui/item_icons/Basic Vest.png\")
+@export var rarity : int
+"
+
+[resource]
+script = SubResource("GDScript_8m5bc")
+super_category = "Clothes"
+item_category = "Vest"
+itemname = "Basic Vest"
+protection = 10
+insulation = 2
+stacksize = 1
+description = "This protects you from damage"
+image = ExtResource("1_rg3d7")
+rarity = 0

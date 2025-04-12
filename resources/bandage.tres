@@ -1,0 +1,27 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://px7svfcnayg"]
+
+[ext_resource type="Texture2D" uid="uid://b4nhgp2ncitj2" path="res://assets/ui/inventory_ui/item_icons/Bandage.png" id="1_ryv3h"]
+
+[sub_resource type="GDScript" id="GDScript_lhn2i"]
+script/source = "extends Resource
+
+@export var item_category: String = \"Consumable\"
+@export var itemname : String = \"Bandage\"
+@export var add_health : int = 2
+@export var add_energy : int = 0
+@export var stacksize : int = 99
+@export var description : String = \"This heals injuries to you or crewmates\"
+@export var image : Texture2D = preload(\"res://assets/ui/inventory_ui/item_icons/Bandage.png\")
+@export var rarity : int
+"
+
+[resource]
+script = SubResource("GDScript_lhn2i")
+item_category = "Consumable"
+itemname = "Bandage"
+add_health = 2
+add_energy = 0
+stacksize = 99
+description = "This heals injuries to you or crewmates"
+image = ExtResource("1_ryv3h")
+rarity = 0

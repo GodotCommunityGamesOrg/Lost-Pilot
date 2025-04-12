@@ -1,0 +1,27 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://6kve61xith2s"]
+
+[ext_resource type="Texture2D" uid="uid://d4l8s4nvpp7ca" path="res://assets/ui/inventory_ui/item_icons/Weapon 1.png" id="1_i3w35"]
+
+[sub_resource type="GDScript" id="GDScript_lrj5o"]
+script/source = "extends Resource
+
+@export var item_category: String = \"Weapon\"
+@export var itemname : String = \"Weapon 1\"
+@export var item_attack : int = 4
+@export var item_reload : int = 1
+@export var stacksize : int = 1
+@export var description : String = \"This deals damage to enemies\"
+@export var image : Texture2D = preload(\"res://assets/ui/inventory_ui/item_icons/Weapon 1.png\")
+@export var rarity : int
+"
+
+[resource]
+script = SubResource("GDScript_lrj5o")
+item_category = "Weapon"
+itemname = "Weapon 1"
+item_attack = 4
+item_reload = 1
+stacksize = 1
+description = "This deals damage to enemies"
+image = ExtResource("1_i3w35")
+rarity = 0

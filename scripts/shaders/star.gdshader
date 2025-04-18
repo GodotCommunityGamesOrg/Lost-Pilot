@@ -42,11 +42,11 @@ void fragment() {
 	    prob = 1.0 - bigStarAmount;
 	    pos = floor(normCoordBig / size);
 	    starValue = rand(pos);
-	
+
 	    if (starValue > prob) {
 			vec2 center = size * pos + vec2(size, size) * 0.5;
 			float dist = distance(normCoordBig, center);
-			float size = mix(7, 10, sin(TIME * 2.0) * 0.5 + 0.5);
+			float size = mix(7, 10, sin((TIME + (UV.x*UV.y)*5.0f) * 2.0) * 0.5 + 0.5);
 
 			if (dist < size) {
 		            color += 1.0;

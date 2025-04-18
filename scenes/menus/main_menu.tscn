@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bfxim84yrh17w"]
+[gd_scene load_steps=12 format=3 uid="uid://bfxim84yrh17w"]
 
 [ext_resource type="Script" uid="uid://dr4orwkymr5hj" path="res://scripts/menus/main_menu.gd" id="1_8rgqn"]
 [ext_resource type="Shader" uid="uid://f0odfx5f7dvb" path="res://scripts/shaders/star.gdshader" id="2_imvie"]
 [ext_resource type="FontFile" uid="uid://b2qsse7qo1d8y" path="res://assets/Gugi-Regular.ttf" id="2_x63qt"]
-[ext_resource type="Texture2D" uid="uid://8h3nvonha1me" path="res://assets/ui/panels/TransparentGrayPanel64x64.png" id="3_ilnhd"]
 [ext_resource type="Texture2D" uid="uid://56uygsg6y0r4" path="res://assets/preview-export(1).png" id="3_ng0o5"]
 [ext_resource type="Texture2D" uid="uid://bhrivec7a66ht" path="res://assets/ui/misc/GitHub_Logo.png" id="4_xmsdu"]
 [ext_resource type="Shader" uid="uid://dpbmrgdgioq6r" path="res://scripts/shaders/ScanLineShader.gdshader" id="6_8r73w"]
@@ -20,6 +19,20 @@ shader_parameter/mediumStarAmount = 0.01
 shader_parameter/bigStarAmount = 0.01
 shader_parameter/pixelSize = 3.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8r73w"]
+shader = ExtResource("6_8r73w")
+shader_parameter/scanline_strength = 0.2
+shader_parameter/glitch_intensity = 0.3
+shader_parameter/speed = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ng0o5"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 20
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1hnlc"]
 shader = ExtResource("6_8r73w")
 shader_parameter/scanline_strength = 0.2
@@ -27,7 +40,7 @@ shader_parameter/glitch_intensity = 0.3
 shader_parameter/speed = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50h1w"]
-bg_color = Color(0.419813, 0.419813, 0.419813, 1)
+bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
@@ -69,39 +82,26 @@ texture = ExtResource("3_ng0o5")
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
+[node name="NinePatchRect" type="PanelContainer" parent="."]
+material = SubResource("ShaderMaterial_8r73w")
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.846875
+anchor_left = 0.832031
 anchor_top = 0.908333
-anchor_right = 0.9875
+anchor_right = 0.972656
 anchor_bottom = 0.977778
+offset_right = 20.0
+offset_bottom = -0.000427246
 grow_horizontal = 0
 grow_vertical = 0
-texture = ExtResource("3_ilnhd")
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_ng0o5")
 metadata/_edit_use_anchors_ = true
 
 [node name="GithubButton" type="TextureButton" parent="NinePatchRect"]
+self_modulate = Color(1, 1, 1, 0.490196)
 custom_minimum_size = Vector2(200, 0)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -30.0
-offset_right = 100.0
-offset_bottom = 30.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 texture_normal = ExtResource("4_xmsdu")
 texture_pressed = ExtResource("4_xmsdu")
 texture_hover = ExtResource("4_xmsdu")

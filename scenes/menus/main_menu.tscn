@@ -102,6 +102,12 @@ metadata/_edit_use_anchors_ = true
 self_modulate = Color(1, 1, 1, 0.490196)
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+focus_neighbor_left = NodePath("../../PanelContainer/MarginContainer/VBoxContainer/Quit")
+focus_neighbor_top = NodePath("../../PanelContainer/MarginContainer/VBoxContainer/Play")
+focus_neighbor_right = NodePath("../../PanelContainer/MarginContainer/VBoxContainer/Settings")
+focus_neighbor_bottom = NodePath("../../PanelContainer/MarginContainer/VBoxContainer/Quit")
+focus_next = NodePath("../../PanelContainer/MarginContainer/VBoxContainer/Play")
+focus_previous = NodePath("../../PanelContainer/MarginContainer/VBoxContainer/Quit")
 texture_normal = ExtResource("4_xmsdu")
 texture_pressed = ExtResource("4_xmsdu")
 texture_hover = ExtResource("4_xmsdu")
@@ -139,6 +145,12 @@ alignment = 1
 
 [node name="Play" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../../../NinePatchRect/GithubButton")
+focus_neighbor_top = NodePath("../Quit")
+focus_neighbor_right = NodePath("../../../../NinePatchRect/GithubButton")
+focus_neighbor_bottom = NodePath("../Settings")
+focus_next = NodePath("../Settings")
+focus_previous = NodePath("../Quit")
 theme_override_colors/font_hover_pressed_color = Color(0.129558, 0.129558, 0.129558, 1)
 theme_override_colors/font_hover_color = Color(0.384314, 0.384314, 0.384314, 1)
 theme_override_colors/font_color = Color(0.537011, 0.537011, 0.537011, 1)
@@ -151,6 +163,12 @@ flat = true
 
 [node name="Settings" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../../../NinePatchRect/GithubButton")
+focus_neighbor_top = NodePath("../Play")
+focus_neighbor_right = NodePath("../../../../NinePatchRect/GithubButton")
+focus_neighbor_bottom = NodePath("../Credits")
+focus_next = NodePath("../Credits")
+focus_previous = NodePath("../Play")
 theme_override_colors/font_hover_pressed_color = Color(0.129558, 0.129558, 0.129558, 1)
 theme_override_colors/font_hover_color = Color(0.384314, 0.384314, 0.384314, 1)
 theme_override_colors/font_color = Color(0.537255, 0.537255, 0.537255, 1)
@@ -163,6 +181,12 @@ flat = true
 
 [node name="Credits" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../../../NinePatchRect/GithubButton")
+focus_neighbor_top = NodePath("../Settings")
+focus_neighbor_right = NodePath("../../../../NinePatchRect/GithubButton")
+focus_neighbor_bottom = NodePath("../Quit")
+focus_next = NodePath("../Quit")
+focus_previous = NodePath("../Settings")
 theme_override_colors/font_hover_pressed_color = Color(0.129558, 0.129558, 0.129558, 1)
 theme_override_colors/font_hover_color = Color(0.384314, 0.384314, 0.384314, 1)
 theme_override_colors/font_color = Color(0.537255, 0.537255, 0.537255, 1)
@@ -175,6 +199,12 @@ flat = true
 
 [node name="Quit" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../../../../NinePatchRect/GithubButton")
+focus_neighbor_top = NodePath("../Credits")
+focus_neighbor_right = NodePath("../../../../NinePatchRect/GithubButton")
+focus_neighbor_bottom = NodePath("../Play")
+focus_next = NodePath("../Play")
+focus_previous = NodePath("../Credits")
 theme_override_colors/font_hover_pressed_color = Color(0.129558, 0.129558, 0.129558, 1)
 theme_override_colors/font_hover_color = Color(0.384314, 0.384314, 0.384314, 1)
 theme_override_colors/font_color = Color(0.537255, 0.537255, 0.537255, 1)

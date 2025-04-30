@@ -1,9 +1,13 @@
-[gd_scene load_steps=9 format=4 uid="uid://cjxiwvvqhuh0q"]
+[gd_scene load_steps=13 format=4 uid="uid://cjxiwvvqhuh0q"]
 
 [ext_resource type="Texture2D" uid="uid://b05hj6ognkfqi" path="res://assets/icon.svg" id="1_glmva"]
 [ext_resource type="PackedScene" uid="uid://dkkdcx534ran6" path="res://scenes/player/player.tscn" id="2_0813x"]
 [ext_resource type="PackedScene" uid="uid://didh1mtde07hl" path="res://scenes/door.tscn" id="3_lctwl"]
 [ext_resource type="Script" uid="uid://mqyxoitrg52a" path="res://scripts/map_generator.gd" id="4_rsxc5"]
+[ext_resource type="Script" uid="uid://bm0r4bkr3dki2" path="res://scripts/game_menu_system.gd" id="5_ytdfj"]
+[ext_resource type="PackedScene" uid="uid://2nq4ts7s3ojx" path="res://scenes/menus/in_game_menu.tscn" id="6_vmden"]
+[ext_resource type="PackedScene" uid="uid://bo4uld1h02n47" path="res://scenes/menus/pause_menu.tscn" id="7_lqun3"]
+[ext_resource type="PackedScene" uid="uid://vcaloblp0bi6" path="res://scenes/menus/settings_menu.tscn" id="8_vmden"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4fw4l"]
 texture = ExtResource("1_glmva")
@@ -27,8 +31,7 @@ custom_data_layer_0/type = 2
 sources/0 = SubResource("TileSetAtlasSource_4fw4l")
 sources/1 = SubResource("TileSetScenesCollectionSource_4su1h")
 
-[sub_resource type="Resource" id="Resource_boq0m"]
-metadata/__load_path__ = "res://Scripts/LightManager/light_manager.gd"
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xy6ne"]
 
 [node name="SpaceStation" type="Node2D"]
 
@@ -41,8 +44,35 @@ script = ExtResource("4_rsxc5")
 tile_map_data = PackedByteArray("AAABAAAAAQAAAAAAAQAGAAIAAQAAAAAAAgAKAAEAAQAAAAAAAgAMAAEAAQAAAAAAAgA=")
 tile_set = SubResource("TileSet_4raql")
 
-[node name="LightManager" type="Node2D" parent="." node_paths=PackedStringArray("tile_layer")]
-script = SubResource("Resource_boq0m")
-tile_layer = NodePath("../Floor")
-default_light = Color(0, 0, 0, 0.588235)
-light_radius = 4
+[node name="LightManager" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MenuSystem" type="TabContainer" parent="CanvasLayer"]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -12.5
+offset_bottom = -12.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_xy6ne")
+current_tab = 0
+tabs_visible = false
+script = ExtResource("5_ytdfj")
+metadata/_custom_type_script = "uid://bjtta1bu63luc"
+
+[node name="InGameMenu" parent="CanvasLayer/MenuSystem" instance=ExtResource("6_vmden")]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="PauseMenu" parent="CanvasLayer/MenuSystem" instance=ExtResource("7_lqun3")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Settings" parent="CanvasLayer/MenuSystem" instance=ExtResource("8_vmden")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2

@@ -7,6 +7,11 @@ static var players: Array[UserActor] = []      ## Reference to the current playe
 static var state: StateMachine = StateMachine.new() ## State machine instance managing game states.
 static var on: bool = false                    ## Tracks whether the game state is active.
 
+static func reset():
+	players = []
+	state = StateMachine.new()
+	on = false
+
 # StateMachine class to handle turn-based states.
 class StateMachine:
 
@@ -26,6 +31,7 @@ class StateMachine:
 	## Current state of the game (default: player turn).
 	var state: STATES = STATES.player:
 		set(val):
+			await GameManager.get_tree().process_frame
 			state = val
 			next_state.emit(state)
 

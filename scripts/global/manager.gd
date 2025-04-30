@@ -7,7 +7,7 @@ class_name Manager
 
 
 # Add to the keys for specific scenes.
-enum Keys {SpaceStation,ShipEditor,SpaceEnvironment}
+enum Keys {SpaceStation,ShipEditor,SpaceEnvironment, main}
 
 # Store the scenes
 var scenes : Dictionary
@@ -15,12 +15,12 @@ var scenes : Dictionary
 var current_scene : Node
 var scene_container : Node2D
 func _ready() -> void:
-	create_container()
 	add_scene("res://scenes/player/world.tscn",Keys.SpaceStation)
+	add_scene("res://scenes/main/main.tscn", Keys.main)
 
 # Add scenes to the scene dict.
 func add_scene(scene : String,key : Keys) -> void:
-	scenes[key] = load(scene)
+	scenes[key] = scene
 
 func delete_scene() -> void:
 	if current_scene:
@@ -29,18 +29,4 @@ func delete_scene() -> void:
 # Spawns the scene to the tree.
 func spawn_scene(key : Keys) -> void:
 	
-	if current_scene:
-		current_scene.queue_free()
-		
-	var next_scene : Node = scenes[key].instantiate()
-	
-	if not scene_container: return
-	
-	scene_container.add_child(next_scene)
-	current_scene = next_scene
-
-# Setup the container for the scenes.
-func create_container() -> void:
-	var node : Node2D = Node2D.new()
-	get_tree().get_root().add_child.call_deferred(node)
-	scene_container = node
+	get_tree().change_scene_to_file(scenes[key])

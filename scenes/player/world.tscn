@@ -1,11 +1,15 @@
-[gd_scene load_steps=10 format=4 uid="uid://cjxiwvvqhuh0q"]
+[gd_scene load_steps=15 format=4 uid="uid://cjxiwvvqhuh0q"]
 
 [ext_resource type="PackedScene" uid="uid://dkkdcx534ran6" path="res://scenes/player/player.tscn" id="1_1vo14"]
+[ext_resource type="Script" uid="uid://eb3vs5x8edfb" path="res://scripts/world.gd" id="1_71hdg"]
 [ext_resource type="Texture2D" uid="uid://b05hj6ognkfqi" path="res://assets/icon.svg" id="2_2nh4u"]
 [ext_resource type="PackedScene" uid="uid://didh1mtde07hl" path="res://scenes/door.tscn" id="3_yy6hg"]
 [ext_resource type="Script" uid="uid://mqyxoitrg52a" path="res://scripts/map_generator.gd" id="4_78f4u"]
 [ext_resource type="PackedScene" uid="uid://cu6wnh1d65tf5" path="res://scenes/actor.tscn" id="4_gd2e3"]
-[ext_resource type="Script" uid="uid://ckg7qxe0rs4en" path="res://scripts/ui/base/user_interface.gd" id="5_lqwlq"]
+[ext_resource type="Script" uid="uid://bm0r4bkr3dki2" path="res://scripts/game_menu_system.gd" id="7_kej52"]
+[ext_resource type="PackedScene" uid="uid://2nq4ts7s3ojx" path="res://scenes/menus/in_game_menu.tscn" id="8_71hdg"]
+[ext_resource type="PackedScene" uid="uid://bo4uld1h02n47" path="res://scenes/menus/pause_menu.tscn" id="9_onws2"]
+[ext_resource type="PackedScene" uid="uid://vcaloblp0bi6" path="res://scenes/menus/settings_menu.tscn" id="10_36eim"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4fw4l"]
 texture = ExtResource("2_2nh4u")
@@ -32,7 +36,10 @@ custom_data_layer_0/type = 2
 sources/0 = SubResource("TileSetAtlasSource_4fw4l")
 sources/1 = SubResource("TileSetScenesCollectionSource_4su1h")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b1qyj"]
+
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_71hdg")
 
 [node name="Floor" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAABAAAAAAAAAAAAAQACAAAAAAAAAAAAAQADAAEAAAAAAAAAAQACAAEAAAAAAAAAAQACAAIAAAAAAAAAAQABAAIAAAAAAAAAAQAAAAIAAAAAAAAAAQAAAAEAAAAAAAAAAQABAAEAAAAAAAAAAQADAAAAAAAAAAAAAQADAAIAAAAAAAAAAQAEAAIAAAAAAAAAAQAEAAMAAAAAAAAAAQADAAMAAAAAAAAAAQACAAMAAAAAAAAAAQABAAMAAAAAAAAAAQAAAAMAAAAAAAAAAQAFAAIAAAAAAAAAAQAFAAEAAAAAAAAAAQAFAAAAAAAAAAAAAQAGAAEAAAAAAAAAAgAGAAIAAAAAAAAAAQAFAAMAAAAAAAAAAQAGAAAAAAAAAAAAAgAHAAIAAAAAAAAAAQAHAAEAAAAAAAAAAQAHAAAAAAAAAAAAAQAJAAAAAAAAAAAAAQAIAAAAAAAAAAAAAQAIAAIAAAAAAAAAAQAIAAEAAAAAAAAAAQAJAAEAAAAAAAAAAQAJAAIAAAAAAAAAAQAGAAMAAAAAAAAAAgAHAAMAAAAAAAAAAgAIAAMAAAAAAAAAAgAJAAMAAAAAAAAAAgAKAAMAAAAAAAAAAgAKAAIAAAAAAAAAAgAKAAAAAAAAAAAAAgAKAP//AAAAAAAAAgAJAP//AAAAAAAAAgAIAP//AAAAAAAAAgAHAP//AAAAAAAAAgAGAP//AAAAAAAAAgAFAP//AAAAAAAAAgAEAP//AAAAAAAAAgADAP//AAAAAAAAAgACAP//AAAAAAAAAgABAP//AAAAAAAAAgAAAP//AAAAAAAAAgD/////AAAAAAAAAgD//wAAAAAAAAAAAgD//wEAAAAAAAAAAgD//wIAAAAAAAAAAgD//wMAAAAAAAAAAgAKAAEAAAAAAAAAAQALAAEAAAAAAAAAAQAMAAEAAAAAAAAAAQALAAIAAAAAAAAAAgAMAAIAAAAAAAAAAgALAAAAAAAAAAAAAgAMAAAAAAAAAAAAAgANAAEAAAAAAAAAAQANAAIAAAAAAAAAAQANAAMAAAAAAAAAAQANAAQAAAAAAAAAAQAOAAQAAAAAAAAAAQAPAAQAAAAAAAAAAQAQAAQAAAAAAAAAAQAPAAMAAAAAAAAAAQAOAAMAAAAAAAAAAQAQAAMAAAAAAAAAAQAPAAIAAAAAAAAAAQAOAAIAAAAAAAAAAQAOAAEAAAAAAAAAAQAPAAEAAAAAAAAAAQAQAAEAAAAAAAAAAQAQAAIAAAAAAAAAAQAPAAAAAAAAAAAAAQAOAAAAAAAAAAAAAQANAAAAAAAAAAAAAQAQAAAAAAAAAAAAAQAQAP//AAAAAAAAAQAPAP//AAAAAAAAAQAOAP//AAAAAAAAAQANAP//AAAAAAAAAQAMAP//AAAAAAAAAgAMAP7/AAAAAAAAAgANAP7/AAAAAAAAAgAOAP7/AAAAAAAAAgAPAP7/AAAAAAAAAgAQAP7/AAAAAAAAAgARAP7/AAAAAAAAAgARAP//AAAAAAAAAgARAAAAAAAAAAAAAgARAAEAAAAAAAAAAgARAAIAAAAAAAAAAgARAAMAAAAAAAAAAgARAAQAAAAAAAAAAgARAAUAAAAAAAAAAgAQAAUAAAAAAAAAAgAPAAUAAAAAAAAAAgAOAAUAAAAAAAAAAgANAAUAAAAAAAAAAgAMAAUAAAAAAAAAAgAMAAQAAAAAAAAAAgAMAAMAAAAAAAAAAgAEAAAAAAAAAAAAAQAEAAEAAAAAAAAAAQAFAAQAAAAAAAAAAgAEAAQAAAAAAAAAAgADAAQAAAAAAAAAAgACAAQAAAAAAAAAAgABAAQAAAAAAAAAAgAAAAQAAAAAAAAAAgD//wQAAAAAAAAAAgAGAAQAAAAAAAAAAgAKAAUAAAAAAAAACAAKAAQAAAAAAAAACAAJAAQAAAAAAAAACAAIAAQAAAAAAAAACAAHAAQAAAAAAAAACAAHAAUAAAAAAAAACAAGAAUAAAAAAAAACAAFAAUAAAAAAAAACAAEAAUAAAAAAAAACAADAAUAAAAAAAAACAACAAUAAAAAAAAACAABAAUAAAAAAAAACAAAAAUAAAAAAAAACAD//wUAAAAAAAAACAAIAAUAAAAAAAAACAAJAAUAAAAAAAAACAALAAQAAAAAAAAACAALAAMAAAAAAAAACAALAAUAAAAAAAAACAALAP7/AAAAAAAACAAKAP7/AAAAAAAACAAJAP7/AAAAAAAACAAIAP7/AAAAAAAACAAHAP7/AAAAAAAACAAGAP7/AAAAAAAACAAFAP7/AAAAAAAACAAEAP7/AAAAAAAACAADAP7/AAAAAAAACAACAP7/AAAAAAAACAABAP7/AAAAAAAACAAAAP7/AAAAAAAACAD///7/AAAAAAAACAALAP//AAAAAAAACAAAAAAAAAAAAAAAAQA=")
@@ -43,10 +50,33 @@ script = ExtResource("4_78f4u")
 tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAwABAAAAAQAAAAAAAQACAAAAAAAAAAAAAQADAAEAAAAAAAAAAQACAAEAAAAAAAAAAQACAAIAAAAAAAAAAQABAAIAAAAAAAAAAQAAAAIAAAAAAAAAAQAAAAEAAAAAAAAAAQABAAEAAAAAAAAAAQADAAAAAAAAAAAAAQADAAIAAAAAAAAAAQAGAAIAAQAAAAAAAgAKAAEAAQAAAAAAAgAMAAEAAQAAAAAAAgA=")
 tile_set = SubResource("TileSet_4raql")
 
-[node name="UserInterface" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("5_lqwlq")
-start_on = false
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MenuSystem" type="TabContainer" parent="CanvasLayer"]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -12.5
+offset_bottom = -12.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_b1qyj")
+current_tab = 0
+tabs_visible = false
+script = ExtResource("7_kej52")
+metadata/_custom_type_script = "uid://bjtta1bu63luc"
+
+[node name="InGameMenu" parent="CanvasLayer/MenuSystem" instance=ExtResource("8_71hdg")]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="PauseMenu" parent="CanvasLayer/MenuSystem" instance=ExtResource("9_onws2")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Settings" parent="CanvasLayer/MenuSystem" instance=ExtResource("10_36eim")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2

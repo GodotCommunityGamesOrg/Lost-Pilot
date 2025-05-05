@@ -1,46 +1,66 @@
 extends Node
 class_name Manager
-# GameManager that handles loading and spawning scenes
-# e.g Player, world scene and more.
-
-# This script will evolve as the game progresses.
+## GameManager that handles loading and spawning scenes
+## e.g Player, world scene and more.
 
 
-# Add to the keys for specific scenes.
-enum Keys {SpaceStation,ShipEditor,SpaceEnvironment}
+const loading_scene: String = "res://scenes/loader.tscn" ## path to the loading screen
 
-# Store the scenes
-var scenes : Dictionary
+var loader: ProgressBar ## loading screen progress
 
-var current_scene : Node
-var scene_container : Node2D
+## keys for each level that corrisponds with the scene path.
+enum Keys {
+	## SpaceStation level where most of the playing takes place.
+	SpaceStation,
+	## Space Ship (player home)
+	ShipEditor, 
+	## ship Navigation area
+	SpaceEnvironment,
+	## Main Menu 
+	main 
+	}
+
+var scenes : Dictionary ## Scene path storage
+var current_scene : Node ## the Main Scene currently loaded
+
+var _load_key : int ## which scene loading (do not touch)
+
 func _ready() -> void:
-	create_container()
-	add_scene("res://scenes/player/world.tscn",Keys.SpaceStation)
+	add_scene("res://scenes/player/world.tscn", Keys.SpaceStation)
+	add_scene("res://scenes/main/main.tscn", Keys.main)
+	add_child(preload(loading_scene).instantiate())
+	loader = get_child(0).get_child(0)
+	spawn_scene(Keys.main)
 
-# Add scenes to the scene dict.
-func add_scene(scene : String,key : Keys) -> void:
-	scenes[key] = load(scene)
+## adds scene path to dictionary with assignes key
+func add_scene(scene : String, key : Keys) -> void:
+	scenes[key] = scene
 
+## deletes primary scene
 func delete_scene() -> void:
 	if current_scene:
 		current_scene.queue_free()
+		current_scene = null
 
-# Spawns the scene to the tree.
-func spawn_scene(key : Keys) -> void:
-	
-	if current_scene:
-		current_scene.queue_free()
-		
-	var next_scene : Node = scenes[key].instantiate()
-	
-	if not scene_container: return
-	
-	scene_container.add_child(next_scene)
-	current_scene = next_scene
+## replaces scene with new scene.
+func spawn_scene(key : Keys, function_await: Callable = func() -> void: pass) -> void:
+	if !scenes.has(key):
+		return
+	_load_key = key
+	var path = scenes[key]
+	ResourceLoader.load_threaded_request(path)
+	while true:
+		var total = []
+		var stage = ResourceLoader.load_threaded_get_status(scenes[_load_key], total)
+		loader.value = total[0] * 100.0
 
-# Setup the container for the scenes.
-func create_container() -> void:
-	var node : Node2D = Node2D.new()
-	get_tree().get_root().add_child.call_deferred(node)
-	scene_container = node
+		if stage == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED and total[0] == 1.0:
+			var res = ResourceLoader.load_threaded_get(scenes[_load_key])
+			if res:
+				delete_scene()
+				current_scene = res.instantiate()
+				add_child(current_scene)
+			await function_await.call()
+			loader.get_parent().visible = false
+			break
+		await get_tree().process_frame

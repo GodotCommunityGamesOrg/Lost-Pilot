@@ -167,6 +167,7 @@ size_flags_vertical = 1
 size_flags_stretch_ratio = 1.0
 localize_numeral_system = true
 tooltip_text = ""
+tooltip_auto_translate_mode = 0
 focus_neighbor_left = NodePath("")
 focus_neighbor_top = NodePath("")
 focus_neighbor_right = NodePath("")

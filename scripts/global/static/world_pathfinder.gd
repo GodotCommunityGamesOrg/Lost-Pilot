@@ -21,3 +21,7 @@ static func calculate_free_path(start: Vector2, end: Vector2, tf: bool = true) -
 		map.local_to_map(end),
 		tf
 	)
+static func reset():
+	pathfinder = AStarGrid2D.new()
+	free_pathfinder = AStarGrid2D.new()
+	map = map_generator.new()

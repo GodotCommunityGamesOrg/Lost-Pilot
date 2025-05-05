@@ -1,8 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://bumr1seyy5evw"]
+[gd_scene load_steps=5 format=3 uid="uid://bumr1seyy5evw"]
 
-[ext_resource type="Script" uid="uid://bjtta1bu63luc" path="res://scripts/menu_system/menu_system.gd" id="1_gwu8r"]
+[ext_resource type="Script" uid="uid://ci1372ncbypk6" path="res://scripts/main.gd" id="1_l3cfh"]
+[ext_resource type="PackedScene" uid="uid://bfxim84yrh17w" path="res://scenes/menus/main_menu.tscn" id="2_l3cfh"]
+[ext_resource type="PackedScene" uid="uid://cv8ccwbqt88bw" path="res://scenes/menus/credits_menu.tscn" id="3_6q06x"]
+[ext_resource type="PackedScene" uid="uid://vcaloblp0bi6" path="res://scenes/menus/settings_menu.tscn" id="4_ow5a4"]
 
-[node name="Main" type="Node2D"]
+[node name="MenuSystem" type="TabContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+tabs_visible = false
+script = ExtResource("1_l3cfh")
+metadata/_custom_type_script = "uid://bjtta1bu63luc"
 
-[node name="MenuSystem" type="Node" parent="."]
-script = ExtResource("1_gwu8r")
+[node name="MainMenu" parent="." instance=ExtResource("2_l3cfh")]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Credits" parent="." instance=ExtResource("3_6q06x")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Settings" parent="." instance=ExtResource("4_ow5a4")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2

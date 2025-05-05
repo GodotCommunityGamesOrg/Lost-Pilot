@@ -61,15 +61,15 @@ func _draw() -> void:
 	for move_action in all_actions:
 		if move_action is Move:
 			for pos in WorldPathfinder.calculate_path(prev, WorldPathfinder.map.map_to_local(move_action.destination)):
-				draw_circle(WorldPathfinder.map.map_to_local(pos) - position, 20, Color(0.7, 0.7, 0.7, 1))
+				draw_circle(WorldPathfinder.map.map_to_local(pos) - position, 10, Color(0.7, 0.7, 0.7, 1))
 			prev = WorldPathfinder.map.map_to_local(move_action.destination)
 
 	for pos in highlight_path:
 		if pos != highlight_path[0]:
-			draw_circle(WorldPathfinder.map.map_to_local(pos) - position, 20, Color(1, 1, 0, 1) if (highlight_path.find(pos) <= _actions) else Color(1, 0, 0, 1))
+			draw_circle(WorldPathfinder.map.map_to_local(pos) - position, 10, Color(1, 1, 0, 1) if (highlight_path.find(pos) <= _actions) else Color(1, 0, 0, 1))
 
 	if highlight_path.size() > 0:
-		draw_rect(Rect2(WorldPathfinder.map.map_to_local(highlight_path[highlight_path.size() - 1]) - (Vector2.ONE * 62.5) - position, Vector2(128, 128)), Color(1, 1, 0, 1) if (highlight_path.size() - 1 <= _actions) else Color(1, 0, 0, 1), false, 10)
+		draw_rect(Rect2(WorldPathfinder.map.map_to_local(highlight_path[highlight_path.size() - 1]) - (Vector2.ONE * 32) - position, Vector2(64, 64)), Color(1, 1, 0, 1) if (highlight_path.size() - 1 <= _actions) else Color(1, 0, 0, 1), false, 5)
 
 func play():
 	action = true

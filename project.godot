@@ -11,14 +11,13 @@ config_version=5
 [application]
 
 config/name="Lost Pilot"
-run/main_scene="res://scenes/main/main.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://Assets/icon.svg"
+run/main_scene="uid://cq1q3hs1i0bbb"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://assets/icon.svg"
 
 [autoload]
 
-global="*res://scripts/global/global.gd"
-GameManager="*res://scripts/global/game_manager.gd"
+GameManager="*res://scripts/global/manager.gd"
 
 [display]
 
@@ -37,7 +36,7 @@ version_control/autoload_on_startup=true
 
 [gui]
 
-theme/custom_font="res://Assets/Gugi-Regular.ttf"
+theme/custom_font="res://assets/Gugi-Regular.ttf"
 theme/default_font_multichannel_signed_distance_field=true
 theme/default_font_generate_mipmaps=true
 
@@ -63,3 +62,4 @@ pseudolocalization/fake_bidi=true
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

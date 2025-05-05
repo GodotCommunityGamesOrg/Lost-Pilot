@@ -1,10 +1,10 @@
 [gd_scene load_steps=23 format=3 uid="uid://didh1mtde07hl"]
 
-[ext_resource type="Script" path="res://scripts/interaction_system/door.gd" id="1_uxbyn"]
+[ext_resource type="Script" uid="uid://boasomcw4dl11" path="res://scripts/interaction_system/door.gd" id="1_uxbyn"]
 [ext_resource type="Texture2D" uid="uid://b1y70ybs2m3ad" path="res://assets/DoorSpriteSheet.png" id="2_hov0a"]
 [ext_resource type="Texture2D" uid="uid://myntqljcecwk" path="res://assets/DoorSpriteSelected.png" id="2_xieid"]
-[ext_resource type="Script" path="res://scripts/ui/base/circle_menu_button.gd" id="3_xu5ei"]
-[ext_resource type="Script" path="res://scripts/ui/base/wheel_option.gd" id="4_v7qj0"]
+[ext_resource type="Script" uid="uid://dr5fgv1ea0fdu" path="res://scripts/ui/base/circle_menu_button.gd" id="3_xu5ei"]
+[ext_resource type="Script" uid="uid://b6eabpqsv7vme" path="res://scripts/ui/base/wheel_option.gd" id="4_v7qj0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y6b7b"]
 atlas = ExtResource("2_hov0a")
@@ -120,25 +120,17 @@ name = "closed"
 script = ExtResource("4_v7qj0")
 name = "open"
 
-[node name="InteractableDoor" type="Control" node_paths=PackedStringArray("anim", "gui_container", "gui_focus")]
+[node name="InteractableDoor" type="Node2D" node_paths=PackedStringArray("anim", "gui_container", "gui_focus")]
 process_priority = 2
 top_level = true
-layout_mode = 3
-anchors_preset = 0
-offset_left = -64.0
-offset_top = -64.0
-offset_right = 64.0
-offset_bottom = 64.0
 script = ExtResource("1_uxbyn")
 anim = NodePath("AnimatedSprite2D")
 hover_texture = ExtResource("2_xieid")
-gui_interaction_priority = 2
 gui_container = NodePath("Control")
 gui_focus = NodePath("Control")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 show_behind_parent = true
-position = Vector2(64, 64)
 sprite_frames = SubResource("SpriteFrames_plsfi")
 animation = &"open"
 
@@ -170,7 +162,7 @@ use_parent_material = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 0)
 layout_direction = 0
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

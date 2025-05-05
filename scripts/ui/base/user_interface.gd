@@ -21,7 +21,7 @@ static var _base_size: Vector2 = Vector2( ## original viewport size.
 	ProjectSettings.get_setting("display/window/size/viewport_height")
 ) 
 
-var _font_nodes: Dictionary = {} ## [Dictionary] to hold nodes with font size overrides
+var _font_nodes: Dictionary[Node, int] = {} ## [Dictionary] to hold nodes with font size overrides
 
 # --- Enum ---
 enum RESIZE_MODE_ENUM 
@@ -50,6 +50,7 @@ enum FOCUS_START_ENUM
 
 # --- Built-in Callbacks ---
 func _ready() -> void:
+	print(start_focus)
 	self.visibility_changed.connect(_on_visibility_changed)
 	# Store font size and node
 	for node: Node in UtilityFunctions.get_all_Children(self, UserInterface):
@@ -65,8 +66,8 @@ func _ready() -> void:
 		_focus_grab()
 
 func _on_visibility_changed() -> void:
-	if start_focus.is_inside_tree() && visible == true \
-	and (start_MODE == FOCUS_START_ENUM.VISIBILITY_CHANGED or start_MODE == FOCUS_START_ENUM.BOTH):
+	if (start_MODE == FOCUS_START_ENUM.VISIBILITY_CHANGED or start_MODE == FOCUS_START_ENUM.BOTH) \
+	and visible == true && start_focus.is_inside_tree():
 		_focus_grab()
 
 # --- Custom Methods ---

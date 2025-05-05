@@ -1,17 +1,55 @@
-[gd_scene load_steps=5 format=3 uid="uid://cv8ccwbqt88bw"]
+[gd_scene load_steps=10 format=3 uid="uid://cv8ccwbqt88bw"]
 
-[ext_resource type="Script" path="res://scripts/menus/credits_menu.gd" id="1_6s5ws"]
+[ext_resource type="Script" uid="uid://bv5kpj2nee461" path="res://scripts/menus/credits_menu.gd" id="1_6s5ws"]
 [ext_resource type="FontFile" uid="uid://b2qsse7qo1d8y" path="res://assets/Gugi-Regular.ttf" id="2_bahlt"]
-[ext_resource type="Texture2D" uid="uid://8h3nvonha1me" path="res://assets/ui/panels/TransparentGrayPanel64x64.png" id="3_5q7uq"]
+[ext_resource type="Shader" uid="uid://f0odfx5f7dvb" path="res://scripts/shaders/star.gdshader" id="2_d74go"]
+[ext_resource type="Shader" uid="uid://dpbmrgdgioq6r" path="res://scripts/shaders/ScanLineShader.gdshader" id="4_325oc"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xaej5"]
-texture = ExtResource("3_5q7uq")
-texture_margin_left = 2.0
-texture_margin_top = 2.0
-texture_margin_right = 2.0
-texture_margin_bottom = 2.0
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wywfy"]
+shader = ExtResource("2_d74go")
+shader_parameter/bg_color = Color(0, 0, 0, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/bigStarSlow = 2.0
+shader_parameter/mediumStarSlow = 6.0
+shader_parameter/smallStarSlow = 8.0
+shader_parameter/smallStarAmount = 0.002
+shader_parameter/mediumStarAmount = 0.01
+shader_parameter/bigStarAmount = 0.02
+shader_parameter/pixelSize = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_komaw"]
+shader = ExtResource("4_325oc")
+shader_parameter/scanline_strength = 0.2
+shader_parameter/glitch_intensity = 0.3
+shader_parameter/speed = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fq4y8"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 20
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_snnwu"]
+shader = ExtResource("4_325oc")
+shader_parameter/scanline_strength = 0.2
+shader_parameter/glitch_intensity = 0.3
+shader_parameter/speed = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xc1f4"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.8, 0.8, 0.8, 0.811765)
+border_blend = true
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+corner_detail = 20
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("start_focus")]
 layout_mode = 3
@@ -21,17 +59,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6s5ws")
-start_focus = NodePath("MarginContainer/NinePatchRect/Back")
+start_focus = NodePath("NinePatchRect/Back")
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_wywfy")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0.27451, 0.541176, 1)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -56,46 +94,30 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.445312
+[node name="NinePatchRect" type="PanelContainer" parent="."]
+material = SubResource("ShaderMaterial_komaw")
+layout_mode = 2
+anchor_left = 0.451562
 anchor_top = 0.838889
-anchor_right = 0.554688
-anchor_bottom = 0.927778
-grow_horizontal = 2
-grow_vertical = 0
+anchor_right = 0.551562
+anchor_bottom = 0.905556
+theme_override_styles/panel = SubResource("StyleBoxFlat_fq4y8")
 metadata/_edit_use_anchors_ = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
-custom_minimum_size = Vector2(140, 64)
+[node name="Back" type="Button" parent="NinePatchRect"]
 layout_mode = 2
-texture = ExtResource("3_5q7uq")
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="Back" type="Button" parent="MarginContainer/NinePatchRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -58.0
-offset_top = -16.5
-offset_right = 58.0
-offset_bottom = 16.5
-grow_horizontal = 2
-grow_vertical = 2
+theme_override_colors/font_hover_pressed_color = Color(0.129558, 0.129558, 0.129558, 1)
+theme_override_colors/font_hover_color = Color(0.384314, 0.384314, 0.384314, 1)
+theme_override_colors/font_color = Color(0.537011, 0.537011, 0.537011, 1)
+theme_override_colors/font_focus_color = Color(0.384314, 0.384314, 0.384314, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_bahlt")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 20
 text = "Back"
+flat = true
 
 [node name="CreditsContainer" type="PanelContainer" parent="."]
+material = SubResource("ShaderMaterial_snnwu")
 custom_minimum_size = Vector2(320, 350)
 layout_mode = 1
 anchors_preset = -1
@@ -107,60 +129,87 @@ offset_left = 1.0
 offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_xaej5")
+theme_override_styles/panel = SubResource("StyleBoxFlat_xc1f4")
 metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="CreditsContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="ScrollContainer" type="ScrollContainer" parent="CreditsContainer/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CreditsContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CreditsContainer/MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CreditsContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Creditor0" type="RichTextLabel" parent="CreditsContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Creditor0" type="RichTextLabel" parent="CreditsContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "
 [center][color=HotPink]Please add your self here[/color][/center]"
 fit_content = true
 
-[node name="Creditor1" type="RichTextLabel" parent="CreditsContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="GameDesigner" type="RichTextLabel" parent="CreditsContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "
-[center]Game idea : [color=Green]Dragon20C[/color][/center]"
-fit_content = true
-
-[node name="Creditor2" type="RichTextLabel" parent="CreditsContainer/MarginContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-bbcode_enabled = true
-text = "
-[center]Org Owner :  [color=Green]GodotCommunityGames[/color][/center]"
-fit_content = true
-
-[node name="Creditor3" type="RichTextLabel" parent="CreditsContainer/MarginContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-bbcode_enabled = true
-text = "
-[center]Programmer :  [color=Green]C.T.S[/color][/center]"
-fit_content = true
-
-[node name="Creditor4" type="RichTextLabel" parent="CreditsContainer/MarginContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-bbcode_enabled = true
-text = "
-[center]CM :  [color=Green]Smoothie UwU
+[center]Game Designer: [color=Green]
+[url=https://github.com/Dragon20C]Dragon20C[/url]
 [/color][/center]"
 fit_content = true
 
-[connection signal="pressed" from="MarginContainer/NinePatchRect/Back" to="." method="_on_back_pressed"]
+[node name="Founder" type="RichTextLabel" parent="CreditsContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "
+[center]Founder :  [color=Green]
+[url=https://github.com/GodotCommunityGamesOrg]GodotCommunityGames[/url]
+[/color][/center]"
+fit_content = true
+
+[node name="ConfigManager" type="RichTextLabel" parent="CreditsContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "
+[center]Configuration Manager :  [color=Green]
+[url=https://github.com/StrawberrySmoothieDev]Smoothie UwU[/url]
+[/color][/center]"
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CreditsContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Programmers" type="RichTextLabel" parent="CreditsContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "
+[center]Programmer's :
+[color=Green]
+[url=https://github.com/ChaoticTechSupport]C.T.S[/url]
+[/color][/center]"
+fit_content = true
+
+[node name="Artists" type="RichTextLabel" parent="CreditsContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "
+[center]Artists:
+[color=Green]
+
+[/color][/center]"
+fit_content = true
+
+[connection signal="pressed" from="NinePatchRect/Back" to="." method="_on_back_pressed"]
+[connection signal="meta_clicked" from="CreditsContainer/ScrollContainer/VBoxContainer/GameDesigner" to="." method="_richtextlabel_on_meta_clicked"]
+[connection signal="meta_clicked" from="CreditsContainer/ScrollContainer/VBoxContainer/Founder" to="." method="_richtextlabel_on_meta_clicked"]
+[connection signal="meta_clicked" from="CreditsContainer/ScrollContainer/VBoxContainer/ConfigManager" to="." method="_richtextlabel_on_meta_clicked"]
+[connection signal="meta_clicked" from="CreditsContainer/ScrollContainer/VBoxContainer/HBoxContainer/Programmers" to="." method="_richtextlabel_on_meta_clicked"]
+[connection signal="meta_clicked" from="CreditsContainer/ScrollContainer/VBoxContainer/HBoxContainer/Artists" to="." method="_richtextlabel_on_meta_clicked"]

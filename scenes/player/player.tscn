@@ -1,17 +1,20 @@
 [gd_scene load_steps=3 format=3 uid="uid://dkkdcx534ran6"]
 
-[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_4kof2"]
+[ext_resource type="Script" uid="uid://dtrudhv5frehb" path="res://scripts/entities/actors/user/player/player.gd" id="1_4kof2"]
 [ext_resource type="Texture2D" uid="uid://b05hj6ognkfqi" path="res://assets/icon.svg" id="2_pi6i1"]
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("cam", "camcon") groups=["Savable"]]
 z_index = 1
 script = ExtResource("1_4kof2")
-Actions = 8
-speed = 400.0
+cam = NodePath("Node2D/Camera2D")
+camcon = NodePath("Node2D")
+actions = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_pi6i1")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="Node2D"]
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0

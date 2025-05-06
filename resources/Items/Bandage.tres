@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cfhr0sg8bfjm4"]
+
+[ext_resource type="Script" uid="uid://dtx3xrtjsr0sa" path="res://scripts/inventory_system/classes/item_resource.gd" id="1_h77xr"]
+[ext_resource type="Texture2D" uid="uid://b05hj6ognkfqi" path="res://assets/icon.svg" id="1_t08m0"]
+
+[resource]
+script = ExtResource("1_h77xr")
+item_name = "Bandage"
+item_description = "Stops bleeding "
+id = 0
+stackable = true
+max_stackable = 6
+item_texture = ExtResource("1_t08m0")
+metadata/_custom_type_script = "uid://dtx3xrtjsr0sa"

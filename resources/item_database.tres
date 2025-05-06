@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemDatabase" load_steps=7 format=3 uid="uid://bjmr6gmi6bxog"]
+
+[ext_resource type="Script" uid="uid://dtx3xrtjsr0sa" path="res://scripts/inventory_system/classes/item_resource.gd" id="1_yiash"]
+[ext_resource type="Script" uid="uid://drjden62jh6oe" path="res://scripts/inventory_system/classes/item_database.gd" id="2_bb8ke"]
+[ext_resource type="Resource" uid="uid://cfhr0sg8bfjm4" path="res://resources/Items/Bandage.tres" id="2_vjx7s"]
+[ext_resource type="Resource" uid="uid://31es6aujwcn1" path="res://resources/Items/Gernade.tres" id="3_ef8je"]
+[ext_resource type="Resource" uid="uid://cudho7h14sjr4" path="res://resources/Items/HealthPack.tres" id="4_2s1r4"]
+[ext_resource type="Resource" uid="uid://dborkiydh6s2c" path="res://resources/Items/Rifle.tres" id="5_3c7v2"]
+
+[resource]
+script = ExtResource("2_bb8ke")
+database = Dictionary[int, ExtResource("1_yiash")]({
+0: ExtResource("2_vjx7s"),
+1: ExtResource("3_ef8je"),
+2: ExtResource("4_2s1r4"),
+3: ExtResource("5_3c7v2")
+})
+metadata/_custom_type_script = "uid://drjden62jh6oe"

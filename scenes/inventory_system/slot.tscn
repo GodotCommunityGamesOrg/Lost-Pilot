@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7i7rt41oe7vk"]
+
+[ext_resource type="Texture2D" uid="uid://b4cl313lwqp7m" path="res://assets/ui/inventory_ui/InventorySlot64x64.png" id="1_65pqo"]
+[ext_resource type="Script" uid="uid://6vjak2yutoxw" path="res://scripts/inventory_system/classes/slot.gd" id="1_cfmsa"]
+[ext_resource type="Texture2D" uid="uid://c204tk0m0rfpn" path="res://assets/ui/inventory_ui/InventorySlotSelected64x64.png" id="3_87dan"]
+[ext_resource type="Texture2D" uid="uid://ti4qvgtc55lp" path="res://assets/ui/inventory_ui/InventorySlotUsed64x64.png" id="4_7odv4"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nn0qy"]
+texture = ExtResource("1_65pqo")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[node name="Slot" type="PanelContainer"]
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = -1
+anchor_right = 0.065625
+anchor_bottom = 0.116667
+offset_right = -20.0
+offset_bottom = -20.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_nn0qy")
+script = ExtResource("1_cfmsa")
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="TextureButton" parent="."]
+layout_mode = 2
+texture_pressed = ExtResource("3_87dan")
+texture_hover = ExtResource("4_7odv4")
+
+[node name="Icon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5

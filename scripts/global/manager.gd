@@ -3,7 +3,8 @@ class_name Manager
 ## GameManager that handles loading and spawning scenes
 ## e.g Player, world scene and more.
 
-
+# temporary leaving inventory in a global script (I dont know if this is a good place or not)
+var player_inventory : Array
 const loading_scene: String = "res://scenes/loader.tscn" ## path to the loading screen
 
 var loader: ProgressBar ## loading screen progress
@@ -30,7 +31,8 @@ func _ready() -> void:
 	add_scene("res://scenes/main/main.tscn", Keys.main)
 	add_child(preload(loading_scene).instantiate())
 	loader = get_child(0).get_child(0)
-	spawn_scene(Keys.main)
+	# temporary disabled the menu to focus on working on the inventory system
+	#spawn_scene(Keys.main)
 
 ## adds scene path to dictionary with assignes key
 func add_scene(scene : String, key : Keys) -> void:

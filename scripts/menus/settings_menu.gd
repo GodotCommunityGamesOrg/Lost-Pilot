@@ -13,15 +13,15 @@ func ready() -> void:
 func _on_back_pressed() -> void:
 	menu_manager.switch_to_previous_menu()
 
-func _on_master_slider_drag_ended(value_changed: bool, value: int = -1) -> void:
+func _on_master_slider_drag_ended(_value_changed: bool, value: float = -1) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(_master.value if value == -1 else value))
 	_save_settings()
 
-func _on_muse_slider_drag_ended(value_changed: bool, value: int = -1) -> void:
+func _on_muse_slider_drag_ended(_value_changed: bool, value: float = -1) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(_music.value if value == -1 else value))
 	_save_settings()
 
-func _on_env_slider_drag_ended(value_changed: bool, value: int = -1) -> void:
+func _on_env_slider_drag_ended(_value_changed: bool, value: float = -1) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(_enviroment.value if value == -1 else value))
 	_save_settings()
 

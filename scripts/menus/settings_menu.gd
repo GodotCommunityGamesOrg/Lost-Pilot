@@ -3,7 +3,7 @@ extends MenuBase
 @export var _music: HSlider
 @export var _enviroment: HSlider
 @export var _v_sync: CheckButton
-
+var _disabled = true
 func _init() -> void:
 	_load_settings()
 
@@ -30,6 +30,8 @@ func _on_v_sync_toggled(on: bool) -> void:
 	_save_settings()
 
 func _save_settings() -> void:
+	if _disabled:
+		return
 	var config = ConfigFile.new()
 	config.set_value("audio", "master-volume", _master.value)
 	config.set_value("audio", "music-volume", _music.value)
@@ -52,5 +54,6 @@ func _setup() -> void:
 		_music.value = config.get_value("audio", "music-volume", 1.0)
 		_master.value = config.get_value("audio", "env-volume", 1.0)
 		_v_sync.button_pressed = config.get_value("graphics", "v_sync", false)
+		
 		
 	

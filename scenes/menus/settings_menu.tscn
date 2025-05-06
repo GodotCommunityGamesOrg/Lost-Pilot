@@ -100,10 +100,10 @@ metadata/_edit_use_anchors_ = true
 [node name="NinePatchRect" type="PanelContainer" parent="."]
 material = SubResource("ShaderMaterial_komaw")
 layout_mode = 2
-offset_left = 577.999
-offset_top = 604.0
-offset_right = 705.999
-offset_bottom = 652.0
+anchor_left = 0.451562
+anchor_top = 0.838889
+anchor_right = 0.551562
+anchor_bottom = 0.905556
 theme_override_styles/panel = SubResource("StyleBoxFlat_fq4y8")
 metadata/_edit_use_anchors_ = true
 

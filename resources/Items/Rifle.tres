@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dborkiydh6s2c"]
+
+[ext_resource type="Texture2D" uid="uid://b05hj6ognkfqi" path="res://assets/icon.svg" id="1_7vojk"]
+[ext_resource type="Script" uid="uid://dtx3xrtjsr0sa" path="res://scripts/inventory_system/classes/item_resource.gd" id="1_stogv"]
+
+[resource]
+script = ExtResource("1_stogv")
+item_name = "Rifle"
+item_description = "Fight off your enemies!"
+id = 3
+stackable = false
+max_stackable = 1
+item_texture = ExtResource("1_7vojk")
+metadata/_custom_type_script = "uid://dtx3xrtjsr0sa"

@@ -31,7 +31,6 @@ class StateMachine:
 	## Current state of the game (default: player turn).
 	var state: STATES = STATES.player:
 		set(val):
-			await GameManager.get_tree().process_frame
 			state = val
 			next_state.emit(state)
 

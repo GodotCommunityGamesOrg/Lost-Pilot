@@ -15,7 +15,6 @@ var highlight_pos: Vector2i
 var all_actions: Array[Action] = []
 var used: bool = false
 signal moved(position: Vector2i)
-var select: CallableList = CallableList.new()
 var selection_position: Vector2
 func _ready() -> void:
 	super()
@@ -28,15 +27,17 @@ func _unhandled_input(event: InputEvent) -> void:
 	super(event)
 	if WorldTurnBase.state.state == turn_state and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		var mouse_pos = WorldPathfinder.map.local_to_map(get_global_mouse_position())
-		await select.emit(mouse_pos)
+		var object = WorldPathfinder.position_to_object(mouse_pos)
+		if object != null and object.interactable():
+			all_actions = object.interact()
 		if UtilityFunctions.in_map(get_global_mouse_position()) and not WorldPathfinder.pathfinder.is_point_solid(mouse_pos):
-			if highlight_path.size() - 1 <= _actions and not action:
+			if highlight_path.size() - 1 <= distence and not action:
 				if !used:
 					camcon.global_position = WorldPathfinder.map.map_to_local(mouse_pos)
 					all_actions.append(Move.new(mouse_pos, self))
 					get_tree().get_root().set_input_as_handled()
-					_actions -= (highlight_path.size() - 1)
 					highlight_path.clear()
+		play()
 
 func _process(delta: float) -> void:
 	super(delta)
@@ -66,19 +67,16 @@ func _draw() -> void:
 
 	for pos in highlight_path:
 		if pos != highlight_path[0]:
-			draw_circle(WorldPathfinder.map.map_to_local(pos) - position, 10, Color(1, 1, 0, 1) if (highlight_path.find(pos) <= _actions) else Color(1, 0, 0, 1))
+			draw_circle(WorldPathfinder.map.map_to_local(pos) - position, 10, Color(1, 1, 0, 1) if (highlight_path.find(pos) <= distence) else Color(1, 0, 0, 1))
 
 	if highlight_path.size() > 0:
-		draw_rect(Rect2(WorldPathfinder.map.map_to_local(highlight_path[highlight_path.size() - 1]) - (Vector2.ONE * 32) - position, Vector2(64, 64)), Color(1, 1, 0, 1) if (highlight_path.size() - 1 <= _actions) else Color(1, 0, 0, 1), false, 5)
+		draw_rect(Rect2(WorldPathfinder.map.map_to_local(highlight_path[highlight_path.size() - 1]) - (Vector2.ONE * 32) - position, Vector2(64, 64)), Color(1, 1, 0, 1) if (highlight_path.size() - 1 <= distence) else Color(1, 0, 0, 1), false, 5)
 
 func play():
 	action = true
 	camcon.position = Vector2.ZERO
 	for current_action in all_actions:
-		if current_action is Move:
-			await current_action.move(0.05)
-		elif current_action is Press:
-			await current_action.execute()
+		await current_action.execute()
 	all_actions.clear()
 	action = false
 	WorldTurnBase.state.remove_actor(self)
@@ -96,6 +94,8 @@ func _cam_resize():
 
 class Action:
 	var used_actions: int = 0
+	func execute():
+		pass
 
 class Move extends Action:
 	var destination: Vector2i = Vector2i.ZERO
@@ -107,7 +107,7 @@ class Move extends Action:
 		destination = dest
 		player = ply
 
-	func move(delta: float) -> void:
+	func execute() -> void:
 		while true:
 			await GameManager.get_tree().process_frame
 			if path.is_empty():
@@ -116,9 +116,9 @@ class Move extends Action:
 			
 			if path.size() > path_index:
 				var target_position = WorldPathfinder.map.map_to_local(path[path_index])
-				player.position = player.position.move_toward(target_position, delta * player.speed)
+				player.position = player.position.move_toward(target_position, player.get_process_delta_time() * player.speed)
 
-				if player.position.distance_to(target_position) < player.speed * delta:
+				if player.position.distance_to(target_position) < player.speed * player.get_process_delta_time():
 					player.current_cell = WorldPathfinder.map.local_to_map(player.position)
 					path_index += 1
 					player.moved.emit(player.current_cell)

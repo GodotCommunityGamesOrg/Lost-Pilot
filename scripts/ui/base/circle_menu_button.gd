@@ -118,6 +118,12 @@ func _draw() -> void:
 		draw_polyline(poly, color_highlight, size_line_width+1)
 
 # --- Custom Methods ---
+##method to open the selection menu: returns result.
+func open():
+	visible = true
+	await closed
+	return close()
+
 ## Method to close the menu and emit the selected option
 func close():
 	hide()

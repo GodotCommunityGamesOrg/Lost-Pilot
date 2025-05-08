@@ -653,10 +653,12 @@ name = "closed"
 script = ExtResource("4_v7qj0")
 name = "open"
 
-[node name="InteractableDoor" type="Node2D"]
+[node name="InteractableDoor" type="Node2D" node_paths=PackedStringArray("gui", "anim")]
 process_priority = 2
 top_level = true
 script = ExtResource("1_uxbyn")
+gui = NodePath("Control")
+anim = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 show_behind_parent = true

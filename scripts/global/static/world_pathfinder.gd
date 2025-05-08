@@ -1,7 +1,6 @@
 class_name WorldPathfinder
 # --- Public Properties ---
 static var pathfinder: AStarGrid2D ## Reference to the AStarGrid2D for pathfinding.
-static var free_pathfinder: AStarGrid2D
 static var map: map_generator
 static var objects: Dictionary[Vector2i, InteractableObject]
 
@@ -16,15 +15,9 @@ static func calculate_path(start: Vector2, end: Vector2, tf: bool = false) -> Pa
 		map.local_to_map(end),
 		tf
 	)
-static func calculate_free_path(start: Vector2, end: Vector2, tf: bool = true) -> PackedVector2Array:
-	return free_pathfinder.get_id_path(
-		map.local_to_map(start), 
-		map.local_to_map(end),
-		tf
-	)
+
 static func reset():
 	pathfinder = AStarGrid2D.new()
-	free_pathfinder = AStarGrid2D.new()
 	map = map_generator.new()
 static func position_to_object(position: Vector2i):
 	if objects.has(position):

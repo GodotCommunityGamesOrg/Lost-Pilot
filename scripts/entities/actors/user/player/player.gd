@@ -28,8 +28,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if WorldTurnBase.state.state == turn_state and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		var mouse_pos = WorldPathfinder.map.local_to_map(get_global_mouse_position())
 		var object = WorldPathfinder.position_to_object(mouse_pos)
-		if object != null and object.interactable():
-			all_actions = object.interact()
+		if object != null:
+			print(object.interactable(self))
+		if object != null and object.interactable(self):
+			all_actions = await object.interact(self)
 		if UtilityFunctions.in_map(get_global_mouse_position()) and not WorldPathfinder.pathfinder.is_point_solid(mouse_pos):
 			if highlight_path.size() - 1 <= distence and not action:
 				if !used:
@@ -111,7 +113,7 @@ class Move extends Action:
 		while true:
 			await GameManager.get_tree().process_frame
 			if path.is_empty():
-				path = WorldPathfinder.calculate_path(player.position, WorldPathfinder.map.map_to_local(destination))
+				path = WorldPathfinder.calculate_path(player.position, WorldPathfinder.map.map_to_local(destination), false)
 				path_index = 0
 			
 			if path.size() > path_index:

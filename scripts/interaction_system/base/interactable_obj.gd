@@ -15,24 +15,45 @@ class_name InteractableObject
 # --- Public Properties ---
 
 # --- Private Properties ---
-
+var _li: Array[Vector2i] = [
+	Vector2i(1, 0),
+	Vector2(-1, 0),
+	Vector2(0, 1),
+	Vector2(0, -1),
+]
 # --- Signals ---
 
 # --- Built-in Callbacks ---
 # Initializes the object settings and connects signals.
 func _ready() -> void:
+	WorldPathfinder.objects[map_position] = self
 	if WorldPathfinder.pathfinder:
 		WorldPathfinder.pathfinder.set_point_solid(WorldPathfinder.map.local_to_map(position), is_blocking)
 	else:
 		push_error("Pathfinder or map not initialized.")
 	
 func interactable(player: PlayerNode):
-	if player.map_pos == map_position:
-		var p = WorldPathfinder.calculate_path(position, player.position, true)
-		if WorldPathfinder.calculate_path(player.position, WorldPathfinder.map.map_to_local(p[p.size()-2]), false).size() > 0:
+	if player.map_position != map_position:
+		if _return_side(player) != Vector2i.ZERO:
 			return true
+	return false
 
 # --- Custom Methods ---
 ## Starts interaction with the object, making the GUI visible and focusing the object.
-func interact(player: PlayerNode) -> void:
+func interact(player: PlayerNode, _choice:int = -10, before_act: Array[Vector2i] = []) -> Array[PlayerNode.Action]:
 	player.action = true
+	before_act.append(_return_side(player))
+	return [PlayerNode.Move.new(before_act[0]+map_position, player)]
+
+func _return_side(player: PlayerNode):
+	var dict: Dictionary[int, Vector2i] = {}
+	for i in _li:
+		dict[WorldPathfinder.calculate_path(player.position, WorldPathfinder.map.map_to_local(map_position+i), false).size()] = i
+	var max_key = 0
+
+	for key in dict.keys():
+		if key > max_key:
+			max_key = key
+	if max_key != 0 and max_key <= player.distence:
+		return dict[max_key]
+	return Vector2i.ZERO

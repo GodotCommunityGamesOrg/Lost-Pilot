@@ -5,7 +5,7 @@ class_name DoorObject
 @export var gui: CircleMenuButton
 @export var anim:AnimatedSprite2D 
 var anim_str: String
-var door2: InteractableObject
+var door2: DoorObject
 var choice
 # --- Built-in Callbacks ---
 func _ready() -> void:
@@ -27,12 +27,15 @@ func _ready() -> void:
 	
 
 func interact(player: PlayerNode, _choice:int = -10, p: Array[Vector2i] = []) -> Array[PlayerNode.Action]:
-	var actions = super(player, _choice, p)
 	choice = await gui.open() if _choice == -10 else _choice
-	if WorldPathfinder.map.local_to_map(WorldTurnBase.players[0].position) == map_position:
+	if WorldPathfinder.map.local_to_map(WorldTurnBase.players[0].position) == map_position or choice == -1:
 		return []
 	
-	
+	if choice == 0:
+		WorldPathfinder.pathfinder.set_point_solid(map_position, true)
+		if door2: WorldPathfinder.pathfinder.set_point_solid(door2.map_position, true)
+
+	var actions = super(player, _choice, p)
 	actions.append(PlayerNode.Press.new(
 	func():
 		match choice:
@@ -41,13 +44,16 @@ func interact(player: PlayerNode, _choice:int = -10, p: Array[Vector2i] = []) ->
 			0:
 				if anim.frame != 0:
 					anim.play_backwards(anim_str)
+					if door2: door2.anim.play_backwards(door2.anim_str)
 					await anim.animation_finished
-					WorldPathfinder.pathfinder.set_point_solid(map_position, true)
 			1:
 				if anim.frame == 0:
 					anim.play(anim_str)
+					if door2: door2.anim.play(door2.anim_str)
 					await anim.animation_finished
 					WorldPathfinder.pathfinder.set_point_solid(map_position, false)
+					if door2: WorldPathfinder.pathfinder.set_point_solid(door2.map_position, false)
+
 	))
 	return actions
 

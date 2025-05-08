@@ -28,18 +28,20 @@ func _unhandled_input(event: InputEvent) -> void:
 	if WorldTurnBase.state.state == turn_state and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		var mouse_pos = WorldPathfinder.map.local_to_map(get_global_mouse_position())
 		var object = WorldPathfinder.position_to_object(mouse_pos)
-		if object != null:
-			print(object.interactable(self))
 		if object != null and object.interactable(self):
 			all_actions = await object.interact(self)
-		if UtilityFunctions.in_map(get_global_mouse_position()) and not WorldPathfinder.pathfinder.is_point_solid(mouse_pos):
+		elif UtilityFunctions.in_map(get_global_mouse_position()) and \
+		not WorldPathfinder.pathfinder.is_point_solid(mouse_pos) and \
+		WorldPathfinder.calculate_path(position, get_global_mouse_position()) and \
+		mouse_pos != map_position:
 			if highlight_path.size() - 1 <= distence and not action:
 				if !used:
 					camcon.global_position = WorldPathfinder.map.map_to_local(mouse_pos)
 					all_actions.append(Move.new(mouse_pos, self))
 					get_tree().get_root().set_input_as_handled()
 					highlight_path.clear()
-		play()
+		if all_actions.size() > 0:
+			play()
 
 func _process(delta: float) -> void:
 	super(delta)
@@ -125,7 +127,9 @@ class Move extends Action:
 					path_index += 1
 					player.moved.emit(player.current_cell)
 			else: 
-				player.position = WorldPathfinder.map.map_to_local(destination)
+				if path_index > 0:
+					player.position = WorldPathfinder.map.map_to_local(destination)
+					player.map_position = path[path_index-1]
 				return
 
 	func is_completed() -> bool:

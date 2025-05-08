@@ -48,11 +48,13 @@ func interact(player: PlayerNode, _choice:int = -10, before_act: Array[Vector2i]
 func _return_side(player: PlayerNode):
 	var dict: Dictionary[int, Vector2i] = {}
 	for i in _li:
+		if player.map_position == map_position+i:
+			return i
 		dict[WorldPathfinder.calculate_path(player.position, WorldPathfinder.map.map_to_local(map_position+i), false).size()] = i
-	var max_key = 0
+	var max_key = INF
 
 	for key in dict.keys():
-		if key > max_key:
+		if key < max_key and key != 0:
 			max_key = key
 	if max_key != 0 and max_key <= player.distence:
 		return dict[max_key]

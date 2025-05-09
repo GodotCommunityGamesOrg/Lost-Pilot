@@ -24,8 +24,11 @@ class_name CircleMenuButton
 var _selection: int = -1  # Currently selected option index
 
 # --- Signals ---
-signal closed ## Signal emitted when the _selection is confirmed
+signal closed(selection) ## Signal emitted when the _selection is confirmed
 # --- Built-in Callbacks ---
+func _ready() -> void:
+	closed.connect(close)
+
 func _process(_delta: float) -> void:
 	size = min(size.x, size.y) * Vector2.ONE
 	pivot_offset = size / 2
@@ -58,7 +61,9 @@ func _input(event: InputEvent) -> void:
 	if not Engine.is_editor_hint():
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and visible:
 			get_tree().get_root().set_input_as_handled()
-			closed.emit()
+			closed.emit(_selection)
+		elif event is InputEventKey:
+			closed.emit(-1)
 
 func _draw() -> void:
 	var poly := []
@@ -118,7 +123,11 @@ func _draw() -> void:
 		draw_polyline(poly, color_highlight, size_line_width+1)
 
 # --- Custom Methods ---
+##method to open the selection menu: returns result.
+func open() -> int:
+	visible = true
+	return await closed
+
 ## Method to close the menu and emit the selected option
-func close():
+func close(_n) -> void:
 	hide()
-	return _selection

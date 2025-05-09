@@ -1,7 +1,6 @@
-[gd_scene load_steps=98 format=3 uid="uid://didh1mtde07hl"]
+[gd_scene load_steps=97 format=3 uid="uid://didh1mtde07hl"]
 
 [ext_resource type="Script" uid="uid://boasomcw4dl11" path="res://scripts/interaction_system/door.gd" id="1_uxbyn"]
-[ext_resource type="Texture2D" uid="uid://myntqljcecwk" path="res://assets/DoorSpriteSelected.png" id="2_xieid"]
 [ext_resource type="Texture2D" uid="uid://lffo83livjbu" path="res://assets/sprites/objects/Animated-door-V.png" id="3_18pbm"]
 [ext_resource type="Script" uid="uid://dr5fgv1ea0fdu" path="res://scripts/ui/base/circle_menu_button.gd" id="3_xu5ei"]
 [ext_resource type="Texture2D" uid="uid://ctutlobpyychk" path="res://assets/sprites/objects/Animated-door-H.png" id="4_q5w8r"]
@@ -654,14 +653,12 @@ name = "closed"
 script = ExtResource("4_v7qj0")
 name = "open"
 
-[node name="InteractableDoor" type="Node2D" node_paths=PackedStringArray("anim", "gui_container", "gui_focus")]
+[node name="InteractableDoor" type="Node2D" node_paths=PackedStringArray("gui", "anim")]
 process_priority = 2
 top_level = true
 script = ExtResource("1_uxbyn")
+gui = NodePath("Control")
 anim = NodePath("AnimatedSprite2D")
-hover_texture = ExtResource("2_xieid")
-gui_container = NodePath("Control")
-gui_focus = NodePath("Control")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 show_behind_parent = true
@@ -745,3 +742,4 @@ color_bg = Color(0, 0, 0, 1)
 size_outer_radius = 100
 size_inner_radius = 32
 size_line_width = 2
+metadata/_custom_type_script = "uid://dr5fgv1ea0fdu"

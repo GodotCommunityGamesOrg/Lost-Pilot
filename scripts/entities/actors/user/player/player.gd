@@ -1,4 +1,4 @@
-extends UserActor
+extends Actor
 class_name PlayerNode
 
 ## PlayerNode class:

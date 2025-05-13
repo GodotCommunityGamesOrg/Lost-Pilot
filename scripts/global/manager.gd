@@ -43,7 +43,7 @@ func delete_scene() -> void:
 		current_scene = null
 
 ## replaces scene with new scene.
-func spawn_scene(key : Keys, function_await: Callable = func() -> void: pass) -> void:
+func spawn_scene(key : Keys, func_args:Array = []) -> void:
 	if !scenes.has(key):
 		return
 	_load_key = key
@@ -59,8 +59,9 @@ func spawn_scene(key : Keys, function_await: Callable = func() -> void: pass) ->
 			if res:
 				delete_scene()
 				current_scene = res.instantiate()
+				if current_scene.has_method("load_function"):
+					await current_scene.load_function.call(func_args)
 				add_child(current_scene)
-			await function_await.call()
 			loader.get_parent().visible = false
 			break
 		await get_tree().process_frame

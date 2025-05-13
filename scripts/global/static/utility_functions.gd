@@ -3,8 +3,9 @@ class_name UtilityFunctions
 ## UtilityFunctions class:
 ## a class containing static functions for global use.
 
-
-static func get_all_Children(root_node, stop_class = null) -> Array[Node]: ## Gets all of the parents children (grand children, great grand children, ect)
+## Recursively gets all child nodes of a given root_node.
+## Stops recursion at nodes of type stop_class (if provided).
+static func get_all_Children(root_node, stop_class = null) -> Array[Node]: 
 	var nodes: Array[Node] = []
 	for node in root_node.get_children():
 		nodes.append(node)
@@ -12,8 +13,8 @@ static func get_all_Children(root_node, stop_class = null) -> Array[Node]: ## Ge
 			nodes += get_all_Children(node, stop_class)
 	return nodes
 
-
-static func in_map(cell: Vector2): ## detects if position is in map (for error handeling)
+## detects if position is in map (for error handeling)
+static func in_map(cell: Vector2): 
 	return WorldPathfinder.map.local_to_map(cell) in WorldPathfinder.map.get_used_cells()
 
 

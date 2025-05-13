@@ -10,40 +10,52 @@ class_name InteractableObject
 @export var is_blocking: bool = true           ## Determines if this object blocks grid cell movement.
 @export var hover_texture: Texture             ## Texture shown when the object is hovered over.
 @export_group("GUI", "gui")
-@export var gui_container: Control             ## Container for GUI elements associated with the object.
-@export var gui_focus: BaseButton              ## Primary focusable GUI element for the object.
+
 
 # --- Public Properties ---
-@onready var map_position = WorldPathfinder.map.local_to_map(position)  ## Position of the object on the map grid.
 
 # --- Private Properties ---
-
+var _li: Array[Vector2i] = [
+	Vector2i(1, 0),
+	Vector2(-1, 0),
+	Vector2(0, 1),
+	Vector2(0, -1),
+]
 # --- Signals ---
 
 # --- Built-in Callbacks ---
 # Initializes the object settings and connects signals.
 func _ready() -> void:
+	WorldPathfinder.objects[map_position] = self
 	if WorldPathfinder.pathfinder:
 		WorldPathfinder.pathfinder.set_point_solid(WorldPathfinder.map.local_to_map(position), is_blocking)
 	else:
 		push_error("Pathfinder or map not initialized.")
 	
-	WorldTurnBase.players[0].select.callables.append(
-		func(pos: Vector2i):
-			if pos == map_position:
-				var p = WorldPathfinder.calculate_free_path(WorldTurnBase.players[0].position, position)
-				if WorldPathfinder.calculate_path(WorldTurnBase.players[0].selection_position, WorldPathfinder.map.map_to_local(p[p.size()-2]), false).size() > 0:
-					print(WorldPathfinder.calculate_path(WorldTurnBase.players[0].selection_position, WorldPathfinder.map.map_to_local(p[p.size()-2]), false).size())
-					interact()
-	)
+func interactable(player: PlayerNode):
+	if player.map_position != map_position:
+		if _return_side(player) != Vector2i.ZERO:
+			return true
+	return false
 
 # --- Custom Methods ---
 ## Starts interaction with the object, making the GUI visible and focusing the object.
-func interact() -> void:
-	gui_container.visible = true
-	WorldTurnBase.players[0].action = true
+func interact(player: PlayerNode, _choice:int = -10, before_act: Array[Vector2i] = []) -> Array[PlayerNode.Action]:
+	player.action = true
+	before_act.append(_return_side(player))
+	return [PlayerNode.Move.new(before_act[0]+map_position, player)]
 
-## Ends the interaction, hiding the GUI and releasing focus.
-func end_interact() -> void:
-	gui_container.visible = false
-	WorldTurnBase.players[0].action = false
+func _return_side(player: PlayerNode):
+	var dict: Dictionary[int, Vector2i] = {}
+	for i in _li:
+		if player.map_position == map_position+i:
+			return i
+		dict[WorldPathfinder.calculate_path(player.position, WorldPathfinder.map.map_to_local(map_position+i), false).size()] = i
+	var max_key = INF
+
+	for key in dict.keys():
+		if key < max_key and key != 0:
+			max_key = key
+	if max_key != 0 and max_key <= player.distence:
+		return dict[max_key]
+	return Vector2i.ZERO

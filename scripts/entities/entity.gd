@@ -1,3 +1,4 @@
 extends Node2D
 class_name Entity
-var map_pos: Vector2i
+## Position of the object on the map grid.
+@onready var map_position: Vector2i = WorldPathfinder.map.local_to_map(position)  

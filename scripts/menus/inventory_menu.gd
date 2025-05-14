@@ -4,29 +4,88 @@ extends MenuBase
 @export var database : ItemDatabase
 @export var grid_container : GridContainer
 @export var inventory_size : Vector2i = Vector2i(8,6)
+@export var held_icon : Sprite2D
+
+enum states {Empty,Held,Drop,PickUp}
+var current_state : states = states.Empty
+
+var inventories : Dictionary[int,InventoryContainer]
 
 var inventory : InventoryContainer
+var held_item : InvItem
+var current_id : int
+var current_index : Vector2i
+
 
 func _ready() -> void:
-	inventory = InventoryContainer.new(grid_container,inventory_size)
-	# This setting of id should be dynamic to include other external inventories e.g chests, lockers
-	# currently its not.
-	inventory.set_id(0)
-	inventory.generate_cells()
-	
-	# Temp for testing items in the inventory, should be a global thing
-	var items : Array[Dictionary] = [
-		{"ID" : 0, "Position" : Vector2i(0,0)},
-		{"ID" : 3, "Position" : Vector2i(4,1)},
-		{"ID" : 2, "Position" : Vector2i(5,0)},
-		{"ID" : 1, "Position" : Vector2i(2,4)}
-	]
-	
-	inventory.load_data(items,database)
-	inventory.slot_pressed.connect(on_slot_pressed)
+	var player_inv : InventoryContainer = _get_inventory(0) # 0 is the players inv
+	player_inv.generate_cells(grid_container)
+	# we need to generate the cells before we can load data, might not be the right way...
+	player_inv.load_data(InventoryManager.player_items,database)
+	# connect the slot pressed signal to a function in this script
+	player_inv.slot_pressed.connect(on_slot_pressed)
+
+func _process(delta: float) -> void:
+	handle_state_update()
 
 func on_slot_pressed(id : int,index : Vector2i) -> void:
-	print("Inventory (%s) was pressed at (%s)" % [id, index])
+	handle_state_transition(id,index)
+	#print("Inventory (%s) was pressed at (%s)" % [id, index])
 
 func _on_exit_button_pressed() -> void:
 	menu_manager.switch_to_previous_menu()
+
+## Handles logic that needs to be run constantly like moving a held item or checking if a pop up should show up
+func handle_state_update() -> void:
+	match current_state:
+		states.Empty:
+			pass
+		states.Held:
+			held_icon.global_position = get_global_mouse_position()
+		states.Drop:
+			# grab the inventory
+			var inv : InventoryContainer = _get_inventory(current_id)
+			# empty the held_icon and reset position
+			held_icon.global_position = Vector2(0,0)
+			held_icon.texture = null
+			# update the held items origin index if we dont it returns to the previous index
+			held_item.origin = current_index
+			# add the item from the previous inventory
+			inv.add_item(held_item)
+			# change the state to held
+			current_state = states.Empty
+		states.PickUp:
+			# grab the inventory
+			var inv : InventoryContainer = _get_inventory(current_id)
+			# set the item to the held_item
+			held_item = inv.get_item(current_index)
+			# set the texture from the held item
+			held_icon.texture = held_item.icon
+			# remove the item from the previous inventory
+			inv.remove_item(held_item)
+			# change the state to held
+			current_state = states.Held
+
+## Handles the logic in each state e.g empty state you can pick up an item
+func handle_state_transition(id:  int, index : Vector2i) -> void:
+	match current_state:
+		states.Empty:
+			var inv : InventoryContainer = _get_inventory(id)
+			if not inv.is_cell_free(index): # Check if we should pick up the item
+				current_id = id
+				current_index = index
+				current_state = states.PickUp
+		states.Held:
+			var inv : InventoryContainer = _get_inventory(id)
+			if inv.is_cell_free(index): # Check if the cell is empty
+				current_id = id
+				current_index = index
+				current_state = states.Drop
+		states.Drop:
+			pass
+		states.PickUp:
+			pass
+
+## Helper function to make it less painful to write
+func _get_inventory(id : int) -> InventoryContainer:
+	return InventoryManager.get_inventory(id)

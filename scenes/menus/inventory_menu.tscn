@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://kwglhhfyum7a"]
+[gd_scene load_steps=8 format=3 uid="uid://kwglhhfyum7a"]
 
 [ext_resource type="Script" uid="uid://c8126ok62de4e" path="res://scripts/menus/inventory_menu.gd" id="1_egj0w"]
 [ext_resource type="Resource" uid="uid://bjmr6gmi6bxog" path="res://resources/item_database.tres" id="2_e31cf"]
 [ext_resource type="Texture2D" uid="uid://dqwlq3g4qvkcb" path="res://assets/ui/panels/BLueTransparentPanel64x64.png" id="2_v0b1f"]
 [ext_resource type="Texture2D" uid="uid://yorwmxguj5ob" path="res://assets/ui/inventory_ui/ExitButton.svg" id="3_xcp4r"]
+[ext_resource type="Texture2D" uid="uid://b05hj6ognkfqi" path="res://assets/icon.svg" id="5_ml676"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xcp4r"]
 texture = ExtResource("2_v0b1f")
@@ -23,7 +24,7 @@ texture_margin_bottom = 10.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="InventoryMenu" type="Control" node_paths=PackedStringArray("grid_container")]
+[node name="InventoryMenu" type="Control" node_paths=PackedStringArray("grid_container", "held_icon")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,6 +34,7 @@ grow_vertical = 2
 script = ExtResource("1_egj0w")
 database = ExtResource("2_e31cf")
 grid_container = NodePath("PanelContainer/MarginContainer/GridContainer")
+held_icon = NodePath("HeldIcon")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -94,5 +96,9 @@ scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("3_xcp4r")
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
+
+[node name="HeldIcon" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_ml676")
 
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

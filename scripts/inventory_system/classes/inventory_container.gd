@@ -11,14 +11,14 @@ var _container : GridContainer
 const _spacing : float = 64
 
 
-func _init(container : GridContainer,size : Vector2i) -> void:
-	_container = container
+func _init(size : Vector2i) -> void:
 	_size = size
 
 func set_id(id : int) -> void:
 	_id = id
 
-func generate_cells() -> void:
+func generate_cells(container : GridContainer) -> void:
+	_container = container
 	_container.columns = _size.x
 	var slot_pack : PackedScene = preload("res://scenes/inventory_system/slot.tscn")
 	
@@ -64,6 +64,9 @@ func remove_item(inv_item : InvItem) -> void:
 	var index : Vector2i = inv_item.origin
 	_item[index] = null
 	_slots[index].set_icon(null)
+
+func get_item(index : Vector2i) -> InvItem:
+	return _item[index]
 
 func load_data(items : Array[Dictionary],database : ItemDatabase) -> void:
 	

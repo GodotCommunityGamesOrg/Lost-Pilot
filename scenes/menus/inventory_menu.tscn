@@ -98,7 +98,8 @@ stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
 [node name="HeldIcon" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+position = Vector2(-92, -94)
+scale = Vector2(1.25, 1.25)
 texture = ExtResource("5_ml676")
 
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

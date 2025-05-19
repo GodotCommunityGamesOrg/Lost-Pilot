@@ -6,10 +6,7 @@ class_name Actor
 @export var turn_state: WorldTurnBase.StateMachine.STATES = WorldTurnBase.StateMachine.STATES.player 
 
 ## Number of actions available per turn for the [Actor].
-@export var actions: int = 2
-
-## Tracks the current remaining actions during the [Actor]'s turn.
-@onready var _actions: int = actions
+@export var distence: int = 2
 
 func _ready() -> void:
 	# Checks if the game state matches the actor's turn state and adds the actor to the turn system.
@@ -21,7 +18,6 @@ func _ready() -> void:
 		func(world_state):
 			# Resets actions and adds the actor to the active list if the turn state matches.
 			if world_state == turn_state:
-				_actions = actions
 				WorldTurnBase.state.actors.append(self)
 	)
 

@@ -1,19 +1,56 @@
-[gd_scene load_steps=5 format=3 uid="uid://vcaloblp0bi6"]
+[gd_scene load_steps=10 format=3 uid="uid://vcaloblp0bi6"]
 
 [ext_resource type="Script" uid="uid://cqlg3suskb2hv" path="res://scripts/menus/settings_menu.gd" id="1_pgun7"]
 [ext_resource type="FontFile" uid="uid://b2qsse7qo1d8y" path="res://assets/Gugi-Regular.ttf" id="2_4werv"]
-[ext_resource type="Texture2D" uid="uid://8h3nvonha1me" path="res://assets/ui/panels/TransparentGrayPanel64x64.png" id="3_f5h2d"]
+[ext_resource type="Shader" uid="uid://f0odfx5f7dvb" path="res://scripts/shaders/star.gdshader" id="2_da10i"]
+[ext_resource type="Shader" uid="uid://dpbmrgdgioq6r" path="res://scripts/shaders/ScanLineShader.gdshader" id="5_jjfif"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w8p4v"]
-texture = ExtResource("3_f5h2d")
-texture_margin_left = 2.0
-texture_margin_top = 2.0
-texture_margin_right = 2.0
-texture_margin_bottom = 2.0
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kffdn"]
+shader = ExtResource("2_da10i")
+shader_parameter/bg_color = Color(0, 0, 0, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/bigStarSlow = 2.0
+shader_parameter/mediumStarSlow = 6.0
+shader_parameter/smallStarSlow = 8.0
+shader_parameter/smallStarAmount = 0.002
+shader_parameter/mediumStarAmount = 0.01
+shader_parameter/bigStarAmount = 0.02
+shader_parameter/pixelSize = 3.0
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("start_focus")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_komaw"]
+shader = ExtResource("5_jjfif")
+shader_parameter/scanline_strength = 0.2
+shader_parameter/glitch_intensity = 0.3
+shader_parameter/speed = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fq4y8"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 20
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qnuys"]
+shader = ExtResource("5_jjfif")
+shader_parameter/scanline_strength = 0.2
+shader_parameter/glitch_intensity = 0.3
+shader_parameter/speed = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eoonq"]
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.8, 0.8, 0.8, 0)
+border_blend = true
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+corner_detail = 20
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("_master", "_music", "_enviroment", "_v_sync", "start_focus")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -22,11 +59,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pgun7")
-is_paused = true
-start_focus = NodePath("MarginContainer/NinePatchRect/Back")
+_master = NodePath("SettingsContainer/ScrollContainer/VBoxContainer/Master/MasterSlider")
+_music = NodePath("SettingsContainer/ScrollContainer/VBoxContainer/Music/MuseSlider")
+_enviroment = NodePath("SettingsContainer/ScrollContainer/VBoxContainer/Enviroment/EnvSlider")
+_v_sync = NodePath("SettingsContainer/ScrollContainer/VBoxContainer/V-Sync")
+start_focus = NodePath("NinePatchRect/Back")
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_kffdn")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,54 +91,36 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0.156863, 0.247059, 1)
-theme_override_constants/outline_size = 16
-theme_override_fonts/font = ExtResource("2_4werv")
 theme_override_font_sizes/font_size = 56
 text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.445312
+[node name="NinePatchRect" type="PanelContainer" parent="."]
+material = SubResource("ShaderMaterial_komaw")
+layout_mode = 2
+anchor_left = 0.451562
 anchor_top = 0.838889
-anchor_right = 0.554688
-anchor_bottom = 0.927778
-grow_horizontal = 2
-grow_vertical = 0
+anchor_right = 0.551562
+anchor_bottom = 0.905556
+theme_override_styles/panel = SubResource("StyleBoxFlat_fq4y8")
 metadata/_edit_use_anchors_ = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
-custom_minimum_size = Vector2(140, 64)
+[node name="Back" type="Button" parent="NinePatchRect"]
 layout_mode = 2
-texture = ExtResource("3_f5h2d")
-patch_margin_left = 2
-patch_margin_top = 2
-patch_margin_right = 2
-patch_margin_bottom = 2
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="Back" type="Button" parent="MarginContainer/NinePatchRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -58.0
-offset_top = -16.5
-offset_right = 58.0
-offset_bottom = 16.5
-grow_horizontal = 2
-grow_vertical = 2
+theme_override_colors/font_hover_pressed_color = Color(0.129558, 0.129558, 0.129558, 1)
+theme_override_colors/font_hover_color = Color(0.384314, 0.384314, 0.384314, 1)
+theme_override_colors/font_color = Color(0.537011, 0.537011, 0.537011, 1)
+theme_override_colors/font_focus_color = Color(0.384314, 0.384314, 0.384314, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_4werv")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 20
 text = "Back"
+flat = true
 
 [node name="SettingsContainer" type="PanelContainer" parent="."]
+material = SubResource("ShaderMaterial_qnuys")
 custom_minimum_size = Vector2(320, 350)
 layout_mode = 1
 anchors_preset = -1
@@ -109,31 +132,97 @@ offset_left = 1.0
 offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_w8p4v")
+theme_override_styles/panel = SubResource("StyleBoxFlat_eoonq")
 metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="SettingsContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="ScrollContainer" type="ScrollContainer" parent="SettingsContainer/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="SettingsContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SettingsContainer/MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Message" type="RichTextLabel" parent="SettingsContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="Message" type="RichTextLabel" parent="SettingsContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 bbcode_enabled = true
 text = "
-[center][color=HotPink]Such empty, no settings :([/color][/center]"
+[center][color=HotPink]Sound[/color][/center]"
 fit_content = true
 
-[connection signal="pressed" from="MarginContainer/NinePatchRect/Back" to="." method="_on_back_pressed"]
+[node name="Master" type="HBoxContainer" parent="SettingsContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsContainer/ScrollContainer/VBoxContainer/Master"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.537255, 0.537255, 0.537255, 1)
+text = "Master"
+
+[node name="MasterSlider" type="HSlider" parent="SettingsContainer/ScrollContainer/VBoxContainer/Master"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+value = 100.0
+
+[node name="Music" type="HBoxContainer" parent="SettingsContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsContainer/ScrollContainer/VBoxContainer/Music"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.537255, 0.537255, 0.537255, 1)
+text = "Music"
+
+[node name="MuseSlider" type="HSlider" parent="SettingsContainer/ScrollContainer/VBoxContainer/Music"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+value = 100.0
+
+[node name="Enviroment" type="HBoxContainer" parent="SettingsContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsContainer/ScrollContainer/VBoxContainer/Enviroment"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.537255, 0.537255, 0.537255, 1)
+text = "Enviroment"
+
+[node name="EnvSlider" type="HSlider" parent="SettingsContainer/ScrollContainer/VBoxContainer/Enviroment"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+value = 100.0
+
+[node name="Message2" type="RichTextLabel" parent="SettingsContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "
+[center][color=HotPink]Graphics[/color][/center]"
+fit_content = true
+
+[node name="V-Sync" type="CheckButton" parent="SettingsContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.787759, 0.787759, 0.787759, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.537255, 0.537255, 0.537255, 1)
+theme_override_colors/font_hover_color = Color(0.537255, 0.537255, 0.537255, 1)
+theme_override_colors/icon_disabled_color = Color(0.537255, 0.537255, 0.537255, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.537255, 0.537255, 0.537255, 1)
+theme_override_colors/icon_hover_color = Color(0.537255, 0.537255, 0.537255, 1)
+theme_override_colors/icon_pressed_color = Color(0.537255, 0.537255, 0.537255, 1)
+theme_override_colors/icon_focus_color = Color(0.537255, 0.537255, 0.537255, 1)
+theme_override_colors/icon_normal_color = Color(0.537255, 0.537255, 0.537255, 1)
+theme_override_colors/font_outline_color = Color(0.537255, 0.537255, 0.537255, 1)
+theme_override_colors/font_color = Color(0.537255, 0.537255, 0.537255, 1)
+theme_override_colors/font_focus_color = Color(0.537255, 0.537255, 0.537255, 1)
+theme_override_colors/font_pressed_color = Color(0.537255, 0.537255, 0.537255, 1)
+text = "V-Sync"
+
+[connection signal="pressed" from="NinePatchRect/Back" to="." method="_on_back_pressed"]
+[connection signal="drag_ended" from="SettingsContainer/ScrollContainer/VBoxContainer/Master/MasterSlider" to="." method="_on_master_slider_drag_ended"]
+[connection signal="drag_ended" from="SettingsContainer/ScrollContainer/VBoxContainer/Music/MuseSlider" to="." method="_on_muse_slider_drag_ended"]
+[connection signal="drag_ended" from="SettingsContainer/ScrollContainer/VBoxContainer/Enviroment/EnvSlider" to="." method="_on_env_slider_drag_ended"]
+[connection signal="toggled" from="SettingsContainer/ScrollContainer/VBoxContainer/V-Sync" to="." method="_on_v_sync_toggled"]

@@ -8,7 +8,7 @@ z_index = 1
 script = ExtResource("1_4kof2")
 cam = NodePath("Node2D/Camera2D")
 camcon = NodePath("Node2D")
-actions = 8
+distence = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_pi6i1")

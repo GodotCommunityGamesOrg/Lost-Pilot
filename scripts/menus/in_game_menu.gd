@@ -11,3 +11,5 @@ func _input(event: InputEvent) -> void:
 		if event.keycode == KEY_ESCAPE and event.is_pressed():
 			# load the pause menu.
 			menu_manager.switch_menu(GameMenuSystem.MENUS.Pause)
+		elif event.keycode == KEY_E and event.is_pressed():
+			menu_manager.switch_menu(GameMenuSystem.MENUS.Inventory)

@@ -32,7 +32,7 @@ func _ready() -> void:
 	add_child(preload(loading_scene).instantiate())
 	loader = get_child(0).get_child(0)
 	# temporary disabled the menu to focus on working on the inventory system
-	#spawn_scene(Keys.main)
+	spawn_scene(Keys.main)
 
 ## adds scene path to dictionary with assignes key
 func add_scene(scene : String, key : Keys) -> void:

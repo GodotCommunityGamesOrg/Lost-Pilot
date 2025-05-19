@@ -15,6 +15,8 @@ var inventory : InventoryContainer
 var held_item : InvItem
 var current_id : int
 var current_index : Vector2i
+var swap_id : int
+var swap_index : Vector2i
 
 
 func _ready() -> void:
@@ -57,7 +59,8 @@ func handle_state_update() -> void:
 		states.Remove:
 			pass
 		states.Swap:
-			pass
+			swap_items()
+			current_state = states.Held
 
 ## Handles the logic in each state e.g empty state you can pick up an item
 func handle_state_transition(id:  int, index : Vector2i) -> void:
@@ -74,6 +77,14 @@ func handle_state_transition(id:  int, index : Vector2i) -> void:
 				current_id = id
 				current_index = index
 				current_state = states.Drop
+			else:
+				var cur_item : InvItem = inv.get_item(index)
+				if held_item.id != cur_item.id:
+					print("Items are not the same so swap them!")
+					swap_id = id
+					swap_index = index
+					current_state = states.Swap
+				
 		states.Drop:
 			pass
 		states.PickUp:
@@ -116,16 +127,17 @@ func pickup() -> void:
 	held_icon.texture = held_item.icon
 	# remove the item from the previous inventory
 	inv.remove_item(held_item)
-	# change the state to held
 
-func swap_items(from_id : int,from_index : Vector2i,to_id : int,to_index : Vector2i) -> void:
-	var from_inv : InventoryContainer = InventoryManager.get_inventory(from_id)
-	var to_inv : InventoryContainer = InventoryManager.get_inventory(to_id)
+func swap_items() -> void:
 	
-	var from_item : InvItem = from_inv.get_item(from_index)
-	var to_item : InvItem = to_inv.get_item(to_index)
+	var to_inv : InventoryContainer = InventoryManager.get_inventory(swap_id)
+	var to_item : InvItem = to_inv.get_item(swap_index)
 	
+	held_item.origin = swap_index
+	to_inv.add_item(held_item)
 	
+	held_item = to_item
+	held_icon.texture = held_item.icon
 
 ## Helper function to make it less painful to write
 func _get_inventory(id : int) -> InventoryContainer:

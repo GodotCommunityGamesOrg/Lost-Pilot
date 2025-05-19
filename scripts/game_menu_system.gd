@@ -4,5 +4,6 @@ class_name GameMenuSystem
 enum MENUS{
 	InGame,
 	Pause,
-	Settings
+	Settings,
+	Inventory
 }

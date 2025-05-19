@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://cudho7h14sjr4"]
+
+[ext_resource type="Script" uid="uid://dtx3xrtjsr0sa" path="res://scripts/inventory_system/classes/item_resource.gd" id="1_hjc62"]
+[ext_resource type="Texture2D" uid="uid://d064goqtv6tb2" path="res://assets/ui/inventory items/Med Kit.png" id="1_xtv8e"]
+
+[resource]
+script = ExtResource("1_hjc62")
+item_name = "HealthPack"
+item_description = "Heals the player for a small amount but does not fix wounds"
+stackable = false
+max_stackable = 1
+item_texture = ExtResource("1_xtv8e")
+metadata/_custom_type_script = "uid://dtx3xrtjsr0sa"

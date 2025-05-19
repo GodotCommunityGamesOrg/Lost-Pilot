@@ -6,7 +6,7 @@ extends MenuBase
 @export var inventory_size : Vector2i = Vector2i(8,6)
 @export var held_icon : Sprite2D
 
-enum states {Empty,Held,Drop,PickUp}
+enum states {Empty,Held,Drop,PickUp,Swap,Add,Remove}
 var current_state : states = states.Empty
 
 var inventories : Dictionary[int,InventoryContainer]
@@ -24,6 +24,7 @@ func _ready() -> void:
 	player_inv.load_data(InventoryManager.player_items,database)
 	# connect the slot pressed signal to a function in this script
 	player_inv.slot_pressed.connect(on_slot_pressed)
+	player_inv.slot_hovered.connect(handle_hover_tooltip)
 
 func _process(delta: float) -> void:
 	handle_state_update()
@@ -42,29 +43,21 @@ func handle_state_update() -> void:
 			pass
 		states.Held:
 			held_icon.global_position = get_global_mouse_position()
+			
 		states.Drop:
-			# grab the inventory
-			var inv : InventoryContainer = _get_inventory(current_id)
-			# empty the held_icon and reset position
-			held_icon.global_position = Vector2(0,0)
-			held_icon.texture = null
-			# update the held items origin index if we dont it returns to the previous index
-			held_item.origin = current_index
-			# add the item from the previous inventory
-			inv.add_item(held_item)
-			# change the state to held
+			drop()
 			current_state = states.Empty
+			
 		states.PickUp:
-			# grab the inventory
-			var inv : InventoryContainer = _get_inventory(current_id)
-			# set the item to the held_item
-			held_item = inv.get_item(current_index)
-			# set the texture from the held item
-			held_icon.texture = held_item.icon
-			# remove the item from the previous inventory
-			inv.remove_item(held_item)
-			# change the state to held
+			pickup()
 			current_state = states.Held
+			
+		states.Add:
+			pass
+		states.Remove:
+			pass
+		states.Swap:
+			pass
 
 ## Handles the logic in each state e.g empty state you can pick up an item
 func handle_state_transition(id:  int, index : Vector2i) -> void:
@@ -85,6 +78,54 @@ func handle_state_transition(id:  int, index : Vector2i) -> void:
 			pass
 		states.PickUp:
 			pass
+		states.Add:
+			pass
+		states.Remove:
+			pass
+		states.Swap:
+			pass
+
+func handle_hover_tooltip(id : int, index : Vector2i) -> void:
+	var inv : InventoryContainer = InventoryManager.get_inventory(id)
+	## the hovered slot is empty
+	if inv.is_cell_free(index):
+		return
+	
+	## show a tooltip for the item, maybe we can also add options like consumbe,drop, etc
+	var item : InvItem = inv.get_item(index)
+	var item_data : Item = database.database[item.id]
+	print("Item (%s) , Stack (%s)" % [item_data.item_name,item.stack])
+	
+func drop() -> void:
+	# grab the inventory
+	var inv : InventoryContainer = _get_inventory(current_id)
+	# empty the held_icon and reset position
+	held_icon.global_position = Vector2(-100,-100)
+	held_icon.texture = null
+	# update the held items origin index if we dont it returns to the previous index
+	held_item.origin = current_index
+	# add the item from the previous inventory
+	inv.add_item(held_item)
+
+func pickup() -> void:
+	# grab the inventory
+	var inv : InventoryContainer = _get_inventory(current_id)
+	# set the item to the held_item
+	held_item = inv.get_item(current_index)
+	# set the texture from the held item
+	held_icon.texture = held_item.icon
+	# remove the item from the previous inventory
+	inv.remove_item(held_item)
+	# change the state to held
+
+func swap_items(from_id : int,from_index : Vector2i,to_id : int,to_index : Vector2i) -> void:
+	var from_inv : InventoryContainer = InventoryManager.get_inventory(from_id)
+	var to_inv : InventoryContainer = InventoryManager.get_inventory(to_id)
+	
+	var from_item : InvItem = from_inv.get_item(from_index)
+	var to_item : InvItem = to_inv.get_item(to_index)
+	
+	
 
 ## Helper function to make it less painful to write
 func _get_inventory(id : int) -> InventoryContainer:

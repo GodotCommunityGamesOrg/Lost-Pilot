@@ -1,5 +1,8 @@
 extends Node
 ## Inventory manager, handles storing the inventory in a global space
+## each time a new inventory is added it gets a new id
+## potentional issue is if the player opens to many inventories and the next id 
+## somehow becomes to big which I dont think will ever happen but we never know...
 
 var inventories : Dictionary[int,InventoryContainer]
 var next_id : int = -1
@@ -18,17 +21,16 @@ var player_items : Array[Dictionary] = [
 
 func _ready() -> void:
 	player_inv = InventoryContainer.new(inventory_size)
-	player_inv.set_id(register_inventory(player_inv))
-	
+	register_inventory(player_inv)
 
-func register_inventory(inventory : InventoryContainer) -> int:
+## helper function for registering the inventory globally
+func register_inventory(inventory : InventoryContainer) -> void:
 	next_id += 1
 	
 	inventories[next_id] = inventory
-	
-	return next_id
+	inventory.set_id(next_id)
 
-# maybe in the future save logic could be here when an inventory is not in use
+## helper function that removes an inventory from its id
 func unregister_inventory(id : int) -> void:
 	inventories.erase(id)
 

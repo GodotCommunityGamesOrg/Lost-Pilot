@@ -29,8 +29,15 @@ texture_pressed = ExtResource("3_87dan")
 texture_hover = ExtResource("4_7odv4")
 
 [node name="Icon" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Stack" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/outline_size = 6
+text = "100"

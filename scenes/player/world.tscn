@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://cjxiwvvqhuh0q"]
+[gd_scene load_steps=16 format=4 uid="uid://cjxiwvvqhuh0q"]
 
 [ext_resource type="PackedScene" uid="uid://dkkdcx534ran6" path="res://scenes/player/player.tscn" id="1_1vo14"]
 [ext_resource type="Script" uid="uid://eb3vs5x8edfb" path="res://scripts/world.gd" id="1_71hdg"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://2nq4ts7s3ojx" path="res://scenes/menus/in_game_menu.tscn" id="8_71hdg"]
 [ext_resource type="PackedScene" uid="uid://bo4uld1h02n47" path="res://scenes/menus/pause_menu.tscn" id="9_onws2"]
 [ext_resource type="PackedScene" uid="uid://vcaloblp0bi6" path="res://scenes/menus/settings_menu.tscn" id="10_36eim"]
+[ext_resource type="PackedScene" uid="uid://kwglhhfyum7a" path="res://scenes/menus/inventory_menu.tscn" id="11_71hdg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4fw4l"]
 texture = ExtResource("2_2nh4u")
@@ -80,3 +81,8 @@ metadata/_tab_index = 1
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+
+[node name="InventoryMenu" parent="CanvasLayer/MenuSystem" instance=ExtResource("11_71hdg")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3

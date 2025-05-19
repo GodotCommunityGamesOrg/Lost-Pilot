@@ -57,8 +57,8 @@ func is_cell_free(index : Vector2i) -> bool:
 func add_item(inv_item : InvItem) -> bool:
 	var index : Vector2i = inv_item.origin
 	
-	if not is_cell_free(index):
-		return false
+	#if not is_cell_free(index):
+		#return false
 	
 	# set item and item icon
 	_item[index] = inv_item

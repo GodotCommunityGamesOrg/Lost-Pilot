@@ -4,7 +4,7 @@ extends Node
 @export var object_layer: TileMapLayer
 @export var room_height: int = 10
 @export var room_width: int = 10
-@export var seed: String = "Coding is hard"
+@export var seed: String = "Game dev is difficult"
 @export var walker_count: int = 3
 @export var walker_steps: int = 50
 @export var walker_chance_to_change_direction: float = 0.3
@@ -26,25 +26,28 @@ var exit_positions: Array[Vector2i]
 func _ready() -> void:
 	rng = RandomNumberGenerator.new()
 	rng.seed = seed.hash()
-	object_layer.clear()
-	room.clear()
+	clean_up_layers()
 	generate_room()
 
+func clean_up_layers() -> void:
+	object_layer.clear()
+	room.clear()
+
 func place_player(pos: Vector2i) -> void:
-	var player_instance = player_scene.instantiate()
-	object_layer.add_child(player_instance)
-	player_instance.position = object_layer.map_to_local(pos)
+	object_layer.set_cell(pos, 1, Vector2i.ZERO, 1)
+	pass
+	
 
 func place_door(pos: Vector2i) -> void:
-	var door_instance = door_scene.instantiate()
-	object_layer.add_child(door_instance)
-	door_instance.position = object_layer.map_to_local(pos)
+	object_layer.set_cell(pos, 1, Vector2i.ZERO, 2)
+	pass
 
 func generate_room() -> void:
 	var attempts = 0
 	var valid_room = false
 	
 	while not valid_room and attempts < max_generation_attempts:
+		clean_up_layers()
 		attempts += 1
 		
 		# Initialize room with walls
@@ -86,7 +89,7 @@ func generate_room() -> void:
 		
 		if not valid_room:
 			print("Room generation attempt ", attempts, " failed - regenerating...")
-			object_layer.clear()
+			
 	
 	# Clean up isolated walls
 	cleanup_isolated_walls()

@@ -13,7 +13,7 @@
 script = ExtResource("1_71hdg")
 
 [node name="RoomGenerator" parent="." instance=ExtResource("10_kej52")]
-seed = "e206de4d-c2a2-4f6e-a9e7-d93cb250d3a0"
+seed = "Game dev makes my brain hurt"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

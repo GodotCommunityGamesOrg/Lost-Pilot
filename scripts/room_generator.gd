@@ -1,4 +1,4 @@
-extends Node
+extends map_generator
 
 @export var room: TileMapLayer
 @export var object_layer: TileMapLayer
@@ -9,8 +9,6 @@ extends Node
 @export var walker_steps: int = 50
 @export var walker_chance_to_change_direction: float = 0.3
 @export var max_generation_attempts: int = 10
-@export var player_scene: PackedScene
-@export var door_scene: PackedScene
 
 var floor: int = 0
 var wall: int = 1
@@ -28,6 +26,7 @@ func _ready() -> void:
 	rng.seed = seed.hash()
 	clean_up_layers()
 	generate_room()
+	super()
 
 func clean_up_layers() -> void:
 	object_layer.clear()

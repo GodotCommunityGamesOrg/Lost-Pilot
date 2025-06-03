@@ -1,24 +1,54 @@
+## A procedural room generator that creates rooms using random walkers.
+## The generator ensures there is always a valid path between entrance and exit.
+class_name RoomGenerator
 extends map_generator
 
+## The tilemap layer used for room terrain (walls and floors)
 @export var room: TileMapLayer
+
+## The tilemap layer used for objects (doors and player)
 @export var object_layer: TileMapLayer
+
+## The height of the generated room in tiles
 @export var room_height: int = 10
+
+## The width of the generated room in tiles
 @export var room_width: int = 10
+
+## Seed used for random generation. Changing this will create different room layouts
 @export var seed: String = "Game dev is difficult"
+
+## Number of walkers used to generate the room. More walkers create more complex layouts
 @export var walker_count: int = 3
+
+## Number of steps each walker takes. More steps create larger rooms
 @export var walker_steps: int = 50
+
+## Probability (0-1) of a walker changing direction each step
 @export var walker_chance_to_change_direction: float = 0.3
+
+## Maximum number of attempts to generate a valid room before giving up
 @export var max_generation_attempts: int = 10
 
+## Terrain ID for floor tiles
 var floor: int = 0
+
+## Terrain ID for wall tiles
 var wall: int = 1
 
+## Random number generator for procedural generation
 var rng: RandomNumberGenerator
+
+## Array of walker positions
 var walkers: Array[Vector2i]
+
+## Array of walker movement directions
 var walker_directions: Array[Vector2i]
 
-# Track entrance and exit positions
+## Array of entrance tile positions
 var entrance_positions: Array[Vector2i]
+
+## Array of exit tile positions
 var exit_positions: Array[Vector2i]
 
 func _ready() -> void:
@@ -28,19 +58,25 @@ func _ready() -> void:
 	generate_room()
 	super()
 
+## Clears both the room and object layers
 func clean_up_layers() -> void:
 	object_layer.clear()
 	room.clear()
 
+## Places the player at the specified position in the object layer
+## @param pos The tile position to place the player
 func place_player(pos: Vector2i) -> void:
 	object_layer.set_cell(pos, 1, Vector2i.ZERO, 1)
 	pass
-	
 
+## Places a door at the specified position in the object layer
+## @param pos The tile position to place the door
 func place_door(pos: Vector2i) -> void:
 	object_layer.set_cell(pos, 1, Vector2i.ZERO, 2)
 	pass
 
+## Generates a new room layout using random walkers
+## Ensures there is a valid path between entrance and exit
 func generate_room() -> void:
 	var attempts = 0
 	var valid_room = false
@@ -88,7 +124,6 @@ func generate_room() -> void:
 		
 		if not valid_room:
 			print("Room generation attempt ", attempts, " failed - regenerating...")
-			
 	
 	# Clean up isolated walls
 	cleanup_isolated_walls()
@@ -96,6 +131,8 @@ func generate_room() -> void:
 	# Place player near entrance
 	place_player_near_entrance()
 
+## Places the entrance and exit on opposite walls
+## Each consists of two floor tiles and corresponding doors
 func place_entrance_and_exit() -> void:
 	entrance_positions.clear()
 	exit_positions.clear()
@@ -124,6 +161,9 @@ func place_entrance_and_exit() -> void:
 	place_door(exit_start)
 	place_door(exit_start + get_wall_direction(exit_wall))
 
+## Gets a random position on the specified wall
+## @param wall_index The wall to get a position from (0: top, 1: right, 2: bottom, 3: left)
+## @return A random position on the specified wall
 func get_wall_position(wall_index: int) -> Vector2i:
 	match wall_index:
 		0:  # Top wall
@@ -140,6 +180,9 @@ func get_wall_position(wall_index: int) -> Vector2i:
 			return Vector2i(0, y)
 	return Vector2i.ZERO
 
+## Gets the direction to place the second tile of an entrance/exit
+## @param wall_index The wall to get the direction for
+## @return The direction vector for placing the second tile
 func get_wall_direction(wall_index: int) -> Vector2i:
 	match wall_index:
 		0, 2:  # Top or bottom wall
@@ -148,6 +191,8 @@ func get_wall_direction(wall_index: int) -> Vector2i:
 			return Vector2i(0, 1)
 	return Vector2i.ZERO
 
+## Gets a random direction for walker movement
+## @return A random direction vector
 func get_random_direction() -> Vector2i:
 	var directions = [
 		Vector2i(1, 0),
@@ -157,6 +202,7 @@ func get_random_direction() -> Vector2i:
 	]
 	return directions[rng.randi() % directions.size()]
 
+## Updates all walkers' positions and creates floor tiles
 func update_walkers() -> void:
 	for i in range(walker_count):
 		# Maybe change direction
@@ -185,40 +231,8 @@ func update_walkers() -> void:
 				if direction_to_exit != Vector2i.ZERO:
 					walker_directions[i] = direction_to_exit
 
-func is_wall_at(pos: Vector2i) -> bool:
-	var tile_data = room.get_cell_tile_data(pos)
-	if not tile_data:
-		return false
-	var terrain = tile_data.terrain
-	return terrain == wall
-	
-func is_floor_at(pos: Vector2i) -> bool:
-	var tile_data = room.get_cell_tile_data(pos)
-	if not tile_data:
-		return false
-	var terrain = tile_data.terrain
-	return terrain == floor
-	
-func is_in_bounds(pos: Vector2i) -> bool:
-	return pos.x >= 0 and pos.x < room_width and pos.y >= 0 and pos.y < room_height
-
-func remove_terrain_tile(pos: Vector2i):
-	room.set_cells_terrain_connect(
-		[pos],
-		0,
-		-1,
-		false
-	)
-	pass
-
-func place_terrain_tile(pos: Vector2i, terrain_set_id: int, terrain_id: int) -> void:
-	room.set_cells_terrain_connect(
-		[pos],
-		terrain_set_id,
-		terrain_id,
-		true
-	)
-
+## Checks if there is a valid path between entrance and exit using flood fill
+## @return true if there is a valid path, false otherwise
 func check_connectivity() -> bool:
 	var visited = {}
 	var queue = []
@@ -252,6 +266,7 @@ func check_connectivity() -> bool:
 	
 	return false
 
+## Removes wall tiles that don't have any floor tiles adjacent to them
 func cleanup_isolated_walls() -> void:
 	var walls_to_remove = []
 	
@@ -287,6 +302,7 @@ func cleanup_isolated_walls() -> void:
 	for pos in walls_to_remove:
 		remove_terrain_tile(pos)
 
+## Places the player near the entrance, ensuring they are on a valid floor tile
 func place_player_near_entrance() -> void:
 	# Get the direction from the entrance to the center of the room
 	var entrance_center = (entrance_positions[0] + entrance_positions[1]) / 2
@@ -311,3 +327,37 @@ func place_player_near_entrance() -> void:
 				break
 	
 	place_player(player_pos)
+
+func is_wall_at(pos: Vector2i) -> bool:
+	var tile_data = room.get_cell_tile_data(pos)
+	if not tile_data:
+		return false
+	var terrain = tile_data.terrain
+	return terrain == wall
+	
+func is_floor_at(pos: Vector2i) -> bool:
+	var tile_data = room.get_cell_tile_data(pos)
+	if not tile_data:
+		return false
+	var terrain = tile_data.terrain
+	return terrain == floor
+	
+func is_in_bounds(pos: Vector2i) -> bool:
+	return pos.x >= 0 and pos.x < room_width and pos.y >= 0 and pos.y < room_height
+
+func remove_terrain_tile(pos: Vector2i):
+	room.set_cells_terrain_connect(
+		[pos],
+		0,
+		-1,
+		false
+	)
+	pass
+
+func place_terrain_tile(pos: Vector2i, terrain_set_id: int, terrain_id: int) -> void:
+	room.set_cells_terrain_connect(
+		[pos],
+		terrain_set_id,
+		terrain_id,
+		true
+	)

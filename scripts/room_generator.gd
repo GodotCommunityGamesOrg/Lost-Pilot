@@ -64,13 +64,11 @@ func clean_up_layers() -> void:
 	room.clear()
 
 ## Places the player at the specified position in the object layer
-## @param pos The tile position to place the player
 func place_player(pos: Vector2i) -> void:
 	object_layer.set_cell(pos, 1, Vector2i.ZERO, 1)
 	pass
 
 ## Places a door at the specified position in the object layer
-## @param pos The tile position to place the door
 func place_door(pos: Vector2i) -> void:
 	object_layer.set_cell(pos, 1, Vector2i.ZERO, 2)
 	pass
@@ -162,8 +160,6 @@ func place_entrance_and_exit() -> void:
 	place_door(exit_start + get_wall_direction(exit_wall))
 
 ## Gets a random position on the specified wall
-## @param wall_index The wall to get a position from (0: top, 1: right, 2: bottom, 3: left)
-## @return A random position on the specified wall
 func get_wall_position(wall_index: int) -> Vector2i:
 	match wall_index:
 		0:  # Top wall
@@ -181,8 +177,6 @@ func get_wall_position(wall_index: int) -> Vector2i:
 	return Vector2i.ZERO
 
 ## Gets the direction to place the second tile of an entrance/exit
-## @param wall_index The wall to get the direction for
-## @return The direction vector for placing the second tile
 func get_wall_direction(wall_index: int) -> Vector2i:
 	match wall_index:
 		0, 2:  # Top or bottom wall
@@ -192,7 +186,6 @@ func get_wall_direction(wall_index: int) -> Vector2i:
 	return Vector2i.ZERO
 
 ## Gets a random direction for walker movement
-## @return A random direction vector
 func get_random_direction() -> Vector2i:
 	var directions = [
 		Vector2i(1, 0),
@@ -232,7 +225,6 @@ func update_walkers() -> void:
 					walker_directions[i] = direction_to_exit
 
 ## Checks if there is a valid path between entrance and exit using flood fill
-## @return true if there is a valid path, false otherwise
 func check_connectivity() -> bool:
 	var visited = {}
 	var queue = []
@@ -328,6 +320,7 @@ func place_player_near_entrance() -> void:
 	
 	place_player(player_pos)
 
+## Checks if the tile at this position is a wall
 func is_wall_at(pos: Vector2i) -> bool:
 	var tile_data = room.get_cell_tile_data(pos)
 	if not tile_data:
@@ -335,6 +328,7 @@ func is_wall_at(pos: Vector2i) -> bool:
 	var terrain = tile_data.terrain
 	return terrain == wall
 	
+## Checks if the tile at this position is a floor
 func is_floor_at(pos: Vector2i) -> bool:
 	var tile_data = room.get_cell_tile_data(pos)
 	if not tile_data:
@@ -342,9 +336,11 @@ func is_floor_at(pos: Vector2i) -> bool:
 	var terrain = tile_data.terrain
 	return terrain == floor
 	
+## Checks if a position is in the bounds of the room
 func is_in_bounds(pos: Vector2i) -> bool:
 	return pos.x >= 0 and pos.x < room_width and pos.y >= 0 and pos.y < room_height
 
+## Removes a terrain tile at a given position
 func remove_terrain_tile(pos: Vector2i):
 	room.set_cells_terrain_connect(
 		[pos],
@@ -354,6 +350,7 @@ func remove_terrain_tile(pos: Vector2i):
 	)
 	pass
 
+## Places a terrain tile at a given position
 func place_terrain_tile(pos: Vector2i, terrain_set_id: int, terrain_id: int) -> void:
 	room.set_cells_terrain_connect(
 		[pos],

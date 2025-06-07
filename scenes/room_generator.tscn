@@ -17,10 +17,9 @@ sources/1 = SubResource("TileSetScenesCollectionSource_4ctu1")
 
 [node name="RoomGenerator" type="Node"]
 
-[node name="Floor" type="TileMapLayer" parent="." node_paths=PackedStringArray("room", "object_layer")]
+[node name="Floor" type="TileMapLayer" parent="." node_paths=PackedStringArray("object_layer")]
 tile_set = ExtResource("1_fs8vn")
 script = ExtResource("1_mhcj8")
-room = NodePath(".")
 object_layer = NodePath("../Objects")
 room_width = 20
 seed = "Coding is cheeks"

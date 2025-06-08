@@ -1,4 +1,6 @@
 extends Node2D
-func _init() -> void:
-	WorldPathfinder.reset()
+@onready var floor = $RoomGenerator/Floor
+
+func _ready() -> void:
+	WorldPathfinder.reset(floor)
 	WorldTurnBase.reset()

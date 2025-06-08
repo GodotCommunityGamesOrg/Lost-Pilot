@@ -235,6 +235,7 @@ func apply_terrain_changes() -> void:
 	apply_walls()
 	apply_entrance()
 	apply_exit()
+	apply_player()
 	
 ### Apply floors
 func apply_floors() -> void:

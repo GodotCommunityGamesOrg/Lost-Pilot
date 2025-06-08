@@ -39,6 +39,9 @@ var walker: Walker
 ## Array of entrance tile positions
 var entrance_positions: Array[Vector2i]
 
+### Player's starting position near the entrance
+var player_start_position: Vector2i
+
 ## Array of exit tile positions
 var exit_positions: Array[Vector2i]
 
@@ -132,6 +135,7 @@ func place_entrance() -> void:
 		
 		for pos in adjacent_positions:
 			if floor_positions.has(pos):
+				player_start_position = pos
 				has_floor_connection = true
 				break
 		
@@ -251,6 +255,9 @@ func apply_exit() -> void:
 	set_cells_terrain_connect(exit_positions, 0, floor, true)
 	object_layer.set_cell(exit_positions[0], 1, Vector2i.ZERO, 2)
 	object_layer.set_cell(exit_positions[1], 1, Vector2i.ZERO, 2)
+
+func apply_player() -> void:
+	object_layer.set_cell(player_start_position, 1, Vector2i.ZERO, 1)
 
 ## Checks if a position is in the bounds of the room
 func is_in_bounds(pos: Vector2i) -> bool:

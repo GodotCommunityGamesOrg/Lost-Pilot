@@ -22,7 +22,7 @@ tile_set = ExtResource("1_dy51p")
 script = ExtResource("1_mhcj8")
 object_layer = NodePath("../Objects")
 room_height = 20
-room_width = 30
+room_width = 20
 walker_steps = 110
 
 [node name="Objects" type="TileMapLayer" parent="."]

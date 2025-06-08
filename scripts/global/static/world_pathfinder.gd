@@ -16,9 +16,12 @@ static func calculate_path(start: Vector2, end: Vector2, tf: bool = false) -> Pa
 		tf
 	)
 
-static func reset():
+static func reset(floor : TileMapLayer):
 	pathfinder = AStarGrid2D.new()
-	map = map_generator.new()
+	pathfinder.region = floor.get_used_rect()
+	pathfinder.update()
+	map = floor
+	
 static func position_to_object(position: Vector2i):
 	if objects.has(position):
 		return objects[position]

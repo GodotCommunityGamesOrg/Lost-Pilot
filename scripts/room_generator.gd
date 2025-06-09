@@ -48,27 +48,34 @@ var exit_positions: Array[Vector2i]
 func _ready() -> void:
 	rng = RandomNumberGenerator.new()
 	rng.seed = seed.hash()
-	
 	generate_room()
 	super()
 
 ## Generates a new room layout
 func generate_room() -> void:
-	# Clear previous room
+	clear_the_previous_room()
+	fill_the_room_with_walls()
+	run_walker()
+	place_entrance()
+	place_exit()
+	apply_terrain_changes()
+
+func clear_the_previous_room() -> void:
 	clear()
 	object_layer.clear()
-	
-	# Initialize arrays
 	floor_positions.clear()
 	wall_positions.clear()
 	entrance_positions.clear()
 	exit_positions.clear()
-	
-	# Fill room with walls
+
+### Fills in the wall positions to make up the whole room
+func fill_the_room_with_walls() -> void:
 	for x in range(room_width):
 		for y in range(room_height):
 			wall_positions.append(Vector2i(x, y))
-	
+
+### Starts a new walker at the center of the room
+func run_walker() -> void:
 	# Create walker at center of room
 	var start_pos = Vector2i(room_width / 2, room_height / 2)
 	walker = Walker.new(start_pos, room_width, room_height, rng.randi())
@@ -80,13 +87,6 @@ func generate_room() -> void:
 		for pos in walker.floor_positions:
 			if not floor_positions.has(pos):
 				floor_positions.append(pos)
-	
-	# Place entrance and exit
-	place_entrance()
-	place_exit()
-	
-	# Apply terrain changes
-	apply_terrain_changes()
 
 ## Places the entrance on the edge of the map
 func place_entrance() -> void:
@@ -121,50 +121,49 @@ func place_entrance() -> void:
 			3: # Left edge - place tile below
 				entrance_pos2 = entrance_pos + Vector2i(0, 1)
 		
-		# Check if positions connect to a floor tile
-		var has_floor_connection = false
-		var adjacent_positions = [
-			entrance_pos + Vector2i(0, 1),   # Below
-			entrance_pos + Vector2i(0, -1),  # Above
-			entrance_pos + Vector2i(1, 0),   # Right
-			entrance_pos + Vector2i(-1, 0),  # Left
-			entrance_pos2 + Vector2i(0, 1),  # Below
-			entrance_pos2 + Vector2i(0, -1), # Above
-			entrance_pos2 + Vector2i(1, 0),  # Right
-			entrance_pos2 + Vector2i(-1, 0)  # Left
-		]
-		
-		for pos in adjacent_positions:
-			if floor_positions.has(pos):
-				player_start_position = pos
-				has_floor_connection = true
-				break
-
-		if not has_floor_connection:
-			attempts += 1
-			continue
-			
 		# Calculate floor positions based on edge
 		var floor_pos1: Vector2i
 		var floor_pos2: Vector2i
 		match edge:
 			0: # Top edge
-				# Place additional floor tiles
 				floor_pos1 = entrance_pos + Vector2i(0, 1)
 				floor_pos2 = entrance_pos2 + Vector2i(0, 1)
 			1: # Right edge
-				# Place additional floor tiles
 				floor_pos1 = entrance_pos + Vector2i(-1, 0)
 				floor_pos2 = entrance_pos2 + Vector2i(-1, 0)
 			2: # Bottom edge
-				# Place additional floor tiles
 				floor_pos1 = entrance_pos + Vector2i(0, -1)
 				floor_pos2 = entrance_pos2 + Vector2i(0, -1)
 			3: # Left edge
-				# Place additional floor tiles
 				floor_pos1 = entrance_pos + Vector2i(1, 0)
 				floor_pos2 = entrance_pos2 + Vector2i(1, 0)
 		
+		# Check if floor positions are valid
+		if not is_in_bounds(floor_pos1) or not is_in_bounds(floor_pos2):
+			attempts += 1
+			continue
+			
+		# Check if floor positions connect to existing floor tiles
+		var has_floor_connection = false
+		var adjacent_positions = [
+			floor_pos1 + Vector2i(0, 1),   # Below
+			floor_pos1 + Vector2i(0, -1),  # Above
+			floor_pos1 + Vector2i(1, 0),   # Right
+			floor_pos1 + Vector2i(-1, 0),  # Left
+			floor_pos2 + Vector2i(0, 1),   # Below
+			floor_pos2 + Vector2i(0, -1),  # Above
+			floor_pos2 + Vector2i(1, 0),   # Right
+			floor_pos2 + Vector2i(-1, 0)   # Left
+		]
+		
+		for pos in adjacent_positions:
+			if floor_positions.has(pos):
+				has_floor_connection = true
+				break
+		
+		if not has_floor_connection:
+			attempts += 1
+			continue
 		
 		# If we get here, we found valid positions
 		entrance_positions.append(entrance_pos)
@@ -215,17 +214,39 @@ func place_exit() -> void:
 			attempts += 1
 			continue
 		
-		# Check if positions connect to a floor tile
+		# Calculate floor positions based on edge
+		var floor_pos1: Vector2i
+		var floor_pos2: Vector2i
+		match edge:
+			0: # Top edge
+				floor_pos1 = exit_pos + Vector2i(0, 1)
+				floor_pos2 = exit_pos2 + Vector2i(0, 1)
+			1: # Right edge
+				floor_pos1 = exit_pos + Vector2i(-1, 0)
+				floor_pos2 = exit_pos2 + Vector2i(-1, 0)
+			2: # Bottom edge
+				floor_pos1 = exit_pos + Vector2i(0, -1)
+				floor_pos2 = exit_pos2 + Vector2i(0, -1)
+			3: # Left edge
+				floor_pos1 = exit_pos + Vector2i(1, 0)
+				floor_pos2 = exit_pos2 + Vector2i(1, 0)
+		
+		# Check if floor positions are valid
+		if not is_in_bounds(floor_pos1) or not is_in_bounds(floor_pos2):
+			attempts += 1
+			continue
+			
+		# Check if floor positions connect to existing floor tiles
 		var has_floor_connection = false
 		var adjacent_positions = [
-			exit_pos + Vector2i(0, 1),   # Below
-			exit_pos + Vector2i(0, -1),  # Above
-			exit_pos + Vector2i(1, 0),   # Right
-			exit_pos + Vector2i(-1, 0),  # Left
-			exit_pos2 + Vector2i(0, 1),  # Below
-			exit_pos2 + Vector2i(0, -1), # Above
-			exit_pos2 + Vector2i(1, 0),  # Right
-			exit_pos2 + Vector2i(-1, 0)  # Left
+			floor_pos1 + Vector2i(0, 1),   # Below
+			floor_pos1 + Vector2i(0, -1),  # Above
+			floor_pos1 + Vector2i(1, 0),   # Right
+			floor_pos1 + Vector2i(-1, 0),  # Left
+			floor_pos2 + Vector2i(0, 1),   # Below
+			floor_pos2 + Vector2i(0, -1),  # Above
+			floor_pos2 + Vector2i(1, 0),   # Right
+			floor_pos2 + Vector2i(-1, 0)   # Left
 		]
 		
 		for pos in adjacent_positions:
@@ -240,26 +261,8 @@ func place_exit() -> void:
 		# If we get here, we found valid positions
 		exit_positions.append(exit_pos)
 		exit_positions.append(exit_pos2)
-
-		var floor_pos1: Vector2i
-		var floor_pos2: Vector2i
-		match edge:
-			0: # Top edge
-				# Place additional floor tiles
-				floor_pos1 = exit_pos + Vector2i(0, 1)
-				floor_pos2 = exit_pos2 + Vector2i(0, 1)
-			1: # Right edge
-				# Place additional floor tiles
-				floor_pos1 = exit_pos + Vector2i(-1, 0)
-				floor_pos2 = exit_pos2 + Vector2i(-1, 0)
-			2: # Bottom edge
-				# Place additional floor tiles
-				floor_pos1 = exit_pos + Vector2i(0, -1)
-				floor_pos2 = exit_pos2 + Vector2i(0, -1)
-			3: # Left edge
-				# Place additional floor tiles
-				floor_pos1 = exit_pos + Vector2i(1, 0)
-				floor_pos2 = exit_pos2 + Vector2i(1, 0)
+		floor_positions.append(floor_pos1)
+		floor_positions.append(floor_pos2)
 		return
 	
 	# If we get here, we couldn't find valid positions
@@ -267,24 +270,16 @@ func place_exit() -> void:
 
 ## Applies all terrain changes at once
 func apply_terrain_changes() -> void:
-	# Ensure no position is in both arrays
-	for pos in floor_positions:
-		wall_positions.erase(pos)
-	
-	# Remove entrance and exit positions from wall positions
-	for pos in entrance_positions:
-		wall_positions.erase(pos)
-	for pos in exit_positions:
-		wall_positions.erase(pos)
-		
 	apply_floors()
-	apply_walls()
 	apply_entrance()
 	apply_exit()
+	apply_walls()
 	apply_player()
 	
 ### Apply floors
 func apply_floors() -> void:
+	for pos in floor_positions:
+		wall_positions.erase(pos)
 	set_cells_terrain_connect(floor_positions, 0, floor, true)
 	
 ### Apply walls
@@ -293,16 +288,22 @@ func apply_walls() -> void:
 
 ### Apply entrance
 func apply_entrance() -> void:
+	for pos in entrance_positions:
+		wall_positions.erase(pos)
 	set_cells_terrain_connect(entrance_positions, 0, floor, true)
 	object_layer.set_cell(entrance_positions[0], 1, Vector2i.ZERO, 2)
 	object_layer.set_cell(entrance_positions[1], 1, Vector2i.ZERO, 2)
 
 ### Apply exit
 func apply_exit() -> void:
+	for pos in exit_positions:
+		wall_positions.erase(pos)
 	set_cells_terrain_connect(exit_positions, 0, floor, true)
 	object_layer.set_cell(exit_positions[0], 1, Vector2i.ZERO, 2)
 	object_layer.set_cell(exit_positions[1], 1, Vector2i.ZERO, 2)
+	
 
+### Apply player
 func apply_player() -> void:
 	object_layer.set_cell(player_start_position, 1, Vector2i.ZERO, 1)
 

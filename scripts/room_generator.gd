@@ -50,6 +50,7 @@ func _ready() -> void:
 	rng.seed = seed.hash()
 	
 	generate_room()
+	super()
 
 ## Generates a new room layout
 func generate_room() -> void:

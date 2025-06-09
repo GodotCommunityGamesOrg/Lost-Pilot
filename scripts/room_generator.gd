@@ -139,14 +139,39 @@ func place_entrance() -> void:
 				player_start_position = pos
 				has_floor_connection = true
 				break
-		
+
 		if not has_floor_connection:
 			attempts += 1
 			continue
+			
+		# Calculate floor positions based on edge
+		var floor_pos1: Vector2i
+		var floor_pos2: Vector2i
+		match edge:
+			0: # Top edge
+				# Place additional floor tiles
+				floor_pos1 = entrance_pos + Vector2i(0, 1)
+				floor_pos2 = entrance_pos2 + Vector2i(0, 1)
+			1: # Right edge
+				# Place additional floor tiles
+				floor_pos1 = entrance_pos + Vector2i(-1, 0)
+				floor_pos2 = entrance_pos2 + Vector2i(-1, 0)
+			2: # Bottom edge
+				# Place additional floor tiles
+				floor_pos1 = entrance_pos + Vector2i(0, -1)
+				floor_pos2 = entrance_pos2 + Vector2i(0, -1)
+			3: # Left edge
+				# Place additional floor tiles
+				floor_pos1 = entrance_pos + Vector2i(1, 0)
+				floor_pos2 = entrance_pos2 + Vector2i(1, 0)
+		
 		
 		# If we get here, we found valid positions
 		entrance_positions.append(entrance_pos)
 		entrance_positions.append(entrance_pos2)
+		floor_positions.append(floor_pos1)
+		floor_positions.append(floor_pos2)
+		player_start_position = floor_pos1
 		return
 	
 	# If we get here, we couldn't find valid positions
@@ -215,6 +240,26 @@ func place_exit() -> void:
 		# If we get here, we found valid positions
 		exit_positions.append(exit_pos)
 		exit_positions.append(exit_pos2)
+
+		var floor_pos1: Vector2i
+		var floor_pos2: Vector2i
+		match edge:
+			0: # Top edge
+				# Place additional floor tiles
+				floor_pos1 = exit_pos + Vector2i(0, 1)
+				floor_pos2 = exit_pos2 + Vector2i(0, 1)
+			1: # Right edge
+				# Place additional floor tiles
+				floor_pos1 = exit_pos + Vector2i(-1, 0)
+				floor_pos2 = exit_pos2 + Vector2i(-1, 0)
+			2: # Bottom edge
+				# Place additional floor tiles
+				floor_pos1 = exit_pos + Vector2i(0, -1)
+				floor_pos2 = exit_pos2 + Vector2i(0, -1)
+			3: # Left edge
+				# Place additional floor tiles
+				floor_pos1 = exit_pos + Vector2i(1, 0)
+				floor_pos2 = exit_pos2 + Vector2i(1, 0)
 		return
 	
 	# If we get here, we couldn't find valid positions

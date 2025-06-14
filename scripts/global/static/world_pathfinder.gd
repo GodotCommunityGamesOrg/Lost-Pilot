@@ -19,6 +19,7 @@ static func calculate_path(start: Vector2, end: Vector2, tf: bool = false) -> Pa
 static func reset():
 	pathfinder = AStarGrid2D.new()
 	map = map_generator.new()
+	
 static func position_to_object(position: Vector2i):
 	if objects.has(position):
 		return objects[position]

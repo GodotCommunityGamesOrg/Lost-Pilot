@@ -11,7 +11,7 @@ class_name DoorObject
 ## Reference to the CircleMenuButton used to prompt player interaction choices.
 @export var gui: CircleMenuButton
 
-## AnimatedSprite2D that visually represents the door’s open/close animation.
+## AnimatedSprite2D that visually represents the door's open/close animation.
 @export var anim: AnimatedSprite2D
 
 # --- Private Properties ---
@@ -88,7 +88,7 @@ func interact(player: PlayerNode, _choice: int = -10, p: Array[Vector2i] = []) -
 ## Returns the terrain type at a relative tile offset.
 ## Useful for determining door orientation at startup.
 func get_terrain_at_tile(x: int = 0, y: int = 0) -> int:
-	var cell := WorldPathfinder.map.get_cell_tile_data(Vector2i(map_position.x + x, map_position.y + y))
+	var cell = WorldPathfinder.map.get_cell_tile_data(Vector2i(map_position.x + x, map_position.y + y))
 	if cell == null:
 		return 0
 	return cell.terrain

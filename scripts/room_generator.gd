@@ -13,13 +13,13 @@ extends map_generator
 @export var room_width: int = 10
 
 ## Seed used for random generation. Changing this will create different room layouts
-@export var seed: String = "Game dev is difficult"
+@export var _seed: String = "Game dev is difficult"
 
 ## Number of steps the walker should take
 @export var walker_steps: int = 100
 
 ## Terrain ID for floor tiles
-var floor: int = 0
+var _floor: int = 0
 
 ## Terrain ID for wall tiles
 var wall: int = 1
@@ -47,7 +47,7 @@ var exit_positions: Array[Vector2i]
 
 func _ready() -> void:
 	rng = RandomNumberGenerator.new()
-	rng.seed = seed.hash()
+	rng.seed = _seed.hash()
 	generate_room()
 	super()
 
@@ -101,13 +101,13 @@ func place_entrance() -> void:
 		var entrance_pos: Vector2i
 		match edge:
 			0: # Top edge
-				entrance_pos = Vector2i(rng.randi_range(1, room_width - 3), 0)
+				entrance_pos = Vector2i(int(rng.randi_range(1, room_width - 3)), 0)
 			1: # Right edge
-				entrance_pos = Vector2i(room_width - 1, rng.randi_range(1, room_height - 3))
+				entrance_pos = Vector2i(room_width - 1, int(rng.randi_range(1, room_height - 3)))
 			2: # Bottom edge
-				entrance_pos = Vector2i(rng.randi_range(1, room_width - 3), room_height - 1)
+				entrance_pos = Vector2i(int(rng.randi_range(1, room_width - 3)), room_height - 1)
 			3: # Left edge
-				entrance_pos = Vector2i(0, rng.randi_range(1, room_height - 3))
+				entrance_pos = Vector2i(0, int(rng.randi_range(1, room_height - 3)))
 		
 		# Calculate second entrance position
 		var entrance_pos2: Vector2i
@@ -189,13 +189,13 @@ func place_exit() -> void:
 		var exit_pos: Vector2i
 		match edge:
 			0: # Top edge
-				exit_pos = Vector2i(rng.randi_range(1, room_width - 3), 0)
+				exit_pos = Vector2i(int(rng.randi_range(1, room_width - 3)), 0)
 			1: # Right edge
-				exit_pos = Vector2i(room_width - 1, rng.randi_range(1, room_height - 3))
+				exit_pos = Vector2i(room_width - 1, int(rng.randi_range(1, room_height - 3)))
 			2: # Bottom edge
-				exit_pos = Vector2i(rng.randi_range(1, room_width - 3), room_height - 1)
+				exit_pos = Vector2i(int(rng.randi_range(1, room_width - 3)), room_height - 1)
 			3: # Left edge
-				exit_pos = Vector2i(0, rng.randi_range(1, room_height - 3))
+				exit_pos = Vector2i(0, int(rng.randi_range(1, room_height - 3)))
 		
 		# Calculate second exit position
 		var exit_pos2: Vector2i
@@ -280,7 +280,7 @@ func apply_terrain_changes() -> void:
 func apply_floors() -> void:
 	for pos in floor_positions:
 		wall_positions.erase(pos)
-	set_cells_terrain_connect(floor_positions, 0, floor, true)
+	set_cells_terrain_connect(floor_positions, 0, _floor, true)
 	
 ### Apply walls
 func apply_walls() -> void:
@@ -290,7 +290,7 @@ func apply_walls() -> void:
 func apply_entrance() -> void:
 	for pos in entrance_positions:
 		wall_positions.erase(pos)
-	set_cells_terrain_connect(entrance_positions, 0, floor, true)
+	set_cells_terrain_connect(entrance_positions, 0, _floor, true)
 	object_layer.set_cell(entrance_positions[0], 1, Vector2i.ZERO, 2)
 	object_layer.set_cell(entrance_positions[1], 1, Vector2i.ZERO, 2)
 
@@ -298,7 +298,7 @@ func apply_entrance() -> void:
 func apply_exit() -> void:
 	for pos in exit_positions:
 		wall_positions.erase(pos)
-	set_cells_terrain_connect(exit_positions, 0, floor, true)
+	set_cells_terrain_connect(exit_positions, 0, _floor, true)
 	object_layer.set_cell(exit_positions[0], 1, Vector2i.ZERO, 2)
 	object_layer.set_cell(exit_positions[1], 1, Vector2i.ZERO, 2)
 	

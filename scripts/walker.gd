@@ -18,8 +18,8 @@ var direction_change_chance: float = 0.3
 var floor_positions: Array[Vector2i]
 
 ## Room bounds
-var room_width: int
-var room_height: int
+var _room_width: int
+var _room_height: int
 
 ## Creates a new walker at the specified position
 ## @param start_pos The starting position of the walker
@@ -28,8 +28,8 @@ var room_height: int
 ## @param seed The seed for random number generation
 func _init(start_pos: Vector2i, room_width: int, room_height: int, seed: int) -> void:
 	position = start_pos
-	self.room_width = room_width
-	self.room_height = room_height
+	_room_width = room_width
+	_room_height = room_height
 	
 	rng = RandomNumberGenerator.new()
 	rng.seed = seed
@@ -90,4 +90,4 @@ func get_random_direction() -> Vector2i:
 ## @param pos The position to check
 ## @return true if the position is in bounds, false otherwise
 func is_in_bounds(pos: Vector2i) -> bool:
-	return pos.x > 0 and pos.x < room_width - 1 and pos.y > 0 and pos.y < room_height - 1 
+	return pos.x > 0 and pos.x < _room_width - 1 and pos.y > 0 and pos.y < _room_height - 1 

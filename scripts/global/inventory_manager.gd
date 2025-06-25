@@ -4,8 +4,9 @@ extends Node
 ## potentional issue is if the player opens to many inventories and the next id 
 ## somehow becomes to big which I dont think will ever happen but we never know...
 
-var inventories : Dictionary[int,InventoryContainer]
-var next_id : int = -1
+#var inventories : Dictionary[int,InventoryContainer]
+var inventories : Array[InventoryContainer]
+var next_id : int = 0
 
 ## Player related
 var inventory_size : Vector2i = Vector2i(8,6)
@@ -23,16 +24,22 @@ func _ready() -> void:
 	player_inv = InventoryContainer.new(inventory_size)
 	register_inventory(player_inv)
 
-## helper function for registering the inventory globally
-func register_inventory(inventory : InventoryContainer) -> void:
-	next_id += 1
+func register_inventory(inv : InventoryContainer) -> void:
 	
-	inventories[next_id] = inventory
-	inventory.set_id(next_id)
-
-## helper function that removes an inventory from its id
+	## if the id is -1, it means the inventory has not been set
+	match inv.get_id():
+		-1:
+			inventories.append(inv)
+			inv.set_id(next_id)
+			## this might not be needed if we just use the array size, leaving it for now.
+			next_id += 1
+		_:
+			inventories[inv.get_id()] = inv
+	
 func unregister_inventory(id : int) -> void:
-	inventories.erase(id)
+	## when we want to not use an inventory it is better to set it to null
+	## this is because we dont want to shuffle the array and also cause mismatch inventory IDs.
+	inventories[id] = null
 
 func get_inventory(id : int) -> InventoryContainer:
 	return inventories.get(id)

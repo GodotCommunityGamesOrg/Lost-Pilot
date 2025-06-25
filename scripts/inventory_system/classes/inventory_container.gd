@@ -7,7 +7,7 @@ signal slot_hovered(id : int , index : Vector2i)
 var _slots : Dictionary[Vector2i,Slot]
 var _item : Dictionary[Vector2i,InvItem]
 var _size : Vector2i
-var _id   : int
+var _id   : int = -1
 var _container : GridContainer
 const _spacing : float = 64
 
@@ -17,6 +17,9 @@ func _init(size : Vector2i) -> void:
 
 func set_id(id : int) -> void:
 	_id = id
+
+func get_id() -> int:
+	return _id
 
 func generate_cells(container : GridContainer) -> void:
 	_container = container

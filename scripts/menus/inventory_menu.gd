@@ -21,9 +21,9 @@ var swap_index : Vector2i
 
 func _ready() -> void:
 	var player_inv : InventoryContainer = _get_inventory(0) # 0 is the players inv
-	player_inv.generate_cells(grid_container)
+	await player_inv.generate_cells(grid_container)
 	# we need to generate the cells before we can load data, might not be the right way...
-	player_inv.load_data(InventoryManager.player_items,database)
+	player_inv.load_data(InventoryManager.player_items) # database has been removed
 	# connect the slot pressed signal to a function in this script
 	player_inv.slot_pressed.connect(on_slot_pressed)
 	player_inv.slot_hovered.connect(handle_hover_tooltip)
@@ -104,7 +104,7 @@ func handle_hover_tooltip(id : int, index : Vector2i) -> void:
 	
 	## show a tooltip for the item, maybe we can also add options like consumbe,drop, etc
 	var item : InvItem = inv.get_item(index)
-	var item_data : Item = database.database[item.id]
+	var item_data = item.get_item_data()
 	print("Item (%s) , Stack (%s)" % [item_data.item_name,item.stack])
 	
 func drop() -> void:

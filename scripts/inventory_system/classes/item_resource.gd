@@ -1,4 +1,5 @@
 extends Resource
+## This was used for the database but this might change hmmmmm...
 class_name Item
 
 @export var item_name : String

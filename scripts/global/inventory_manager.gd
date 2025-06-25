@@ -10,18 +10,13 @@ var next_id : int = 0
 
 ## Player related
 var inventory_size : Vector2i = Vector2i(8,6)
-var player_inv : InventoryContainer
+var player_inv : InventoryContainer = InventoryContainer.new(inventory_size)
 # this might change in the future for a better way of storing items
-var player_items : Array[Dictionary] = [
-	# ID is the item id, Position is the slot index, can add stack size here as well
-		{"ID" : 0, "Position" : Vector2i(0,0)},
-		{"ID" : 3, "Position" : Vector2i(4,1)},
-		{"ID" : 2, "Position" : Vector2i(5,0)},
-		{"ID" : 1, "Position" : Vector2i(2,4)}
-	]
+var player_items : ItemInventory = preload("res://scripts/inventory_system/temp folder/player_inventory.tres")
+
 
 func _ready() -> void:
-	player_inv = InventoryContainer.new(inventory_size)
+	#player_inv = 
 	register_inventory(player_inv)
 
 func register_inventory(inv : InventoryContainer) -> void:

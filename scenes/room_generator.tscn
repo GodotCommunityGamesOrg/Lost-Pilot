@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmfohcgyw6m8y"]
+
+[ext_resource type="TileSet" uid="uid://bsusnci8cuc5k" path="res://resources/terrain_procgen_tileset.tres" id="1_dy51p"]
+[ext_resource type="Script" uid="uid://b0olx5d38bq7u" path="res://scripts/room_generator.gd" id="1_mhcj8"]
+[ext_resource type="PackedScene" uid="uid://dkkdcx534ran6" path="res://scenes/player/player.tscn" id="4_nayog"]
+[ext_resource type="PackedScene" uid="uid://didh1mtde07hl" path="res://scenes/door.tscn" id="5_t8u47"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_4ctu1"]
+scenes/1/scene = ExtResource("4_nayog")
+scenes/2/scene = ExtResource("5_t8u47")
+
+[sub_resource type="TileSet" id="TileSet_gjms6"]
+tile_size = Vector2i(64, 64)
+custom_data_layer_0/name = "Col"
+custom_data_layer_0/type = 2
+sources/1 = SubResource("TileSetScenesCollectionSource_4ctu1")
+
+[node name="RoomGenerator" type="Node"]
+
+[node name="Floor" type="TileMapLayer" parent="." node_paths=PackedStringArray("object_layer")]
+tile_set = ExtResource("1_dy51p")
+script = ExtResource("1_mhcj8")
+object_layer = NodePath("../Objects")
+room_height = 20
+room_width = 20
+walker_steps = 110
+
+[node name="Objects" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_gjms6")

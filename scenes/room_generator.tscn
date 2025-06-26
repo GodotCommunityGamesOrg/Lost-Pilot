@@ -6,8 +6,6 @@
 
 [node name="RoomGenerator" type="Node2D"]
 script = ExtResource("1_mhcj8")
-room_height = 20
-room_width = 20
 floor_tileset = ExtResource("2_fs8vn")
 wall_tile = 1
 object_tileset = ExtResource("3_mhcj8")

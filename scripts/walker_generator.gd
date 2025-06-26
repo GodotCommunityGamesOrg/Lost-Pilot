@@ -19,8 +19,35 @@ func generate(_rng: RandomNumberGenerator) -> void:
 	room_width = rng.randi_range(minimum_room_width, maximum_room_width)
 	clear()
 	fill_the_room_with_walls()
-	for n in number_of_walkers:
-		run_walker()
+
+	var threads = []
+	var results = []
+	var start_pos = Vector2i(room_width / 2, room_height / 2)
+
+	# Start threads
+	for n in range(number_of_walkers):
+		var thread = Thread.new()
+		var args = {
+			"start_pos": start_pos,
+			"room_width": room_width,
+			"room_height": room_height,
+			"steps": walker_steps,
+			"seed": rng.randi()
+		}
+		thread.start(walker_thread_func.bind(args))
+		threads.append(thread)
+
+	# Wait for threads and collect results
+	for thread in threads:
+		var floor_positions_result = thread.wait_to_finish()
+		results.append(floor_positions_result)
+
+	# Merge all floor positions
+	for floor_positions_result in results:
+		for pos in floor_positions_result:
+			if not floor_positions.has(pos):
+				floor_positions.append(pos)
+
 	place_entrance()
 	place_exit()
 
@@ -227,3 +254,15 @@ func place_exit() -> void:
 ## Checks if a position is in the bounds of the room
 func is_in_bounds(pos: Vector2i) -> bool:
 	return pos.x >= 0 and pos.x < room_width and pos.y >= 0 and pos.y < room_height
+
+func walker_thread_func(args):
+	var start_pos = args["start_pos"]
+	var room_width = args["room_width"]
+	var room_height = args["room_height"]
+	var steps = args["steps"]
+	var seed = args["seed"]
+	
+	var walker = Walker.new(start_pos, room_width, room_height, seed)
+	for i in range(steps):
+		walker.update()
+	return walker.floor_positions

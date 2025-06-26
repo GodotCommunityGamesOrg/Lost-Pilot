@@ -1,28 +1,41 @@
 ## A procedural room generator that creates rooms using random walkers.
 ## The generator ensures there is always a valid path between entrance and exit.
 class_name RoomGenerator
-extends map_generator
+extends Node2D
 
-## The tilemap layer used for objects (doors and player)
-@export var object_layer: TileMapLayer
-
+@export_category("Room Size")
 ## The height of the generated room in tiles
 @export var room_height: int = 10
 
 ## The width of the generated room in tiles
 @export var room_width: int = 10
 
+@export_category("Floors & Walls")
+## The Tileset that will be used for Floors & Walls
+@export var floor_tileset: TileSet
+
+## Terrain ID for the floor tiles
+@export var floor_tile: int
+
+## Terrain ID for the wall tiles
+@export var wall_tile: int
+
+@export_category("Objects")
+## The TileSet that will be used for Objects
+@export var object_tileset: TileSet
+
+## The ID of the door in the Scene Collection
+@export var door_id: int
+
+## The ID of the player in the Scene Collection
+@export var player_id: int
+
+@export_category("Randomization")
 ## Seed used for random generation. Changing this will create different room layouts
 @export var _seed: String = "Game dev is difficult"
 
 ## Number of steps the walker should take
 @export var walker_steps: int = 100
-
-## Terrain ID for floor tiles
-var _floor: int = 0
-
-## Terrain ID for wall tiles
-var wall: int = 1
 
 ## Random number generator for procedural generation
 var rng: RandomNumberGenerator
@@ -45,11 +58,32 @@ var player_start_position: Vector2i
 ## Array of exit tile positions
 var exit_positions: Array[Vector2i]
 
+var floor_layer: map_generator
+var object_layer: TileMapLayer
+
 func _ready() -> void:
 	rng = RandomNumberGenerator.new()
 	rng.seed = _seed.hash()
+	create_layers()
 	generate_room()
-	super()
+	floor_layer.init_pathfinding()
+
+## Creates the neccessary TileMapLayers
+func create_layers() -> void:
+	create_floor_layer()
+	create_object_layer()
+
+## Creates the floor layer
+func create_floor_layer() -> void:
+	floor_layer = map_generator.new()
+	floor_layer.tile_set = floor_tileset
+	add_child(floor_layer)
+
+## Creates the object layer
+func create_object_layer() -> void:
+	object_layer = TileMapLayer.new()
+	object_layer.tile_set = object_tileset
+	add_child(object_layer)
 
 ## Generates a new room layout
 func generate_room() -> void:
@@ -61,7 +95,7 @@ func generate_room() -> void:
 	apply_terrain_changes()
 
 func clear_the_previous_room() -> void:
-	clear()
+	floor_layer.clear()
 	object_layer.clear()
 	floor_positions.clear()
 	wall_positions.clear()
@@ -280,32 +314,37 @@ func apply_terrain_changes() -> void:
 func apply_floors() -> void:
 	for pos in floor_positions:
 		wall_positions.erase(pos)
-	set_cells_terrain_connect(floor_positions, 0, _floor, true)
+	floor_layer.set_cells_terrain_connect(floor_positions, 0, floor_tile, true)
 	
 ### Apply walls
 func apply_walls() -> void:
-	set_cells_terrain_connect(wall_positions, 0, wall, true)
+	floor_layer.set_cells_terrain_connect(wall_positions, 0, wall_tile, true)
 
 ### Apply entrance
 func apply_entrance() -> void:
+	print("Entrance Positions:")
+	print(entrance_positions)
+	print("------------------")
 	for pos in entrance_positions:
 		wall_positions.erase(pos)
-	set_cells_terrain_connect(entrance_positions, 0, _floor, true)
-	object_layer.set_cell(entrance_positions[0], 1, Vector2i.ZERO, 2)
-	object_layer.set_cell(entrance_positions[1], 1, Vector2i.ZERO, 2)
+	floor_layer.set_cells_terrain_connect(entrance_positions, 0, floor_tile, true)
+	object_layer.set_cell(entrance_positions[0], 1, Vector2i.ZERO, door_id)
+	object_layer.set_cell(entrance_positions[1], 1, Vector2i.ZERO, door_id)
 
 ### Apply exit
 func apply_exit() -> void:
+	print("Exit Positions:")
+	print(exit_positions)
+	print("__________________")
 	for pos in exit_positions:
 		wall_positions.erase(pos)
-	set_cells_terrain_connect(exit_positions, 0, _floor, true)
-	object_layer.set_cell(exit_positions[0], 1, Vector2i.ZERO, 2)
-	object_layer.set_cell(exit_positions[1], 1, Vector2i.ZERO, 2)
-	
+	floor_layer.set_cells_terrain_connect(exit_positions, 0, floor_tile, true)
+	object_layer.set_cell(exit_positions[0], 1, Vector2i.ZERO, door_id)
+	object_layer.set_cell(exit_positions[1], 1, Vector2i.ZERO, door_id)
 
 ### Apply player
 func apply_player() -> void:
-	object_layer.set_cell(player_start_position, 1, Vector2i.ZERO, 1)
+	object_layer.set_cell(player_start_position, 1, Vector2i.ZERO, player_id)
 
 ## Checks if a position is in the bounds of the room
 func is_in_bounds(pos: Vector2i) -> bool:

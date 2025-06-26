@@ -1,3 +1,15 @@
-[gd_scene format=3 uid="uid://dmfohcgyw6m8y"]
+[gd_scene load_steps=4 format=3 uid="uid://dmfohcgyw6m8y"]
+
+[ext_resource type="Script" uid="uid://b0olx5d38bq7u" path="res://scripts/room_generator.gd" id="1_mhcj8"]
+[ext_resource type="TileSet" uid="uid://bsusnci8cuc5k" path="res://resources/space_station_terrain.tres" id="2_fs8vn"]
+[ext_resource type="TileSet" uid="uid://b7oyh106ko6lk" path="res://resources/space_station_objects.tres" id="3_mhcj8"]
 
 [node name="RoomGenerator" type="Node2D"]
+script = ExtResource("1_mhcj8")
+room_height = 20
+room_width = 20
+floor_tileset = ExtResource("2_fs8vn")
+wall_tile = 1
+object_tileset = ExtResource("3_mhcj8")
+door_id = 2
+player_id = 1

@@ -1,5 +1,6 @@
 extends PanelContainer
 class_name Slot
+## Slot is simply a custom texture button that sets information about the set item.
 
 var index :Vector2i
 

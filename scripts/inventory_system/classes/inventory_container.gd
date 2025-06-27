@@ -1,5 +1,7 @@
 extends RefCounted
 class_name InventoryContainer
+## InventoryContainer handles the interactions between the slots.
+## This includes, Loading item data on init, handling slot hover and presses which is handled externally
 
 signal slot_pressed(id : int , index : Vector2i)
 signal slot_hovered(id : int , index : Vector2i)
@@ -24,13 +26,10 @@ func get_id() -> int:
 func generate_cells(container : GridContainer) -> void:
 	_container = container
 	_container.columns = _size.x
-	print("This the columns %s" % _container.columns)
 	var slot_pack : PackedScene = preload("res://scenes/inventory_system/slot.tscn")
-	# This needs to created backwards because grid container...
-	print("Size %s" % _size)
 	for y in range(_size.y):
 		for x in range(_size.x):
-			await container.get_tree().create_timer(0.5).timeout
+			#await container.get_tree().create_timer(0.5).timeout
 			var slot : Slot = slot_pack.instantiate()
 			_container.add_child(slot)
 			
@@ -40,10 +39,8 @@ func generate_cells(container : GridContainer) -> void:
 			
 			# set the slots index and inv id
 			slot.index = Vector2i(x,y)
-			print("Size x %s" % _size.x)
-			print("This is the index of the slot %s" % Vector2i(x,y))
 			## this might be useful for detecting multiple different inventories
-			#slot.inventory_id = _id
+			##slot.inventory_id = _id
 			# set slot into the slots dict to be able to change the item sprite
 			_slots[slot.index] = slot
 			_slots[slot.index].set_stack(0)
@@ -64,9 +61,6 @@ func is_cell_free(index : Vector2i) -> bool:
 
 func add_item(inv_item : InvItem) -> bool:
 	var index : Vector2i = inv_item.origin
-	print(index)
-	#if not is_cell_free(index):
-		#return false
 	
 	# set item and item icon
 	_item[index] = inv_item
@@ -86,22 +80,12 @@ func get_item(index : Vector2i) -> InvItem:
 
 ## Database is not needed if the inventory res contains the items, this makes it so items are unique!
 func load_data(items_container : ItemInventory) -> void:
-	# terriable way of naming stuff, sorry!
 	var items = items_container.inventory
 	
 	for item_c in items:
 		var pos : Vector2i = item_c.position
 		var item : Item = item_c.item
-		## Why do I need an id for adding an item into the inventory, what was I thinking?
-		## Setting it to -1 to see if it even is needed.
+		
 		var inv_item : InvItem = InvItem.new(pos,item)
 		add_item(inv_item)
 	
-## OLD way of loading data.
-#func load_data(items : Array[Dictionary],database : ItemDatabase) -> void:
-	#
-	#for item in items:
-		#var found_item : Item = database.database[item["ID"]]
-		#
-		#var inv_item : InvItem = InvItem.new(item["Position"],item["ID"],found_item)
-		#add_item(inv_item)

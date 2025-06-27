@@ -1,6 +1,6 @@
 extends Resource
-## This was used for the database but this might change hmmmmm...
 class_name Item
+## This is an important class, Item simply stores un-mutable data about the item
 
 @export var item_name : String
 @export_multiline var item_description : String

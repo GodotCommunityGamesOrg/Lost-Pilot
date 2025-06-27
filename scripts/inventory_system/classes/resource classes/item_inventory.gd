@@ -1,6 +1,6 @@
 extends Resource
 class_name ItemInventory
-## This is a terriable name for this class, the job for this class is to act as saving and loading items for 
-## specific inventories, needs a new name...
-
+## A resource class for storing item_containers which can be used for saving and loading.
+## E.G the player would have an item inventory.
+@export var inventory_size : Vector2i = Vector2i.ONE
 @export var inventory : Array[ItemContainer]

@@ -9,16 +9,19 @@ var inventories : Array[InventoryContainer]
 var next_id : int = 0
 
 ## Player related
-var inventory_size : Vector2i = Vector2i(8,6)
-var player_inv : InventoryContainer = InventoryContainer.new(inventory_size)
-# this might change in the future for a better way of storing items
-var player_items : ItemInventory = preload("res://scripts/inventory_system/temp folder/player_inventory.tres")
-
+var player_items : ItemInventory = preload("res://resources/inventories/player_inventory.tres")
+var player_inv : InventoryContainer = InventoryContainer.new(player_items.inventory_size):
+	set(value):
+		unregister_inventory(player_inv)
+		register_inventory(value)
+		player_inv = value
 
 func _ready() -> void:
-	#player_inv = 
 	register_inventory(player_inv)
 
+## The register and unregister functions might need to be reworked because of how loading new scenes
+## might be handled, if the inventory is fresh then it might not have an id already set when loading
+## a new scene, but I think it will work still...
 func register_inventory(inv : InventoryContainer) -> void:
 	
 	## if the id is -1, it means the inventory has not been set
@@ -31,7 +34,11 @@ func register_inventory(inv : InventoryContainer) -> void:
 		_:
 			inventories[inv.get_id()] = inv
 	
-func unregister_inventory(id : int) -> void:
+func unregister_inventory(inv : InventoryContainer) -> void:
+	var id : int = inv.get_id()
+	
+	if id <= -1:
+		return
 	## when we want to not use an inventory it is better to set it to null
 	## this is because we dont want to shuffle the array and also cause mismatch inventory IDs.
 	inventories[id] = null

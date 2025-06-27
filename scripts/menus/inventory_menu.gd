@@ -3,7 +3,6 @@ extends MenuBase
 @export_group("Settings")
 @export var database : ItemDatabase
 @export var grid_container : GridContainer
-@export var inventory_size : Vector2i = Vector2i(8,6)
 @export var held_icon : Sprite2D
 
 enum states {Empty,Held,Drop,PickUp,Swap,Add,Remove}
@@ -21,7 +20,7 @@ var swap_index : Vector2i
 
 func _ready() -> void:
 	var player_inv : InventoryContainer = _get_inventory(0) # 0 is the players inv
-	await player_inv.generate_cells(grid_container)
+	player_inv.generate_cells(grid_container)
 	# we need to generate the cells before we can load data, might not be the right way...
 	player_inv.load_data(InventoryManager.player_items) # database has been removed
 	# connect the slot pressed signal to a function in this script

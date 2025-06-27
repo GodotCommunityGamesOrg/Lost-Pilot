@@ -1,5 +1,7 @@
 extends RefCounted
 class_name InvItem
+## InvItem is mutable data, this is created on item loads when an inventory container
+## is created and set.
 
 
 # the top left of the item/slot

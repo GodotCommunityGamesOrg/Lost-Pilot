@@ -1,5 +1,5 @@
 extends Resource
 class_name ItemDatabase
-## A place to store every item in the game... Might change in the future, not sure...
+## This class might not be needed in the future, Leaving it for now until I add more features.
 
 @export var database : Dictionary[int,Item]

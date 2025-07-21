@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://31es6aujwcn1"]
+
+[ext_resource type="Script" uid="uid://dtx3xrtjsr0sa" path="res://scripts/inventory_system/classes/item_resource.gd" id="1_2o47v"]
+[ext_resource type="Texture2D" uid="uid://bue43mkwcmm0d" path="res://assets/ui/inventory items/Fuel.png" id="1_vo7bo"]
+
+[resource]
+script = ExtResource("1_2o47v")
+item_name = "Gernade"
+item_description = "Does explosive damage to an area"
+stackable = true
+max_stackable = 4
+item_texture = ExtResource("1_vo7bo")
+metadata/_custom_type_script = "uid://dtx3xrtjsr0sa"

@@ -6,10 +6,20 @@ extends MenuBase
 # key then we should open the pause menu in this script
 # also we should call the GameManager script to delete the current scene if we 
 # are going back to the main menu.
+
+var is_inv_open : bool = false
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.keycode == KEY_ESCAPE and event.is_pressed():
 			# load the pause menu.
 			menu_manager.switch_menu(GameMenuSystem.MENUS.Pause)
 		elif event.keycode == KEY_E and event.is_pressed():
-			menu_manager.switch_menu(GameMenuSystem.MENUS.Inventory)
+			match is_inv_open:
+				true:
+					is_inv_open = false
+					menu_manager.switch_to_previous_menu()
+				false:
+					menu_manager.switch_menu(GameMenuSystem.MENUS.Inventory)
+					is_inv_open = true
+			

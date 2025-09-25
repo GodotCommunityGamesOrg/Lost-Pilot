@@ -1,4 +1,4 @@
-extends UserInterface
+extends Control
 class_name MenuBase
 
 ## Use dependecy injection to the menus so it can communicate back to the system.

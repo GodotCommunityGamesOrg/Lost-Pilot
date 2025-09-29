@@ -55,7 +55,6 @@ func _ready() -> void:
 	super()
 	moved.emit()
 	_setup_camera_limits()
-	get_tree().get_root().size_changed.connect(_cam_resize)
 	WorldTurnBase.on = true
 
 ## Handles unhandled input during the player's turn for mouse-based interaction.
@@ -144,11 +143,6 @@ func _setup_camera_limits():
 	cam.limit_top = map_rect.position.y * 128
 	cam.limit_right = (map_rect.position.x + map_rect.size.x) * 128
 	cam.limit_bottom = (map_rect.position.y + map_rect.size.y) * 128
-
-## Adjusts the camera zoom based on the window size.
-func _cam_resize():
-	var viewport_size = get_viewport().size
-	cam.zoom = (Vector2.ONE * 0.8) * (viewport_size.x / UserInterface._base_size.x + viewport_size.y / UserInterface._base_size.y) / 2.0
 
 # --- Action Classes ---
 

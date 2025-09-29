@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Lost Pilot"
 run/main_scene="uid://cq1q3hs1i0bbb"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://assets/icon.svg"
 
 [autoload]
@@ -21,8 +21,9 @@ GameManager="*res://scripts/global/manager.gd"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/stretch/mode="viewport"
 
 [dotnet]
 
@@ -36,9 +37,9 @@ version_control/autoload_on_startup=true
 
 [gui]
 
-theme/custom_font="res://assets/Gugi-Regular.ttf"
 theme/default_font_multichannel_signed_distance_field=true
 theme/default_font_generate_mipmaps=true
+theme/custom_font="res://assets/Gugi-Regular.ttf"
 
 [input]
 

@@ -3,6 +3,9 @@ class_name map_generator
 ## builds pathfinder for tilemap
 # --- Exported Properties ---
 func _ready() -> void:
+	init_pathfinding()
+	
+func init_pathfinding() -> void:
 	WorldTurnBase.state.actors = []
 	WorldPathfinder.map = self
 	WorldPathfinder.pathfinder = AStarGrid2D.new()

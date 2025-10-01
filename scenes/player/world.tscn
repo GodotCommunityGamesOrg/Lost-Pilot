@@ -1,11 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjxiwvvqhuh0q"]
+[gd_scene load_steps=10 format=3 uid="uid://cjxiwvvqhuh0q"]
 
 [ext_resource type="Script" uid="uid://eb3vs5x8edfb" path="res://scripts/world.gd" id="1_71hdg"]
+[ext_resource type="Script" uid="uid://bbvlq556chi7s" path="res://scripts/walker_generator.gd" id="3_yh6o4"]
 [ext_resource type="Script" uid="uid://bm0r4bkr3dki2" path="res://scripts/game_menu_system.gd" id="7_kej52"]
 [ext_resource type="PackedScene" uid="uid://2nq4ts7s3ojx" path="res://scenes/menus/in_game_menu.tscn" id="8_71hdg"]
 [ext_resource type="PackedScene" uid="uid://bo4uld1h02n47" path="res://scenes/menus/pause_menu.tscn" id="9_onws2"]
 [ext_resource type="PackedScene" uid="uid://vcaloblp0bi6" path="res://scenes/menus/settings_menu.tscn" id="10_36eim"]
 [ext_resource type="PackedScene" uid="uid://dmfohcgyw6m8y" path="res://scenes/room_generator.tscn" id="10_kej52"]
+
+[sub_resource type="Resource" id="Resource_efs36"]
+script = ExtResource("3_yh6o4")
+number_of_walkers = 5
+walker_steps = 500
+minimum_room_width = 20
+maximum_room_width = 100
+minimum_room_height = 20
+maximum_room_height = 100
+metadata/_custom_type_script = "uid://bbvlq556chi7s"
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b1qyj"]
 
@@ -13,6 +24,7 @@
 script = ExtResource("1_71hdg")
 
 [node name="RoomGenerator" parent="." instance=ExtResource("10_kej52")]
+procedural_generator = SubResource("Resource_efs36")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
